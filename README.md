@@ -92,6 +92,27 @@ NN-name.html        One embed per file.
 
 Live base URL: **https://chatgptmentoring.github.io/lit-wellness-embeds/**
 
+### Section heights — one number each, desktop AND mobile
+
+Verified identical at 360 / 390 / 480 / 600 / 749 / 750 / 850 / 1000 / 1200 /
+1440 / 1920px. Set the Wix section height once in desktop view; Mobile view
+never needs touching.
+
+| Section | Height |
+|---|---|
+| 01 trust strip | 64 |
+| 02 five pillars | 592 |
+| 03 pain points | 222 |
+| 04 how we help | 218 |
+| 05 services grid | 656 |
+| 06 testimonials | 388 |
+
+Held constant by two mechanisms: grids keep their column count from 750px up
+and shrink the cards rather than wrapping, and below 750px they become
+sideways-scrolling rails instead of stacking. Cards have fixed heights so
+text rewrapping is absorbed internally. If a section ever needs new content,
+re-measure — adding a card to a rail is free, but adding a row is not.
+
 | # | File | Page | Own heading? | Status | Assets |
 |---|---|---|---|---|---|
 | 01 | `01-trust-marquee.html` | Home, under hero | n/a | ✅ Live | none |
