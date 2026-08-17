@@ -38,7 +38,12 @@
   .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: clamp(12px, 1.7vw, 24px);
+    /* This is the only two-row grid, so the ROW gap must be a fixed
+       value — a fluid one would make the total height drift with the
+       window width, which is the exact thing we are eliminating. Only
+       the column gap flexes. */
+    row-gap: 24px;
+    column-gap: clamp(12px, 1.7vw, 24px);
   }
 
   .card {
