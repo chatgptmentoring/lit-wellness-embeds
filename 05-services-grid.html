@@ -32,19 +32,23 @@
 <style>
   .wrap { padding: 8px 0 12px; }
 
+  /* Three columns at EVERY desktop width — never wraps, so the section
+     is always exactly two rows tall. Fixed card height absorbs the
+     difference between short and long descriptions. */
   .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    gap: clamp(12px, 1.7vw, 24px);
   }
 
   .card {
+    height: 306px;
     display: flex;
     flex-direction: column;
     background: var(--white);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 34px 30px 30px;
+    padding: 28px clamp(18px, 2.2vw, 30px);
     text-decoration: none;
     color: inherit;
     transition: border-color .25s var(--ease), box-shadow .25s var(--ease), transform .25s var(--ease);
@@ -56,9 +60,9 @@
   }
 
   .icon {
-    width: 52px;
-    height: 52px;
-    margin-bottom: 22px;
+    width: clamp(42px, 4vw, 52px);
+    height: clamp(42px, 4vw, 52px);
+    margin-bottom: clamp(14px, 1.8vw, 22px);
     border-radius: 50%;
     display: grid;
     place-items: center;
@@ -66,7 +70,7 @@
     flex: none;
   }
   .icon svg {
-    width: 25px; height: 25px;
+    width: 48%; height: 48%;
     fill: none;
     stroke: var(--blue);
     stroke-width: 1.6;
@@ -74,22 +78,23 @@
     stroke-linejoin: round;
   }
 
-  .card .h4 { margin-bottom: 10px; }
-  .card .p2 { color: var(--grey); margin-bottom: 22px; }
+  .card .h4 { margin-bottom: 10px; font-size: clamp(15px, 1.5vw, 20px); }
+  .card .p2 { color: var(--grey); margin-bottom: 20px; font-size: clamp(13px, 1.2vw, 16px); }
 
   /* Pushes every "Learn more" onto the same baseline regardless of how
      long the description above it runs. */
-  .more { margin-top: auto; }
+  .more { margin-top: auto; font-size: clamp(13px, 1.2vw, 16px); }
 
   .card:hover .more svg { transform: translateX(4px); }
 
-  @media (max-width: 980px) {
-    .grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
-  }
-  @media (max-width: 620px) {
-    .grid { grid-template-columns: 1fr; gap: 14px; }
-    .card { padding: 28px 24px 26px; }
-    .icon { width: 46px; height: 46px; margin-bottom: 18px; }
+  /* Stack only below Wix's mobile breakpoint. */
+  @media (max-width: 749px) {
+    .grid { grid-template-columns: 1fr; gap: 12px; }
+    .card { height: 226px; padding: 24px 22px; }
+    .icon { width: 44px; height: 44px; margin-bottom: 14px; }
+    .card .h4 { font-size: 18px; }
+    .card .p2 { font-size: 15px; }
+    .more { font-size: 15px; }
   }
 </style>
 </head>

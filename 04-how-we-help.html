@@ -26,19 +26,25 @@
 <style>
   .wrap { padding: 8px 0 12px; }
 
+  /* Three columns at EVERY desktop width — never wraps, so the section
+     height is one constant number. Fixed card height absorbs wrapping. */
   .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    gap: clamp(12px, 1.7vw, 24px);
   }
 
   .step {
+    height: 198px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     position: relative;
     overflow: hidden;
     background: var(--white);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 40px 32px 38px;
+    padding: 30px clamp(20px, 2.4vw, 32px);
     transition: border-color .25s var(--ease), box-shadow .25s var(--ease), transform .25s var(--ease);
   }
   .step:hover {
@@ -55,7 +61,7 @@
     right: 6px;
     font-family: var(--font-display);
     font-weight: 400;
-    font-size: 132px;
+    font-size: clamp(92px, 9vw, 132px);
     line-height: 1;
     color: var(--blue);
     opacity: .15;
@@ -68,18 +74,22 @@
   .rule {
     width: 34px;
     height: 3px;
+    flex: none;
     border-radius: 2px;
     background: var(--terracotta);
-    margin-bottom: 22px;
+    margin-bottom: clamp(14px, 1.8vw, 22px);
   }
 
-  .step .h4 { margin-bottom: 10px; }
-  .step .p2 { color: var(--grey); }
+  .step .h4 { margin-bottom: 10px; font-size: clamp(16px, 1.5vw, 20px); }
+  .step .p2 { color: var(--grey); font-size: clamp(13px, 1.2vw, 16px); }
 
-  @media (max-width: 900px) {
-    .grid { grid-template-columns: 1fr; gap: 16px; }
-    .step { padding: 32px 26px 30px; }
-    .step::before { font-size: 104px; top: -12px; }
+  /* Stack only below Wix's mobile breakpoint. */
+  @media (max-width: 749px) {
+    .grid { grid-template-columns: 1fr; gap: 12px; }
+    .step { height: 150px; padding: 24px 22px; }
+    .step::before { font-size: 96px; top: -10px; }
+    .step .h4 { font-size: 18px; }
+    .step .p2 { font-size: 15px; }
   }
 </style>
 </head>

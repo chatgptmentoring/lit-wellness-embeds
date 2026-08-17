@@ -34,20 +34,33 @@
   }
   .band > .shell { position: relative; z-index: 1; }
 
-  .head { max-width: 660px; margin: 0 auto 56px; text-align: center; }
+  /* HEIGHT-STABLE LAYOUT — see the note at the top of this file.
+     Fixed max-width, so the heading block is the same height at every
+     desktop width and never reflows. */
+  .head { max-width: 620px; margin: 0 auto 52px; text-align: center; }
   .head .eyebrow { color: var(--tan); margin-bottom: 14px; }
   .head .h2 { color: var(--white); }
   .head .p1 { color: rgba(255,255,255,.82); margin-top: 18px; }
 
+  /* Five columns at EVERY desktop width. The cards get narrower as the
+     window shrinks; they never wrap onto a second row. */
   .grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
+    gap: clamp(9px, 1.2vw, 20px);
   }
 
   .pillar {
+    /* Fixed height is the whole trick. Any variation in how the text
+       wraps is absorbed as whitespace inside the card instead of
+       changing the height of the section. */
+    height: 206px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    padding: 34px 16px 30px;
+    padding: 16px clamp(8px, 1vw, 16px);
     border: 1px solid rgba(255,255,255,.16);
     border-radius: var(--radius);
     background: rgba(255,255,255,.05);
@@ -60,18 +73,19 @@
   }
 
   .icon {
-    width: 58px;
-    height: 58px;
-    margin: 0 auto 20px;
+    width: clamp(44px, 4.2vw, 58px);
+    height: clamp(44px, 4.2vw, 58px);
+    margin: 0 auto clamp(12px, 1.5vw, 20px);
     border-radius: 50%;
     display: grid;
     place-items: center;
     background: rgba(255,255,255,.1);
     border: 1px solid rgba(216,195,165,.4);
+    flex: none;
   }
   .icon svg {
-    width: 27px;
-    height: 27px;
+    width: 48%;
+    height: 48%;
     fill: none;
     stroke: var(--tan);
     stroke-width: 1.6;
@@ -79,25 +93,28 @@
     stroke-linejoin: round;
   }
 
-  .pillar .h4 { color: var(--white); margin-bottom: 8px; }
-  .pillar .p3 { color: rgba(255,255,255,.75); }
-
-  /* --- Reflow. Auto-height means we never have to care about the
-         resulting height, so we can pick whatever reads best. ------- */
-  @media (max-width: 1080px) {
-    .grid { grid-template-columns: repeat(3, 1fr); }
-    /* Centre the orphan row of 2 under the row of 3. */
-    .pillar:nth-child(4) { grid-column: 1 / span 1; margin-left: 50%; }
-    .pillar:nth-child(5) { margin-left: 50%; }
+  .pillar .h4 {
+    color: var(--white);
+    margin-bottom: 7px;
+    font-size: clamp(14px, 1.4vw, 20px);
   }
+  .pillar .p3 {
+    color: rgba(255,255,255,.75);
+    font-size: clamp(11px, 1.05vw, 14px);
+    line-height: 1.4;
+  }
+
+  /* Only below Wix's mobile breakpoint do we stack. You set the mobile
+     section height separately in Wix's mobile view, so one extra number
+     covers this. */
   @media (max-width: 749px) {
-    .grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
-    .pillar:nth-child(4), .pillar:nth-child(5) { grid-column: auto; margin-left: 0; }
+    .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
     .pillar:nth-child(5) { grid-column: 1 / -1; }
-    .pillar { padding: 26px 12px 24px; }
-    .icon { width: 50px; height: 50px; margin-bottom: 15px; }
-    .icon svg { width: 24px; height: 24px; }
-    .head { margin-bottom: 36px; }
+    .pillar { height: 164px; padding: 14px 10px; }
+    .icon { width: 46px; height: 46px; margin-bottom: 12px; }
+    .pillar .h4 { font-size: 16px; }
+    .pillar .p3 { font-size: 12px; }
+    .head { margin-bottom: 32px; }
   }
 </style>
 </head>

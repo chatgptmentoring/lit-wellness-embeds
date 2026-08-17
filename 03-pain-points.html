@@ -28,17 +28,24 @@
 <style>
   .wrap { padding: 8px 0 12px; }
 
+  /* Four columns at EVERY desktop width — they never wrap, so the
+     section height stays the same number no matter how wide the
+     browser is. Fixed card height absorbs text-wrap variation. */
   .grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    gap: clamp(10px, 1.4vw, 20px);
   }
 
   .card {
+    height: 202px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     background: var(--white);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 30px 26px 32px;
+    padding: 24px clamp(16px, 1.8vw, 26px);
     transition: border-color .25s var(--ease), box-shadow .25s var(--ease), transform .25s var(--ease);
   }
   .card:hover {
@@ -48,9 +55,10 @@
   }
 
   .mark {
-    width: 40px;
-    height: 40px;
-    margin-bottom: 20px;
+    width: clamp(32px, 3vw, 40px);
+    height: clamp(32px, 3vw, 40px);
+    flex: none;
+    margin-bottom: clamp(12px, 1.5vw, 20px);
     border-radius: 50%;
     display: grid;
     place-items: center;
@@ -67,20 +75,18 @@
   .card p {
     font-family: var(--font-body);
     font-weight: 600;
-    font-size: 18px;
+    font-size: clamp(14px, 1.35vw, 18px);
     line-height: 1.45;
     margin: 0;
     color: var(--ink);
   }
 
-  @media (max-width: 1000px) {
-    .grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width: 560px) {
-    .grid { grid-template-columns: 1fr; gap: 14px; }
-    .card { padding: 24px 22px 26px; }
-    .mark { width: 36px; height: 36px; margin-bottom: 16px; }
-    .card p { font-size: 16px; }
+  /* Stack only below Wix's mobile breakpoint. */
+  @media (max-width: 749px) {
+    .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .card { height: 178px; padding: 20px 16px; }
+    .mark { width: 34px; height: 34px; margin-bottom: 12px; }
+    .card p { font-size: 14px; }
   }
 </style>
 </head>
