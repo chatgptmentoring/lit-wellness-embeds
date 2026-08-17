@@ -85,8 +85,7 @@
 
   /* Stack only below Wix's mobile breakpoint. */
   @media (max-width: 749px) {
-    .grid { grid-template-columns: 1fr; gap: 12px; }
-    .step { height: 150px; padding: 24px 22px; }
+    .step { height: 198px; padding: 26px 24px; }
     .step::before { font-size: 96px; top: -10px; }
     .step .h4 { font-size: 18px; }
     .step .p2 { font-size: 15px; }
@@ -95,9 +94,9 @@
 </head>
 <body>
 
-<div class="wrap">
+<div class="wrap locked" style="min-height:218px">
   <div class="shell">
-    <div class="grid">
+    <div class="grid rail">
 
       <div class="step" data-num="01" data-reveal data-reveal-delay="0">
         <div class="rule" aria-hidden="true"></div>

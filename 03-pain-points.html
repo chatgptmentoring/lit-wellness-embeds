@@ -83,8 +83,7 @@
 
   /* Stack only below Wix's mobile breakpoint. */
   @media (max-width: 749px) {
-    .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .card { height: 178px; padding: 20px 16px; }
+    .card { height: 202px; padding: 22px 20px; }
     .mark { width: 34px; height: 34px; margin-bottom: 12px; }
     .card p { font-size: 14px; }
   }
@@ -92,9 +91,9 @@
 </head>
 <body>
 
-<div class="wrap">
+<div class="wrap locked" style="min-height:222px">
   <div class="shell">
-    <div class="grid">
+    <div class="grid rail">
 
       <div class="card" data-reveal data-reveal-delay="0">
         <div class="mark" aria-hidden="true">

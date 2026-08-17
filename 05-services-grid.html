@@ -92,10 +92,20 @@
 
   .card:hover .more svg { transform: translateX(4px); }
 
-  /* Stack only below Wix's mobile breakpoint. */
+  /* On mobile this becomes a TWO-ROW sideways scroller rather than the
+     single-row rail the other sections use. Two rows of 306px plus the
+     24px gap reproduces the desktop height exactly, so this section is
+     also a single number in Wix. */
   @media (max-width: 749px) {
-    .grid { grid-template-columns: 1fr; gap: 12px; }
-    .card { height: 226px; padding: 24px 22px; }
+    .grid.rail {
+      display: grid !important;
+      grid-auto-flow: column;
+      grid-template-rows: 306px 306px;
+      grid-auto-columns: 76%;
+      row-gap: 24px !important;
+      column-gap: 12px !important;
+    }
+    .card { height: 306px; padding: 24px 22px; }
     .icon { width: 44px; height: 44px; margin-bottom: 14px; }
     .card .h4 { font-size: 18px; }
     .card .p2 { font-size: 15px; }
@@ -105,9 +115,9 @@
 </head>
 <body>
 
-<div class="wrap">
+<div class="wrap locked" style="min-height:656px">
   <div class="shell">
-    <div class="grid">
+    <div class="grid rail">
 
       <a class="card" href="https://www.litwellnesssolutions.com/individualcoaching" data-reveal data-reveal-delay="0">
         <div class="icon" aria-hidden="true">

@@ -108,9 +108,7 @@
      section height separately in Wix's mobile view, so one extra number
      covers this. */
   @media (max-width: 749px) {
-    .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .pillar:nth-child(5) { grid-column: 1 / -1; }
-    .pillar { height: 164px; padding: 14px 10px; }
+    .pillar { height: 206px; padding: 18px 14px; }
     .icon { width: 46px; height: 46px; margin-bottom: 12px; }
     .pillar .h4 { font-size: 16px; }
     .pillar .p3 { font-size: 12px; }
@@ -120,7 +118,7 @@
 </head>
 <body>
 
-<section class="band on-dark section">
+<section class="band on-dark section locked" style="min-height:592px">
   <div class="shell">
 
     <div class="head" data-reveal>
@@ -130,7 +128,7 @@
         &mdash; because they hold each other up.</p>
     </div>
 
-    <div class="grid">
+    <div class="grid rail">
 
       <div class="pillar" data-reveal data-reveal-delay="0">
         <div class="icon" aria-hidden="true">

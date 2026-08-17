@@ -127,6 +127,43 @@ a { color: inherit; }
 .link-arrow svg { transition: transform .2s var(--ease); }
 .link-arrow:hover svg { transform: translateX(4px); }
 
+/* --- Locked section height ------------------------------------------
+   Every embed sits inside one of these. The height is fixed and
+   identical on desktop and mobile, so exactly ONE number gets typed
+   into Wix per section and Mobile view never has to be touched.
+   min-height rather than height: if a device renders text unusually
+   large, the section grows a little instead of clipping the content. */
+.locked {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* --- Mobile card rail ------------------------------------------------
+   Below Wix's 750px mobile breakpoint, card grids scroll sideways
+   instead of stacking. Stacking is what made mobile taller than
+   desktop and forced a second height into the process. Cards are
+   sized so the next one peeks in from the right, which is what tells
+   a thumb there is more to see. */
+@media (max-width: 749px) {
+  .rail {
+    display: flex !important;
+    grid-template-columns: none !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 12px !important;
+  }
+  .rail::-webkit-scrollbar { display: none; }
+  .rail > * {
+    flex: 0 0 76%;
+    scroll-snap-align: center;
+    margin-left: 0 !important;
+  }
+}
+
 /* --- Scroll reveal -------------------------------------------------- */
 [data-reveal] {
   opacity: 0;

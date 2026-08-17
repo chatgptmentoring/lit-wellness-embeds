@@ -75,8 +75,7 @@
 
   /* Stack only below Wix's mobile breakpoint. */
   @media (max-width: 749px) {
-    .grid { grid-template-columns: 1fr; gap: 12px; }
-    .quote { height: 262px; padding: 24px 22px; }
+    .quote { height: 336px; padding: 26px 24px; }
     .quote blockquote { font-size: 16px; }
     .stars { width: auto; margin-bottom: 14px; }
     .stars svg { width: 16px; height: 16px; }
@@ -85,9 +84,9 @@
 </head>
 <body>
 
-<div class="wrap">
+<div class="wrap locked" style="min-height:388px">
   <div class="shell">
-    <div class="grid">
+    <div class="grid rail">
 
       <figure class="quote" data-reveal data-reveal-delay="0">
         <div class="stars" role="img" aria-label="5 out of 5 stars">

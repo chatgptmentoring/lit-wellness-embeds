@@ -16,6 +16,9 @@
 
 <style>
   .strip {
+    min-height: 64px;
+    display: flex;
+    align-items: center;
     background: var(--white);
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
@@ -71,7 +74,6 @@
   .item .star { color: var(--terracotta); font-size: 13px; line-height: 1; }
 
   @media (max-width: 749px) {
-    .strip { padding: 16px 0; }
     .item  { font-size: 12px; padding: 0 20px; gap: 11px; }
     .strip::before, .strip::after { width: 44px; }
   }
