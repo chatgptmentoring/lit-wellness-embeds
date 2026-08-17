@@ -1,0 +1,40 @@
+/* =====================================================================
+   LIT Wellness Solutions — shared design tokens
+   Matches the APPROVED spec (Wix Build Guide Part 2.2 / 2.3), NOT the
+   WordPress demo's Fraunces/Inter/ember palette.
+
+   Change a value here and every embed on the site updates.
+   ===================================================================== */
+
+:root {
+  /* --- Base colours (Wix "Base colors") --- */
+  --white:        #FFFFFF;   /* primary page background */
+  --sand:         #F7F3EE;   /* warm sand, alternating sections */
+  --ink:          #1A1A1A;   /* body text + headings on light */
+
+  /* --- Accent colours (Wix "Accent colors") --- */
+  --blue:         #355D80;   /* brand blue — links, secondary btn, bands */
+  --terracotta:   #A9502F;   /* primary CTA only (5.4:1 on white text) */
+  --tan:          #D8C3A5;   /* dividers, badges, book section bg */
+
+  /* --- Per-element "My colors" --- */
+  --blue-deep:    #223E56;   /* footer, blue hover */
+  --blue-wash:    #E8EEF3;   /* quote panels, tertiary hover fill */
+  --terracotta-2: #C1633F;   /* icon accents */
+  --terracotta-h: #8E4227;   /* primary button hover */
+  --grey:         #6B6B6B;   /* captions */
+  --border:       #E8E2D9;   /* card borders */
+
+  /* --- Type --- */
+  --font-display: 'Newsreader', 'Iowan Old Style', Georgia, serif;
+  --font-body:    'Karla', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* --- Shape --- */
+  --radius:     12px;   /* cards */
+  --radius-btn:  8px;   /* buttons */
+  --shell:    1180px;   /* max content width */
+  --ease: cubic-bezier(.2, .7, .2, 1);
+
+  --shadow-sm: 0 8px 24px -14px rgba(26, 26, 26, .28);
+  --shadow:    0 20px 44px -24px rgba(26, 26, 26, .34);
+}

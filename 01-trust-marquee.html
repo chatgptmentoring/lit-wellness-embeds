@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Never let Google index the raw embed file — only the Wix page. -->
+<meta name="robots" content="noindex, nofollow">
+<title>LIT Wellness — Trust Strip</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
+
+<link rel="stylesheet" href="shared/tokens.css">
+<link rel="stylesheet" href="shared/base.css">
+
+<style>
+  .strip {
+    background: var(--white);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 0;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Soft fade at both edges so items don't pop in/out abruptly. */
+  .strip::before,
+  .strip::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .strip::before { left: 0;  background: linear-gradient(to right, var(--white), rgba(255,255,255,0)); }
+  .strip::after  { right: 0; background: linear-gradient(to left,  var(--white), rgba(255,255,255,0)); }
+
+  .track {
+    display: flex;
+    width: max-content;
+    animation: scroll 44s linear infinite;
+  }
+  .strip:hover .track { animation-play-state: paused; }
+
+  /* The track holds FOUR identical sets and slides by exactly two of
+     them. Two sets (~2350px) is wider than any realistic desktop, so
+     the strip never runs out of items before it loops. */
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  .set { display: flex; }
+
+  .item {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 0 30px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .item .star { color: var(--terracotta); font-size: 13px; line-height: 1; }
+
+  @media (max-width: 749px) {
+    .strip { padding: 16px 0; }
+    .item  { font-size: 12px; padding: 0 20px; gap: 11px; }
+    .strip::before, .strip::after { width: 44px; }
+  }
+
+  /* Reduced motion: stop scrolling, show one static centred set. */
+  @media (prefers-reduced-motion: reduce) {
+    .track { animation: none; width: 100%; }
+    .set   { flex-wrap: wrap; justify-content: center; row-gap: 8px; width: 100%; }
+    .set + .set { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="strip" role="region" aria-label="Why clients choose LIT Wellness Solutions">
+  <div class="track">
+
+    <div class="set">
+      <span class="item"><span class="star" aria-hidden="true">&#10022;</span> Non-Diet Approach</span>
+      <span class="item"><span class="star" aria-hidden="true">&#10022;</span> Insurance Accepted</span>
+      <span class="item"><span class="star" aria-hidden="true">&#10022;</span> Registered Dietitian Nutritionist</span>
+      <span class="item"><span class="star" aria-hidden="true">&#10022;</span> Award-Winning Coaching</span>
+      <span class="item"><span class="star" aria-hidden="true">&#10022;</span> Virtual Nationwide</span>
+    </div>
+
+    <!-- Sets 2-4 are visual filler only, hidden from screen readers. -->
+    <div class="set" aria-hidden="true">
+      <span class="item"><span class="star">&#10022;</span> Non-Diet Approach</span>
+      <span class="item"><span class="star">&#10022;</span> Insurance Accepted</span>
+      <span class="item"><span class="star">&#10022;</span> Registered Dietitian Nutritionist</span>
+      <span class="item"><span class="star">&#10022;</span> Award-Winning Coaching</span>
+      <span class="item"><span class="star">&#10022;</span> Virtual Nationwide</span>
+    </div>
+
+    <div class="set" aria-hidden="true">
+      <span class="item"><span class="star">&#10022;</span> Non-Diet Approach</span>
+      <span class="item"><span class="star">&#10022;</span> Insurance Accepted</span>
+      <span class="item"><span class="star">&#10022;</span> Registered Dietitian Nutritionist</span>
+      <span class="item"><span class="star">&#10022;</span> Award-Winning Coaching</span>
+      <span class="item"><span class="star">&#10022;</span> Virtual Nationwide</span>
+    </div>
+
+    <div class="set" aria-hidden="true">
+      <span class="item"><span class="star">&#10022;</span> Non-Diet Approach</span>
+      <span class="item"><span class="star">&#10022;</span> Insurance Accepted</span>
+      <span class="item"><span class="star">&#10022;</span> Registered Dietitian Nutritionist</span>
+      <span class="item"><span class="star">&#10022;</span> Award-Winning Coaching</span>
+      <span class="item"><span class="star">&#10022;</span> Virtual Nationwide</span>
+    </div>
+
+  </div>
+</div>
+
+<script src="shared/embed.js"></script>
+</body>
+</html>

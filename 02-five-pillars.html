@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>LIT Wellness — 5 Pillars of Health</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
+
+<link rel="stylesheet" href="shared/tokens.css">
+<link rel="stylesheet" href="shared/base.css">
+
+<style>
+  .band {
+    background: var(--blue);
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+  /* Very soft warm glow, top-right — stops the blue reading as flat. */
+  .band::after {
+    content: '';
+    position: absolute;
+    top: -30%;
+    right: -10%;
+    width: 620px;
+    height: 620px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(216,195,165,.16) 0%, rgba(216,195,165,0) 68%);
+    pointer-events: none;
+  }
+  .band > .shell { position: relative; z-index: 1; }
+
+  .head { max-width: 660px; margin: 0 auto 56px; text-align: center; }
+  .head .eyebrow { color: var(--tan); margin-bottom: 14px; }
+  .head .h2 { color: var(--white); }
+  .head .p1 { color: rgba(255,255,255,.82); margin-top: 18px; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+  }
+
+  .pillar {
+    text-align: center;
+    padding: 34px 16px 30px;
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: var(--radius);
+    background: rgba(255,255,255,.05);
+    transition: background-color .25s var(--ease), border-color .25s var(--ease), transform .25s var(--ease);
+  }
+  .pillar:hover {
+    background: rgba(255,255,255,.1);
+    border-color: rgba(216,195,165,.5);
+    transform: translateY(-4px);
+  }
+
+  .icon {
+    width: 58px;
+    height: 58px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(216,195,165,.4);
+  }
+  .icon svg {
+    width: 27px;
+    height: 27px;
+    fill: none;
+    stroke: var(--tan);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .pillar .h4 { color: var(--white); margin-bottom: 8px; }
+  .pillar .p3 { color: rgba(255,255,255,.75); }
+
+  /* --- Reflow. Auto-height means we never have to care about the
+         resulting height, so we can pick whatever reads best. ------- */
+  @media (max-width: 1080px) {
+    .grid { grid-template-columns: repeat(3, 1fr); }
+    /* Centre the orphan row of 2 under the row of 3. */
+    .pillar:nth-child(4) { grid-column: 1 / span 1; margin-left: 50%; }
+    .pillar:nth-child(5) { margin-left: 50%; }
+  }
+  @media (max-width: 749px) {
+    .grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .pillar:nth-child(4), .pillar:nth-child(5) { grid-column: auto; margin-left: 0; }
+    .pillar:nth-child(5) { grid-column: 1 / -1; }
+    .pillar { padding: 26px 12px 24px; }
+    .icon { width: 50px; height: 50px; margin-bottom: 15px; }
+    .icon svg { width: 24px; height: 24px; }
+    .head { margin-bottom: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<section class="band on-dark section">
+  <div class="shell">
+
+    <div class="head" data-reveal>
+      <p class="eyebrow">Our Approach</p>
+      <h2 class="h2">The 5 Pillars of Health</h2>
+      <p class="p1">Lasting change never comes from food alone. We work across all five together
+        &mdash; because they hold each other up.</p>
+    </div>
+
+    <div class="grid">
+
+      <div class="pillar" data-reveal data-reveal-delay="0">
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 21c0-6.2 4.1-10.4 9.2-10.4C21.2 16.8 17.1 21 12 21z"/><path d="M12 21c0-4.6-3-7.7-6.8-7.7"/><path d="M12 21V8.4"/><path d="M12 8.4C12 5.4 9.9 3 7.2 3c0 3 2.1 5.4 4.8 5.4z"/></svg>
+        </div>
+        <h3 class="h4">Nutrition</h3>
+        <p class="p3">Food that fits your real life</p>
+      </div>
+
+      <div class="pillar" data-reveal data-reveal-delay="70">
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M2 12.5h4.2l2.6-7.2 4.4 14 2.5-6.8H22"/></svg>
+        </div>
+        <h3 class="h4">Activity</h3>
+        <p class="p3">Movement you can sustain</p>
+      </div>
+
+      <div class="pillar" data-reveal data-reveal-delay="140">
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.6"/><path d="M6.2 17.8a8.2 8.2 0 0 1 0-11.6"/><path d="M17.8 6.2a8.2 8.2 0 0 1 0 11.6"/><path d="M3.2 20.8a12.4 12.4 0 0 1 0-17.6"/><path d="M20.8 3.2a12.4 12.4 0 0 1 0 17.6"/></svg>
+        </div>
+        <h3 class="h4">Stress</h3>
+        <p class="p3">Tools for emotional eating</p>
+      </div>
+
+      <div class="pillar" data-reveal data-reveal-delay="210">
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 2.8s6.4 6.9 6.4 11.1a6.4 6.4 0 1 1-12.8 0C5.6 9.7 12 2.8 12 2.8z"/><path d="M9 14.4a3 3 0 0 0 3 3"/></svg>
+        </div>
+        <h3 class="h4">Hydration</h3>
+        <p class="p3">Simple, steady, daily</p>
+      </div>
+
+      <div class="pillar" data-reveal data-reveal-delay="280">
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M20.6 14.6A8.6 8.6 0 0 1 9.4 3.4a8.6 8.6 0 1 0 11.2 11.2z"/></svg>
+        </div>
+        <h3 class="h4">Sleep</h3>
+        <p class="p3">Rest that resets everything</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script src="shared/embed.js"></script>
+</body>
+</html>

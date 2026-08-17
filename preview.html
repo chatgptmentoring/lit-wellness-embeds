@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>LIT Wellness — Embed Preview Harness</title>
+<style>
+  body { margin: 0; font: 15px/1.5 system-ui, sans-serif; background: #FFFFFF; color: #1A1A1A; }
+  .bar {
+    position: sticky; top: 0; z-index: 10;
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    padding: 12px 18px; background: #223E56; color: #fff;
+  }
+  .bar strong { font-size: 14px; letter-spacing: .04em; text-transform: uppercase; }
+  .bar button {
+    font: inherit; font-size: 13px; padding: 6px 13px; cursor: pointer;
+    border: 1px solid rgba(255,255,255,.45); border-radius: 6px;
+    background: transparent; color: #fff;
+  }
+  .bar button[aria-pressed="true"] { background: #A9502F; border-color: #A9502F; }
+  .stage { margin: 0 auto; transition: max-width .25s ease; }
+  .label {
+    font-size: 12px; letter-spacing: .1em; text-transform: uppercase;
+    color: #6B6B6B; padding: 22px 18px 8px;
+  }
+  iframe { display: block; width: 100%; border: 0; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <strong>Embed preview</strong>
+  <button data-w="390"  aria-pressed="false">Mobile 390</button>
+  <button data-w="768"  aria-pressed="false">Tablet 768</button>
+  <button data-w="1280" aria-pressed="true">Desktop 1280</button>
+  <button data-w="1920" aria-pressed="false">Wide 1920</button>
+  <span id="log" style="font-size:12px;opacity:.8"></span>
+</div>
+
+<div class="stage" id="stage" style="max-width:1280px">
+  <p class="label">01 — Trust marquee</p>
+  <iframe src="01-trust-marquee.html" data-embed title="Trust marquee" scrolling="no"></iframe>
+
+  <p class="label">02 — Five pillars of health</p>
+  <iframe src="02-five-pillars.html" data-embed title="Five pillars" scrolling="no"></iframe>
+</div>
+
+<script>
+  /* This does exactly what the Wix Site Code snippet does: listen for the
+     height each embed reports, and resize its box. If the heights below
+     track correctly here, they will track correctly in Wix.            */
+  var log = document.getElementById('log');
+
+  window.addEventListener('message', function (e) {
+    var h = e.data && e.data.litwsHeight;
+    if (!h) return;
+    var frames = document.querySelectorAll('iframe[data-embed]');
+    for (var i = 0; i < frames.length; i++) {
+      if (frames[i].contentWindow === e.source) {
+        frames[i].style.height = h + 'px';
+        log.textContent = 'auto-height ok — last: ' + h + 'px';
+        return;
+      }
+    }
+  });
+
+  document.querySelector('.bar').addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-w]');
+    if (!btn) return;
+    document.querySelectorAll('.bar button').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b === btn));
+    });
+    document.getElementById('stage').style.maxWidth = btn.dataset.w + 'px';
+  });
+</script>
+</body>
+</html>
