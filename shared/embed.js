@@ -44,15 +44,26 @@
   }
 
   if (typeof ResizeObserver === 'function') {
-    new ResizeObserver(report).observe(document.body);
+    var ro = new ResizeObserver(report);
+    ro.observe(document.body);
+    ro.observe(document.documentElement);
   }
   window.addEventListener('load', report);
   window.addEventListener('resize', report);
   if (document.fonts && document.fonts.ready) {
     document.fonts.ready.then(report);
   }
-  // Belt-and-braces: images and late layout shifts.
+  // Images and late layout shifts.
   [100, 400, 900, 2000].forEach(function (ms) { setTimeout(report, ms); });
+
+  /* Polling backstop. We cannot open devtools inside the Wix editor, so
+     this embed must not depend on resize events firing. In testing, a
+     parent-driven width change did not always reach the iframe's resize
+     listener or its ResizeObserver, which left the box stuck at the old
+     height. report() is a no-op unless the height actually moved, so the
+     real cost of this is a getBoundingClientRect twice a second.        */
+  setInterval(report, 500);
+
   report();
 
   /* ---------- 2. Scroll reveal -------------------------------------- */
