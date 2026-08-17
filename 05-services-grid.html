@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>LIT Wellness — Services Grid (cards only)</title>
+
+<!--
+  SEO NOTE — read before placing this.
+  No heading in here on purpose. Build Guide 10.2 wants the homepage
+  keywords "Integrated Nutrition Therapy", "Sports Performance Wellness"
+  and "Employee Wellness" readable on this page, and Google cannot read
+  inside an embed. So above this embed, keep a REAL Wix H2 plus one
+  sentence of native text carrying those terms. The card titles below
+  repeat them for the human reader; the native text is what ranks.
+
+  Transparent background: inherits the Wix section colour behind it.
+
+  CARD 6 currently links to the Fay insurance booking page, because
+  /insurance-coverage does not exist yet. Once that page is built, this
+  link should be repointed to it.
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
+
+<link rel="stylesheet" href="shared/tokens.css">
+<link rel="stylesheet" href="shared/base.css">
+
+<style>
+  .wrap { padding: 8px 0 12px; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 34px 30px 30px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color .25s var(--ease), box-shadow .25s var(--ease), transform .25s var(--ease);
+  }
+  .card:hover {
+    border-color: var(--tan);
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-4px);
+  }
+
+  .icon {
+    width: 52px;
+    height: 52px;
+    margin-bottom: 22px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--blue-wash);
+    flex: none;
+  }
+  .icon svg {
+    width: 25px; height: 25px;
+    fill: none;
+    stroke: var(--blue);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .card .h4 { margin-bottom: 10px; }
+  .card .p2 { color: var(--grey); margin-bottom: 22px; }
+
+  /* Pushes every "Learn more" onto the same baseline regardless of how
+     long the description above it runs. */
+  .more { margin-top: auto; }
+
+  .card:hover .more svg { transform: translateX(4px); }
+
+  @media (max-width: 980px) {
+    .grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  }
+  @media (max-width: 620px) {
+    .grid { grid-template-columns: 1fr; gap: 14px; }
+    .card { padding: 28px 24px 26px; }
+    .icon { width: 46px; height: 46px; margin-bottom: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="shell">
+    <div class="grid">
+
+      <a class="card" href="https://www.litwellnesssolutions.com/individualcoaching" data-reveal data-reveal-delay="0">
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 16.5c0-3.5 2.2-5.9 5.1-5.9 0 3.4-2.2 5.9-5.1 5.9z"/><path d="M12 16.5V9.2"/></svg>
+        </div>
+        <h3 class="h4">Integrated Nutrition Therapy</h3>
+        <p class="p2">Personalized, evidence-based medical nutrition care.</p>
+        <span class="link-arrow more">Learn more
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <a class="card" href="https://www.litwellnesssolutions.com/mindful-eating-freedom" data-reveal data-reveal-delay="70">
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 20.3s-7.2-4.7-7.2-9.4a3.95 3.95 0 0 1 7.2-2.3 3.95 3.95 0 0 1 7.2 2.3c0 4.7-7.2 9.4-7.2 9.4z"/></svg>
+        </div>
+        <h3 class="h4">Mindful Eating &amp; Weight Loss</h3>
+        <p class="p2">A non-diet path to a healthier relationship with food.</p>
+        <span class="link-arrow more">Learn more
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <a class="card" href="https://www.litwellnesssolutions.com/sports-nutrition-coaching" data-reveal data-reveal-delay="140">
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M13.4 2.8 5.7 13.4h5.3L10.6 21.2l7.7-10.6H13z"/></svg>
+        </div>
+        <h3 class="h4">Sports Performance Wellness</h3>
+        <p class="p2">Fueling strategies for athletes at every level.</p>
+        <span class="link-arrow more">Learn more
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <a class="card" href="https://www.litwellnesssolutions.com/workplace-wellness" data-reveal data-reveal-delay="0">
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M3.5 21h17"/><path d="M6 21V5.2l6-2.2v18"/><path d="M12 21V9.4l6 2.2V21"/><path d="M9 8.4v.01M9 12v.01M9 15.6v.01M15 13.6v.01M15 17.2v.01"/></svg>
+        </div>
+        <h3 class="h4">Corporate Health</h3>
+        <p class="p2">Culture-first employee wellness programs for organizations.</p>
+        <span class="link-arrow more">Learn more
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <a class="card" href="https://www.litwellnesssolutions.com/transportation-health" data-reveal data-reveal-delay="70">
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M2.8 6.6h11.4v9.2H2.8z"/><path d="M14.2 9.9h3.9l3.1 3.1v2.8h-7z"/><circle cx="7.2" cy="17.6" r="1.8"/><circle cx="17.4" cy="17.6" r="1.8"/></svg>
+        </div>
+        <h3 class="h4">Transportation Health</h3>
+        <p class="p2">Specialized wellness for drivers and fleets.</p>
+        <span class="link-arrow more">Learn more
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <a class="card" href="https://signup.faynutrition.com/book/tanya-jolliffe/ddfa1a" data-reveal data-reveal-delay="140">
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 2.9 19 5.8v5.4c0 4.2-2.9 7.9-7 9.4-4.1-1.5-7-5.2-7-9.4V5.8z"/><path d="M9.1 11.9 11 13.8l3.9-3.9"/></svg>
+        </div>
+        <h3 class="h4">Insurance-Covered Counseling</h3>
+        <p class="p2">Work one-on-one with a registered dietitian using your insurance benefits.</p>
+        <span class="link-arrow more">Check coverage
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+    </div>
+  </div>
+</div>
+
+<script src="shared/embed.js"></script>
+</body>
+</html>
