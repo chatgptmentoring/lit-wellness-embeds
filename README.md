@@ -90,7 +90,32 @@ NN-name.html        One embed per file.
 
 ## Embed index
 
-| # | File | Page | Status | Assets needed |
-|---|---|---|---|---|
-| 01 | `01-trust-marquee.html` | Home (under hero) | ✅ Built | none |
-| 02 | `02-five-pillars.html` | Home | ✅ Built | none |
+Live base URL: **https://chatgptmentoring.github.io/lit-wellness-embeds/**
+
+| # | File | Page | Own heading? | Status | Assets |
+|---|---|---|---|---|---|
+| 01 | `01-trust-marquee.html` | Home, under hero | n/a | ✅ Live | none |
+| 02 | `02-five-pillars.html` | Home | yes (no keywords) | ✅ Live | none |
+| 03 | `03-pain-points.html` | Home, under native "Sound familiar?" H2 | **no — native H2 required above** | ✅ Live | none |
+| 04 | `04-how-we-help.html` | Home, under native "How we help" H2 | **no — native H2 required above** | ✅ Live | none |
+
+### Which homepage sections may be embedded
+
+Build Guide 10.2 assigns keywords to most homepage sections. Google does not
+read iframe content, so:
+
+| Homepage section | Keywords assigned? | Approach |
+|---|---|---|
+| Hero / H1 | yes | **native Wix** |
+| Trust strip | no | embed ✅ |
+| Sound familiar? | H2 only | native H2 + embed cards ✅ |
+| How we help | H2 only | native H2 + embed steps ✅ |
+| Who we are / insurance | yes | **native Wix** |
+| 5 Pillars | no | embed ✅ |
+| Services grid | card titles | native H2 + intro line, then embed |
+| Books | no | embed ✅ |
+| Testimonials | no | embed ✅ |
+| Final CTA | yes | **native Wix** |
+
+Pages *without* assigned keywords (`/speaking`, `/books`, `/faq`, `/contact`,
+`/insurance-coverage`, the About pages) can be embedded much more freely.
