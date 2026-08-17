@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>LIT Wellness — How We Help (steps only)</title>
+
+<!--
+  SEO NOTE — read before placing this.
+  No heading in here on purpose. The "HOW WE HELP" eyebrow and its H2 stay
+  as REAL Wix text above this embed — Build Guide 10.2 assigns homepage
+  keywords ("behavior change", "healthy habits") to that H2, and Google
+  cannot read inside an embed.
+
+  Transparent background: inherits the Wix section colour behind it.
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
+
+<link rel="stylesheet" href="shared/tokens.css">
+<link rel="stylesheet" href="shared/base.css">
+
+<style>
+  .wrap { padding: 8px 0 12px; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .step {
+    position: relative;
+    overflow: hidden;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 40px 32px 38px;
+    transition: border-color .25s var(--ease), box-shadow .25s var(--ease), transform .25s var(--ease);
+  }
+  .step:hover {
+    border-color: var(--tan);
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-3px);
+  }
+
+  /* The big ghost numeral — Build Guide section 6, item 4. */
+  .step::before {
+    content: attr(data-num);
+    position: absolute;
+    top: -18px;
+    right: 6px;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 132px;
+    line-height: 1;
+    color: var(--blue);
+    opacity: .15;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .step > * { position: relative; z-index: 1; }
+
+  .rule {
+    width: 34px;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--terracotta);
+    margin-bottom: 22px;
+  }
+
+  .step .h4 { margin-bottom: 10px; }
+  .step .p2 { color: var(--grey); }
+
+  @media (max-width: 900px) {
+    .grid { grid-template-columns: 1fr; gap: 16px; }
+    .step { padding: 32px 26px 30px; }
+    .step::before { font-size: 104px; top: -12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="shell">
+    <div class="grid">
+
+      <div class="step" data-num="01" data-reveal data-reveal-delay="0">
+        <div class="rule" aria-hidden="true"></div>
+        <h3 class="h4">Personalized Plan</h3>
+        <p class="p2">Built around your lifestyle, not a fixed diet.</p>
+      </div>
+
+      <div class="step" data-num="02" data-reveal data-reveal-delay="90">
+        <div class="rule" aria-hidden="true"></div>
+        <h3 class="h4">Behavior-Based Approach</h3>
+        <p class="p2">Focus on the actions you repeat daily.</p>
+      </div>
+
+      <div class="step" data-num="03" data-reveal data-reveal-delay="180">
+        <div class="rule" aria-hidden="true"></div>
+        <h3 class="h4">Ongoing Support</h3>
+        <p class="p2">Staying consistent with guidance and accountability.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="shared/embed.js"></script>
+</body>
+</html>

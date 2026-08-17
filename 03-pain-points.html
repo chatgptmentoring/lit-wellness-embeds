@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>LIT Wellness — Sound Familiar (cards only)</title>
+
+<!--
+  SEO NOTE — read before placing this.
+  This embed deliberately contains NO heading. The "SOUND FAMILIAR?" eyebrow
+  and the H2 above it must stay as REAL Wix text, because Build Guide 10.2
+  assigns homepage keywords to that H2. Google cannot read text inside an
+  embed. Native heading on top, this embed directly beneath it.
+
+  Background is transparent on purpose — it picks up whatever colour the
+  Wix section behind it is set to, so it blends seamlessly and you don't
+  have to fight the editor to stretch it edge-to-edge.
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
+
+<link rel="stylesheet" href="shared/tokens.css">
+<link rel="stylesheet" href="shared/base.css">
+
+<style>
+  .wrap { padding: 8px 0 12px; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 30px 26px 32px;
+    transition: border-color .25s var(--ease), box-shadow .25s var(--ease), transform .25s var(--ease);
+  }
+  .card:hover {
+    border-color: var(--tan);
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-3px);
+  }
+
+  .mark {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 20px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: rgba(169, 80, 47, .09);
+  }
+  .mark svg {
+    width: 20px; height: 20px;
+    fill: none;
+    stroke: var(--terracotta);
+    stroke-width: 1.8;
+    stroke-linecap: round;
+  }
+
+  .card p {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 1.45;
+    margin: 0;
+    color: var(--ink);
+  }
+
+  @media (max-width: 1000px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 560px) {
+    .grid { grid-template-columns: 1fr; gap: 14px; }
+    .card { padding: 24px 22px 26px; }
+    .mark { width: 36px; height: 36px; margin-bottom: 16px; }
+    .card p { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="shell">
+    <div class="grid">
+
+      <div class="card" data-reveal data-reveal-delay="0">
+        <div class="mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 15.5 15.5 8.5"/></svg>
+        </div>
+        <p>You start diets and stop after a few weeks</p>
+      </div>
+
+      <div class="card" data-reveal data-reveal-delay="80">
+        <div class="mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 15.5 15.5 8.5"/></svg>
+        </div>
+        <p>You struggle with emotional eating</p>
+      </div>
+
+      <div class="card" data-reveal data-reveal-delay="160">
+        <div class="mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 15.5 15.5 8.5"/></svg>
+        </div>
+        <p>You feel stuck and do not know what works</p>
+      </div>
+
+      <div class="card" data-reveal data-reveal-delay="240">
+        <div class="mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 15.5 15.5 8.5"/></svg>
+        </div>
+        <p>You want structure but not restriction</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="shared/embed.js"></script>
+</body>
+</html>
