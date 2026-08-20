@@ -130,7 +130,15 @@
     overflow: hidden;
   }
 
-  .foot { text-align: center; margin-top: 32px; }
+  /* Fixed height: on a narrow phone the button label wraps to two lines,
+     which was enough to push the whole section 16px taller than desktop. */
+  .foot {
+    height: 76px;
+    margin-top: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
   @media (max-width: 749px) {
     /* Four-row sideways scroller reproduces the desktop height exactly. */
@@ -142,7 +150,7 @@
       row-gap: 20px !important;
       column-gap: 12px !important;
     }
-    .btn { width: 100%; max-width: 320px; }
+    .btn { width: 100%; max-width: 320px; font-size: 14px; padding: 14px 18px; }
   }
 </style>
 </head>
