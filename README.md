@@ -88,6 +88,58 @@ preview.html       Local/hosted test harness. Mimics exactly what Wix does.
 NN-name.html        One embed per file.
 ```
 
+## Section heights — one number each, desktop AND mobile
+
+Live base URL: **https://chatgptmentoring.github.io/lit-wellness-embeds/**
+
+Verified identical at 320 / 390 / 600 / 749 / 750 / 1000 / 1440 / 1920px.
+Set the Wix section height once in desktop view; Mobile view never needs
+touching.
+
+| # | File | Height | Page |
+|---|---|---|---|
+| 01 | `01-trust-marquee.html` | 66 | Home |
+| 02 | `02-five-pillars.html` | 592 | Home |
+| 03 | `03-pain-points.html` | 222 | Home |
+| 04 | `04-how-we-help.html` | 218 | Home |
+| 05 | `05-services-grid.html` | 656 | Home |
+| 06 | `06-testimonials.html` | 388 | Home |
+| 07 | `07-final-cta.html` | 640 | Home |
+| 08 | `08-speaking-topics.html` | 342 | /speaking |
+| 09 | `09-speaking-videos.html` | 1232 | /speaking |
+| 10 | `10-insurance-steps.html` | 400 | Home + /insurance-coverage |
+
+Held constant by three mechanisms: grids keep their column count from
+750px up and shrink the cards rather than wrapping; below 750px they
+become sideways-scrolling rails instead of stacking; and each embed sits
+in a `.locked` wrapper whose min-height clears its own tallest layout.
+Cards have fixed heights, images use fixed pixel heights with
+`object-fit` rather than aspect ratios, and long titles are line-clamped.
+
+**Re-measure after any content change.** Adding a card to a rail is free;
+adding a ROW is not, and neither is a longer heading.
+
+### Which homepage sections may be embedded
+
+Build Guide 10.2 assigns keywords to most homepage sections, and Google does
+not read iframe content, so:
+
+| Homepage section | Keywords assigned? | Approach |
+|---|---|---|
+| Hero / H1 | yes | **native Wix** |
+| Trust strip | no | embed 01 |
+| Sound familiar? | H2 only | native H2 + embed 03 |
+| How we help | H2 only | native H2 + embed 04 |
+| Who we are | yes | **native Wix** |
+| Insurance | H2 only | native H2 + embed 10 |
+| 5 Pillars | no | embed 02 |
+| Services grid | card titles | native H2 + keyword sentence, then embed 05 |
+| Testimonials | no | embed 06 |
+| Final CTA | brand name, already native | embed 07 |
+
+Pages *without* assigned keywords (`/speaking`, `/books`, `/faq`, `/contact`,
+`/insurance-coverage`, the About pages) can be embedded much more freely.
+
 ## Embed index
 
 | # | Own heading? | Notes |
