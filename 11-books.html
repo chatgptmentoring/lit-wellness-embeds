@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>LIT Wellness — Books</title>
+
+<!--
+  Tanya's specific request (Build Guide 6, section 8 and Part 8).
+  Tan #D8C3A5 band, new book first, then The Mindful Me Journey.
+
+  IMAGES
+  - The Mindful Me Journey cover is served from Tanya's own Wix account,
+    resized by the Wix CDN from 1.8MB down to a sane size. Its "#1 New
+    Release" flash is burned into the artwork, which is why the text
+    below does not repeat that claim as a badge.
+  - "Food Isn't the Problem" is NOT on Wix yet — it is an upcoming book —
+    so its cover is hosted in this repo at assets/food-isnt-the-problem.jpg.
+
+  COPY — do not embellish. The new book's description is built only from
+  what is printed on its own cover plus what the client told us: it is
+  about the emotions driving eating, dieting and bingeing. The book is
+  unreleased, so there is deliberately NO purchase button and no launch
+  date. Swap the "Coming soon" tag for a real "Get the Book" link to the
+  retailer once it is published.
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
+
+<link rel="stylesheet" href="shared/tokens.css">
+<link rel="stylesheet" href="shared/base.css">
+
+<style>
+  .band { background: var(--tan); }
+
+  .head { max-width: 620px; margin: 0 auto 44px; text-align: center; }
+  .head .eyebrow { color: var(--terracotta); margin-bottom: 14px; }
+  .head .h2 { color: var(--ink); }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(14px, 2vw, 28px);
+  }
+
+  .book {
+    height: 560px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 30px clamp(20px, 2.4vw, 34px) 28px;
+  }
+
+  /* Fixed pixel height + contain: the two covers have different aspect
+     ratios, so a width-driven image would give the cards different
+     heights. contain (not cover) because cropping a book cover is
+     never acceptable. */
+  .cover {
+    height: 268px;
+    flex: none;
+    margin-bottom: 22px;
+    display: grid;
+    place-items: center;
+  }
+  .cover img {
+    max-height: 268px;
+    width: auto;
+    max-width: 100%;
+    border-radius: 4px;
+    box-shadow: 0 18px 36px -18px rgba(26,26,26,.55);
+  }
+
+  .tag {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin: 0 0 8px;
+  }
+
+  .book .h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(19px, 1.9vw, 26px);
+    line-height: 1.2;
+    margin: 0 0 8px;
+    color: var(--ink);
+  }
+  .sub {
+    font-family: var(--font-body);
+    font-size: clamp(12px, 1.15vw, 14px);
+    line-height: 1.45;
+    color: var(--grey);
+    margin: 0 0 12px;
+  }
+  .pitch {
+    font-size: clamp(13px, 1.2vw, 15px);
+    line-height: 1.55;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  .actions {
+    margin-top: auto;
+    padding-top: 20px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .actions .btn { padding: 14px 22px; font-size: 15px; }
+
+  @media (max-width: 749px) {
+    .book { height: 560px; padding: 26px 22px 24px; }
+    .head { margin-bottom: 30px; }
+    .book .h3 { font-size: 21px; }
+    .sub { font-size: 13px; }
+    .pitch { font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<section class="band section locked" style="min-height:790px">
+  <div class="shell">
+
+    <div class="head" data-reveal>
+      <p class="eyebrow">Books by Tanya Jolliffe</p>
+      <h2 class="h2">From reading to real change</h2>
+    </div>
+
+    <div class="grid rail">
+
+      <article class="book" data-reveal>
+        <div class="cover">
+          <img src="assets/food-isnt-the-problem.jpg"
+               alt="Food Isn't the Problem, by Tanya Fasnacht Jolliffe RDN LD CIMHP"
+               loading="lazy">
+        </div>
+        <p class="tag">Coming soon</p>
+        <h3 class="h3">Food Isn't the Problem</h3>
+        <p class="sub">Understanding Emotional Eating and Crossing the Bridge to Peace with Food</p>
+        <p class="pitch">A three-step path to freedom from emotional eating &mdash; built around
+          the emotions that drive eating, dieting and bingeing, rather than the food itself.</p>
+        <div class="actions">
+          <a class="btn btn--tertiary" href="https://www.litwellnesssolutions.com/contact">Tell me when it&rsquo;s out</a>
+        </div>
+      </article>
+
+      <article class="book" data-reveal data-reveal-delay="110">
+        <div class="cover">
+          <img src="https://static.wixstatic.com/media/dca1c2_85fe24c16e654161b0be54c206ceeb64~mv2.png/v1/fit/w_420,h_600,al_c,q_85,enc_auto/mindful-me-journey.png"
+               alt="The Mindful Me Journey, a 40-day guided journal by Tanya Fasnacht Jolliffe"
+               loading="lazy">
+        </div>
+        <p class="tag">Available now</p>
+        <h3 class="h3">The Mindful Me Journey</h3>
+        <p class="sub">A 40-Day Guided Journal Toward a Healthier Relationship with Food and Exercise</p>
+        <p class="pitch">Forty days of guided prompts for re-examining habits without stigma,
+          shame or guilt. Now distributed internationally.</p>
+        <div class="actions">
+          <a class="btn btn--primary" href="https://www.amazon.com/Mindful-Me-Journey-Healthier-Relationship/dp/0578581809/">Get the Book</a>
+          <a class="btn btn--tertiary" href="https://www.litwellnesssolutions.com/the-mindful-me-journey">Learn more</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<script src="shared/embed.js"></script>
+</body>
+</html>
