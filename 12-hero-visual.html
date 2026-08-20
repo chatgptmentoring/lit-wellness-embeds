@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>LIT Wellness — Hero Visual</title>
+
+<!--
+  THE VISUAL HALF OF THE HERO ONLY. Place it on the RIGHT-HAND SIDE of
+  the hero, beside the existing Wix text.
+
+  ⚠️ THE H1 MUST STAY NATIVE WIX TEXT. The homepage H1 is the single most
+  valuable SEO element on the site and Build Guide 10.2 assigns
+  "nutrition support" and "strict diets" to it. Google cannot read inside
+  an embed, so the headline, subhead and CTA button stay as real Wix
+  elements to the LEFT of this. This embed carries no text that needs to
+  rank.
+
+  Images are Tanya's own, pulled through the Wix CDN resizer. The 2026
+  award badge is 5.5MB at full size and 6.6KB through the resizer, so
+  never reference the bare original.
+
+  NOTE ON REPEATED WORDING: the three floating chips repeat wording from
+  the trust strip (01). That mirrors the demo, but if you place both,
+  consider dropping one — reading the same five claims twice in one
+  screen reads as padding.
+
+  Sizing: designed for a container roughly 380-560px wide. Height is
+  locked, so it will not shift the hero section when the window resizes.
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
+
+<link rel="stylesheet" href="shared/tokens.css">
+<link rel="stylesheet" href="shared/base.css">
+
+<style>
+  .stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 0;
+  }
+
+  .frame {
+    position: relative;
+    /* Fixed height, fluid width. The height is what the Wix section
+       cares about, so it must never depend on the container width. */
+    width: min(340px, 74vw);
+    height: 440px;
+    flex: none;
+    border-radius: 20px;
+    overflow: hidden;
+    background: var(--blue-wash);
+    box-shadow: 0 28px 60px -30px rgba(26,26,26,.55);
+  }
+  .frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Bias upward so the crop keeps her face centred at every width. */
+    object-position: center 18%;
+  }
+
+  /* Soft tan halo behind the portrait. */
+  .halo {
+    position: absolute;
+    width: 520px; height: 520px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(216,195,165,.55) 0%, rgba(216,195,165,0) 70%);
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .wrapper { position: relative; display: grid; place-items: center; }
+
+  .chip {
+    position: absolute;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 14px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.94);
+    border: 1px solid var(--border);
+    box-shadow: 0 10px 26px -14px rgba(26,26,26,.45);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: .02em;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .chip::before {
+    content: '';
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--terracotta);
+    flex: none;
+  }
+  .chip--1 { top: 44px;  left: -6px; }
+  .chip--2 { top: 190px; right: -10px; }
+  .chip--3 { bottom: 58px; left: 4px; }
+
+  .awards {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin-top: 26px;
+    height: 74px;
+    flex: none;
+  }
+  .awards img { height: 74px; width: auto; }
+
+  .credit {
+    margin-top: 12px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    letter-spacing: .04em;
+    color: var(--grey);
+    text-align: center;
+  }
+
+  @media (max-width: 749px) {
+    .chip { font-size: 11px; padding: 8px 12px; }
+    .chip--1 { left: -2px; }
+    .chip--2 { right: -4px; }
+    .awards { gap: 14px; height: 64px; }
+    .awards img { height: 64px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stage locked" style="min-height:620px">
+
+  <div class="wrapper" data-reveal>
+    <span class="halo" aria-hidden="true"></span>
+
+    <div class="frame">
+      <img src="https://static.wixstatic.com/media/dca1c2_ad3d1a3d26ad4ec2a3238ed019a9763a~mv2.jpg/v1/fill/w_760,h_950,al_t,q_85,enc_auto/tanya-jolliffe.jpg"
+           alt="Tanya Jolliffe, Registered Dietitian Nutritionist and founder of LIT Wellness Solutions">
+    </div>
+
+    <span class="chip chip--1">Non-Diet Approach</span>
+    <span class="chip chip--2">Insurance Accepted</span>
+    <span class="chip chip--3">1-on-1 Coaching</span>
+  </div>
+
+  <div class="awards" data-reveal data-reveal-delay="120">
+    <img src="https://static.wixstatic.com/media/dca1c2_5617a240d6644d82887c9c24e819fcad~mv2.png/v1/fit/w_180,h_180,al_c,q_85,enc_auto/award-2026.png"
+         alt="2026 Business Rate Award" loading="lazy">
+    <img src="https://static.wixstatic.com/media/dca1c2_dd41fbd52033400baf30137737bebb27~mv2.png/v1/fit/w_180,h_180,al_c,q_85,enc_auto/award-corporate-excellence.png"
+         alt="Corporate Excellence Awards 2025 winner" loading="lazy">
+  </div>
+
+  <p class="credit">Award-winning wellness coaching &middot; RDN, LD, CIMHP</p>
+
+</div>
+
+<script src="shared/embed.js"></script>
+</body>
+</html>
