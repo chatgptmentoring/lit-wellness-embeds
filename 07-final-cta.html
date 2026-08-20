@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>LIT Wellness — Final CTA</title>
+
+<!--
+  This one DOES carry its own heading, unlike 03/04/05.
+  Build Guide 10.2 assigns "Wellness Solutions" to the final CTA, and
+  that phrase already appears natively site-wide in the brand name,
+  header, footer and title tag — so nothing is lost by the heading
+  living inside the embed here.
+
+  Button label is "Book Free Consult", the single canonical CTA from
+  Build Guide 2.4. The live site currently says "Book your free
+  consultation" and the audit PDF says "Schedule a Free Strategy
+  Session"; the guide's whole point is that one label wins everywhere.
+  Tanya still needs to sign off on which.
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
+
+<link rel="stylesheet" href="shared/tokens.css">
+<link rel="stylesheet" href="shared/base.css">
+
+<style>
+  .band {
+    background: var(--blue);
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+  .band::after {
+    content: '';
+    position: absolute;
+    bottom: -40%;
+    left: -8%;
+    width: 640px;
+    height: 640px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(216,195,165,.15) 0%, rgba(216,195,165,0) 68%);
+    pointer-events: none;
+  }
+  .band > .shell { position: relative; z-index: 1; }
+
+  .inner {
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .inner .eyebrow { color: var(--tan); margin-bottom: 16px; }
+  .inner .h2 { color: var(--white); }
+  .inner .lede { color: rgba(255,255,255,.85); margin-top: 18px; }
+
+  .benefits {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px clamp(18px, 2.6vw, 38px);
+    margin: 32px 0 36px;
+  }
+  .benefit {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: clamp(13px, 1.25vw, 16px);
+    color: var(--white);
+  }
+  .benefit svg {
+    width: 20px; height: 20px; flex: none;
+    fill: none; stroke: var(--tan);
+    stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;
+  }
+
+  .closer {
+    margin-top: 26px;
+    color: rgba(255,255,255,.7);
+    font-style: italic;
+  }
+
+  @media (max-width: 749px) {
+    .benefits {
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin: 26px 0 30px;
+    }
+    .btn { width: 100%; max-width: 320px; }
+  }
+</style>
+</head>
+<body>
+
+<section class="band on-dark section locked" style="min-height:498px">
+  <div class="shell">
+    <div class="inner" data-reveal>
+
+      <p class="eyebrow">Your next step</p>
+      <h2 class="h2">Get a clear plan for your health</h2>
+      <p class="p1 lede">Book a free consultation to understand your needs, get expert guidance,
+        and see exactly what comes next. We meet you where you are.</p>
+
+      <div class="benefits">
+        <span class="benefit">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4.5 12.5 5 5 10-11"/></svg>
+          Understand what is holding you back
+        </span>
+        <span class="benefit">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4.5 12.5 5 5 10-11"/></svg>
+          Get a simple plan you can follow
+        </span>
+        <span class="benefit">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4.5 12.5 5 5 10-11"/></svg>
+          Know exactly what to do next
+        </span>
+      </div>
+
+      <a class="btn btn--primary"
+         href="https://secure.gethealthie.com/appointments/embed_appt?dietitian_id=420052&amp;require_offering=true&amp;offering_id=76499&amp;hide_package_images=false&amp;primary_color=355d80">
+        Book Free Consult
+      </a>
+
+      <p class="p2 closer">Because wellness should support your life &mdash; not take it over.</p>
+
+    </div>
+  </div>
+</section>
+
+<script src="shared/embed.js"></script>
+</body>
+</html>

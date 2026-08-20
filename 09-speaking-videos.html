@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>LIT Wellness — Speaking Video Library</title>
+
+<!--
+  FOR THE /speaking PAGE. This is the replacement for the video library
+  currently sitting on the HOMEPAGE.
+
+  WHY IT MATTERS: the homepage embeds a full Wix Video library, roughly
+  20 players, and that is almost certainly Tanya's worst Core Web Vitals
+  offender (Build Guide 6.3 and Part 12). This grid loads ONE static
+  thumbnail image per talk instead of a player, and clicking opens the
+  talk on YouTube. Page weight drops enormously.
+
+  Titles and IDs come from links.txt — every one is a real published
+  talk. Twelve are featured here; the channel link at the bottom covers
+  the rest. Reorder or swap any of them freely; adding a FOURTH ROW
+  changes the locked height, so re-measure if you do.
+
+  Headless by design — put a real Wix H2 above it.
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
+
+<link rel="stylesheet" href="shared/tokens.css">
+<link rel="stylesheet" href="shared/base.css">
+
+<style>
+  .wrap { padding: 8px 0 12px; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 20px;
+    column-gap: clamp(12px, 1.7vw, 20px);
+  }
+
+  .vid {
+    height: 262px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color .25s var(--ease), box-shadow .25s var(--ease), transform .25s var(--ease);
+  }
+  .vid:hover {
+    border-color: var(--tan);
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-4px);
+  }
+
+  /* Fixed pixel height + object-fit rather than an aspect ratio. An
+     aspect-ratio thumbnail would grow and shrink with the column width
+     and take the whole section's height with it, which is the one
+     thing these embeds must never do. */
+  .thumb {
+    position: relative;
+    height: 172px;
+    flex: none;
+    background: var(--blue-deep);
+    overflow: hidden;
+  }
+  .thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .4s var(--ease);
+  }
+  .vid:hover .thumb img { transform: scale(1.05); }
+
+  .play {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(to top, rgba(16,24,32,.5) 0%, rgba(16,24,32,0) 55%);
+  }
+  .play span {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.92);
+    display: grid;
+    place-items: center;
+    transition: background-color .25s var(--ease), transform .25s var(--ease);
+  }
+  .vid:hover .play span { background: var(--terracotta); transform: scale(1.08); }
+  .play svg { width: 17px; height: 17px; margin-left: 3px; fill: var(--blue-deep); }
+  .vid:hover .play svg { fill: #fff; }
+
+  .meta {
+    padding: 14px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .tag {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 10px;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin: 0 0 6px;
+  }
+
+  .vid h3 {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 1.35;
+    margin: 0;
+    color: var(--ink);
+    /* Two lines maximum, so a long title can never push the card taller. */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .foot { text-align: center; margin-top: 32px; }
+
+  @media (max-width: 749px) {
+    /* Four-row sideways scroller reproduces the desktop height exactly. */
+    .grid.rail {
+      display: grid !important;
+      grid-auto-flow: column;
+      grid-template-rows: repeat(4, 262px);
+      grid-auto-columns: 78%;
+      row-gap: 20px !important;
+      column-gap: 12px !important;
+    }
+    .btn { width: 100%; max-width: 320px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap locked" style="min-height:1210px">
+  <div class="shell">
+    <div class="grid rail">
+
+      <a class="vid" href="https://www.youtube.com/watch?v=SyQVqXAktHM" data-reveal>
+        <div class="thumb">
+          <img src="https://img.youtube.com/vi/SyQVqXAktHM/hqdefault.jpg" alt="" loading="lazy">
+          <span class="play"><span><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg></span></span>
+        </div>
+        <div class="meta">
+          <p class="tag">Her Story</p>
+          <h3>From Idea to Impact: The Story Behind LIT Wellness Solutions</h3>
+        </div>
+      </a>
+
+      <a class="vid" href="https://www.youtube.com/watch?v=gz9lhMQmarc" data-reveal data-reveal-delay="60">
+        <div class="thumb">
+          <img src="https://img.youtube.com/vi/gz9lhMQmarc/hqdefault.jpg" alt="" loading="lazy">
+          <span class="play"><span><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg></span></span>
+        </div>
+        <div class="meta">
+          <p class="tag">Diet Culture</p>
+          <h3>Why Counting Calories Is the Wrong Way to Manage Your Weight</h3>
+        </div>
+      </a>
+
+      <a class="vid" href="https://www.youtube.com/watch?v=x2wdNmGS4Vc" data-reveal data-reveal-delay="120">
+        <div class="thumb">
+          <img src="https://img.youtube.com/vi/x2wdNmGS4Vc/hqdefault.jpg" alt="" loading="lazy">
+          <span class="play"><span><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg></span></span>
+        </div>
+        <div class="meta">
+          <p class="tag">Workplace Culture</p>
+          <h3>Breaking Diet Culture to Create a Culture of Wellness</h3>
+        </div>
+      </a>
+
+      <a class="vid" href="https://www.youtube.com/watch?v=XtZfPaQLMDw" data-reveal>
+        <div class="thumb">
+          <img src="https://img.youtube.com/vi/XtZfPaQLMDw/hqdefault.jpg" alt="" loading="lazy">
+          <span class="play"><span><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg></span></span>
+        </div>
+        <div class="meta">
+          <p class="tag">Transportation Health</p>
+          <h3>Hauling Toward Health: Wellness on the Road and Beyond</h3>
+        </div>
+      </a>
+
+      <a class="vid" href="https://www.youtube.com/watch?v=fqls0O_pYsM" data-reveal data-reveal-delay="60">
+        <div class="thumb">
+          <img src="https://img.youtube.com/vi/fqls0O_pYsM/hqdefault.jpg" alt="" loading="lazy">
+          <span class="play"><span><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg></span></span>
+        </div>
+        <div class="meta">
+          <p class="tag">Conference Keynote</p>
+          <h3>What the Health? Proactive Steps Toward Driver Health &amp; Wellness</h3>
+        </div>
+      </a>
+
+      <a class="vid" href="https://www.youtube.com/watch?v=O3U9iJxW9lg" data-reveal data-reveal-delay="120">
+        <div class="thumb">
+          <img src="https://img.youtube.com/vi/O3U9iJxW9lg/hqdefault.jpg" alt="" loading="lazy">
+          <span class="play"><span><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg></span></span>
+        </div>
+        <div class="meta">
+          <p class="tag">Diet Culture</p>
+          <h3>The Diet Culture You STILL Don't Understand</h3>
+        </div>
+      </a>
+
+      <a class="vid" href="https://www.youtube.com/watch?v=FSKtF2QVSWg" data-reveal>
+        <div class="thumb">
+          <img src="https://img.youtube.com/vi/FSKtF2QVSWg/hqdefault.jpg" alt="" loading="lazy">
+          <span class="play"><span><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg></span></span>
+        </div>
+        <div class="meta">
+          <p class="tag">Podcast</p>
+          <h3>The Healing Place Podcast: It Isn't Just About the Food</h3>
+        </div>
+      </a>
+
+      <a class="vid" href="https://www.youtube.com/watch?v=IUdZvyEJk60" data-reveal data-reveal-delay="60">
+        <div class="thumb">
+          <img src="https://img.youtube.com/vi/IUdZvyEJk60/hqdefault.jpg" alt="" loading="lazy">
+          <span class="play"><span><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg></span></span>
+        </div>
+        <div class="meta">
+          <p class="tag">Mindful Eating</p>
+          <h3>Mindful Eating Instead of Diets</h3>
+        </div>
+      </a>
+
+      <a class="vid" href="https://www.youtube.com/watch?v=WZkf3h0TfbY" data-reveal data-reveal-delay="120">
+        <div class="thumb">
+          <img src="https://img.youtube.com/vi/WZkf3h0TfbY/hqdefault.jpg" alt="" loading="lazy">
+          <span class="play"><span><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg></span></span>
+        </div>
+        <div class="meta">
+          <p class="tag">Transportation Health</p>
+          <h3>FIT DRIVERS Episode 18: Tanya Jolliffe</h3>
+        </div>
+      </a>
+
+      <a class="vid" href="https://www.youtube.com/watch?v=liGum3hGeBw" data-reveal>
+        <div class="thumb">
+          <img src="https://img.youtube.com/vi/liGum3hGeBw/hqdefault.jpg" alt="" loading="lazy">
+          <span class="play"><span><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg></span></span>
+        </div>
+        <div class="meta">
+          <p class="tag">Her Story</p>
+          <h3>Overcoming Disordered Eating &mdash; Tanya's Story</h3>
+        </div>
+      </a>
+
+      <a class="vid" href="https://www.youtube.com/watch?v=Eq1IRb195Bs" data-reveal data-reveal-delay="60">
+        <div class="thumb">
+          <img src="https://img.youtube.com/vi/Eq1IRb195Bs/hqdefault.jpg" alt="" loading="lazy">
+          <span class="play"><span><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg></span></span>
+        </div>
+        <div class="meta">
+          <p class="tag">Transportation Health</p>
+          <h3>Driver Health and Fitness: How to Make It a Priority</h3>
+        </div>
+      </a>
+
+      <a class="vid" href="https://www.youtube.com/watch?v=D4z9t84bDig" data-reveal data-reveal-delay="120">
+        <div class="thumb">
+          <img src="https://img.youtube.com/vi/D4z9t84bDig/hqdefault.jpg" alt="" loading="lazy">
+          <span class="play"><span><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg></span></span>
+        </div>
+        <div class="meta">
+          <p class="tag">Recognition</p>
+          <h3>Tanya Fasnacht Jolliffe, Honored Member of IAOTP</h3>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="foot">
+      <a class="btn btn--tertiary" href="https://www.youtube.com/channel/UC15hfpx2WiTtIOXKUhV63aQ">
+        View the full talk library on YouTube
+      </a>
+    </div>
+  </div>
+</div>
+
+<script src="shared/embed.js"></script>
+</body>
+</html>

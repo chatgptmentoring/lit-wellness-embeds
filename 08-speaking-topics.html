@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>LIT Wellness — Signature Speaking Topics</title>
+
+<!--
+  FOR THE /speaking PAGE.
+
+  The three signature topics come from Build Guide Part 9, which fixes
+  the audit's finding that Speaking sits apart from Tanya's brand story.
+  Each topic's description is drawn from work she has actually done and
+  published talks on — nothing here is invented, but Tanya should still
+  read it before it goes live.
+
+  Headless by design: put a real Wix H2 above this ("Signature topics"
+  or similar). /speaking has its own assigned title tag and meta, and
+  native heading text is what Google reads.
+
+  Transparent background: inherits the Wix section colour behind it.
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
+
+<link rel="stylesheet" href="shared/tokens.css">
+<link rel="stylesheet" href="shared/base.css">
+
+<style>
+  .wrap { padding: 8px 0 12px; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(12px, 1.7vw, 24px);
+  }
+
+  .topic {
+    height: 322px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 30px clamp(20px, 2.4vw, 30px);
+    transition: border-color .25s var(--ease), box-shadow .25s var(--ease), transform .25s var(--ease);
+  }
+  .topic:hover {
+    border-color: var(--tan);
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-4px);
+  }
+
+  /* Thin terracotta cap so the three read as a set. */
+  .topic::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--terracotta);
+  }
+
+  .num {
+    font-family: var(--font-display);
+    font-size: 15px;
+    letter-spacing: .18em;
+    color: var(--blue);
+    opacity: .55;
+    margin-bottom: 16px;
+  }
+
+  .topic .h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(19px, 1.9vw, 26px);
+    line-height: 1.25;
+    margin: 0 0 12px;
+    color: var(--ink);
+  }
+  .topic .p2 { color: var(--grey); font-size: clamp(13px, 1.2vw, 16px); }
+
+  .audience {
+    margin-top: auto;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: clamp(11px, 1.05vw, 13px);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--blue);
+  }
+
+  @media (max-width: 749px) {
+    .topic { height: 322px; padding: 28px 24px; }
+    .topic .h3 { font-size: 21px; }
+    .topic .p2 { font-size: 15px; }
+    .audience { font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap locked" style="min-height:342px">
+  <div class="shell">
+    <div class="grid rail">
+
+      <article class="topic" data-reveal data-reveal-delay="0">
+        <p class="num">01</p>
+        <h3 class="h3">Mindful Eating &amp; Diet Culture</h3>
+        <p class="p2">Why calorie counting and restriction keep failing people, and what
+          attuned eating offers instead &mdash; hunger and fullness cues, emotional
+          triggers, and a workable relationship with food.</p>
+        <p class="audience">Conferences &middot; Summits &middot; Podcasts</p>
+      </article>
+
+      <article class="topic" data-reveal data-reveal-delay="90">
+        <p class="num">02</p>
+        <h3 class="h3">Workplace Wellness Culture</h3>
+        <p class="p2">Building a culture of wellness that actually changes behaviour &mdash;
+          moving past step challenges and biometric screenings toward programs
+          that lower cost and raise engagement.</p>
+        <p class="audience">Employers &middot; HR &amp; Benefits Teams</p>
+      </article>
+
+      <article class="topic" data-reveal data-reveal-delay="180">
+        <p class="num">03</p>
+        <h3 class="h3">Driver &amp; Transportation Health</h3>
+        <p class="p2">Wellness that survives life on the road. Practical strategies for
+          fleets and professional drivers, drawn from years of work with
+          transportation organizations.</p>
+        <p class="audience">Fleets &middot; Trucking &middot; Safety Conferences</p>
+      </article>
+
+    </div>
+  </div>
+</div>
+
+<script src="shared/embed.js"></script>
+</body>
+</html>
