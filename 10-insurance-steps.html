@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>LIT Wellness — Insurance in three steps</title>
+
+<!--
+  Works on the HOMEPAGE (under the existing insurance heading) and on the
+  new /insurance-coverage page. The audit lists insurance coverage as
+  valuable but buried; this makes the path explicit.
+
+  SEO NOTE — headless on purpose. Build Guide 10.2 assigns
+  "Insurance-Covered Nutrition Counseling" and "Free Consultation" to the
+  homepage insurance section, so that H2 must stay REAL Wix text above
+  this embed.
+
+  ⚠️ COVERAGE WORDING: "covered by most insurance carriers" is Tanya's
+  own published claim, lifted from the graphic already on her site. Do
+  not strengthen it — no "guaranteed", no "free", no naming carriers we
+  have not verified. Eligibility is what the Fay link checks.
+
+  Transparent background: inherits the Wix section colour behind it.
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
+
+<link rel="stylesheet" href="shared/tokens.css">
+<link rel="stylesheet" href="shared/base.css">
+
+<style>
+  .wrap { padding: 8px 0 12px; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(12px, 1.7vw, 24px);
+  }
+
+  .step {
+    height: 244px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: var(--blue-wash);
+    border-radius: var(--radius);
+    padding: 28px clamp(20px, 2.4vw, 30px);
+  }
+
+  .n {
+    width: 38px; height: 38px;
+    flex: none;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--blue);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 18px;
+  }
+
+  .step .h4 { margin-bottom: 9px; font-size: clamp(16px, 1.5vw, 20px); }
+  .step .p2 { color: var(--grey); font-size: clamp(13px, 1.2vw, 16px); }
+
+  /* Connecting line between the three steps on desktop. */
+  .step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 46px;
+    right: calc(clamp(12px, 1.7vw, 24px) * -1);
+    width: clamp(12px, 1.7vw, 24px);
+    height: 2px;
+    background: var(--tan);
+  }
+
+  .foot {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .foot .note {
+    color: var(--grey);
+    font-size: clamp(12px, 1.15vw, 14px);
+  }
+
+  @media (max-width: 749px) {
+    .step { height: 244px; padding: 26px 24px; }
+    .step:not(:last-child)::after { display: none; }
+    .step .h4 { font-size: 18px; }
+    .step .p2 { font-size: 15px; }
+    .foot { flex-direction: column; gap: 12px; margin-top: 24px; }
+    .btn { width: 100%; max-width: 320px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap locked" style="min-height:336px">
+  <div class="shell">
+    <div class="grid rail">
+
+      <div class="step" data-reveal data-reveal-delay="0">
+        <div class="n" aria-hidden="true">1</div>
+        <h3 class="h4">Check your coverage</h3>
+        <p class="p2">Enter your insurance details and find out in a couple of minutes
+          whether your nutrition counseling is covered.</p>
+      </div>
+
+      <div class="step" data-reveal data-reveal-delay="90">
+        <div class="n" aria-hidden="true">2</div>
+        <h3 class="h4">Book your first session</h3>
+        <p class="p2">Pick a time that works around your schedule. No referral hunting,
+          no waiting rooms.</p>
+      </div>
+
+      <div class="step" data-reveal data-reveal-delay="180">
+        <div class="n" aria-hidden="true">3</div>
+        <h3 class="h4">Meet with your dietitian</h3>
+        <p class="p2">Work one-on-one with a Registered Dietitian Nutritionist from home
+          or the office, anywhere in the country.</p>
+      </div>
+
+    </div>
+
+    <div class="foot">
+      <a class="btn btn--secondary" href="https://signup.faynutrition.com/book/tanya-jolliffe/ddfa1a">
+        Check Insurance Coverage
+      </a>
+      <span class="p3 note">Nutrition counseling covered by most insurance carriers, in partnership with Fay.</span>
+    </div>
+  </div>
+</div>
+
+<script src="shared/embed.js"></script>
+</body>
+</html>
