@@ -16,7 +16,9 @@
 
 <style>
   .strip {
-    min-height: 64px;
+    /* 66 clears the desktop line-height (65) as well as the mobile one
+       (64), so the strip reports one number at every width. */
+    min-height: 66px;
     display: flex;
     align-items: center;
     background: var(--white);

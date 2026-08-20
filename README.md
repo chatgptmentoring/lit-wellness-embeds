@@ -90,53 +90,33 @@ NN-name.html        One embed per file.
 
 ## Embed index
 
-Live base URL: **https://chatgptmentoring.github.io/lit-wellness-embeds/**
-
-### Section heights — one number each, desktop AND mobile
-
-Verified identical at 360 / 390 / 480 / 600 / 749 / 750 / 850 / 1000 / 1200 /
-1440 / 1920px. Set the Wix section height once in desktop view; Mobile view
-never needs touching.
-
-| Section | Height |
-|---|---|
-| 01 trust strip | 64 |
-| 02 five pillars | 592 |
-| 03 pain points | 222 |
-| 04 how we help | 218 |
-| 05 services grid | 656 |
-| 06 testimonials | 388 |
-
-Held constant by two mechanisms: grids keep their column count from 750px up
-and shrink the cards rather than wrapping, and below 750px they become
-sideways-scrolling rails instead of stacking. Cards have fixed heights so
-text rewrapping is absorbed internally. If a section ever needs new content,
-re-measure — adding a card to a rail is free, but adding a row is not.
-
-| # | File | Page | Own heading? | Status | Assets |
-|---|---|---|---|---|---|
-| 01 | `01-trust-marquee.html` | Home, under hero | n/a | ✅ Live | none |
-| 02 | `02-five-pillars.html` | Home | yes (no keywords) | ✅ Live | none |
-| 03 | `03-pain-points.html` | Home, under native "Sound familiar?" H2 | **no — native H2 required above** | ✅ Live | none |
-| 04 | `04-how-we-help.html` | Home, under native "How we help" H2 | **no — native H2 required above** | ✅ Live | none |
-
-### Which homepage sections may be embedded
-
-Build Guide 10.2 assigns keywords to most homepage sections. Google does not
-read iframe content, so:
-
-| Homepage section | Keywords assigned? | Approach |
+| # | Own heading? | Notes |
 |---|---|---|
-| Hero / H1 | yes | **native Wix** |
-| Trust strip | no | embed ✅ |
-| Sound familiar? | H2 only | native H2 + embed cards ✅ |
-| How we help | H2 only | native H2 + embed steps ✅ |
-| Who we are / insurance | yes | **native Wix** |
-| 5 Pillars | no | embed ✅ |
-| Services grid | card titles | native H2 + intro line, then embed |
-| Books | no | embed ✅ |
-| Testimonials | no | embed ✅ |
-| Final CTA | yes | **native Wix** |
+| 01 trust marquee | n/a | decorative |
+| 02 five pillars | yes, no keywords | blue band, full-bleed |
+| 03 pain points | **no — native H2 required above** | transparent |
+| 04 how we help | **no — native H2 required above** | transparent |
+| 05 services grid | **no — native H2 + keyword sentence above** | card 6 -> Fay until /insurance-coverage exists |
+| 06 testimonials | no | attribution slots empty pending real names |
+| 07 final CTA | yes | "Wellness Solutions" is already native site-wide |
+| 08 speaking topics | **no — native H2 required above** | copy needs Tanya's sign-off |
+| 09 speaking videos | **no — native H2 required above** | replaces the homepage video library |
+| 10 insurance steps | **no — native H2 required above** | coverage wording must not be strengthened |
 
-Pages *without* assigned keywords (`/speaking`, `/books`, `/faq`, `/contact`,
-`/insurance-coverage`, the About pages) can be embedded much more freely.
+### Deliberately NOT embedded
+
+| Thing | Why it stays native Wix |
+|---|---|
+| FAQ | Q&A is high-value indexable text and Tanya edits it herself |
+| Contact / eBook forms | Wix Forms handle delivery and storage |
+| Hero, insurance heading, "who we are" | carry assigned homepage keywords |
+| Header, footer, nav | sitewide, and the nav restructure is the audit's #1 item |
+
+### Still blocked on assets
+
+| Section | Needs |
+|---|---|
+| Hero | Tanya portrait, 2 award badges, logo PNG |
+| Books | both covers, new book title + copy + buy link |
+| Speaking hero | high-res speaking photo |
+
