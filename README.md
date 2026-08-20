@@ -108,6 +108,8 @@ touching.
 | 08 | `08-speaking-topics.html` | 342 | /speaking |
 | 09 | `09-speaking-videos.html` | 1232 | /speaking |
 | 10 | `10-insurance-steps.html` | 400 | Home + /insurance-coverage |
+| 11 | `11-books.html` | 870 | Home + /books |
+| 12 | `12-hero-visual.html` | 620 | Home hero, beside native text |
 
 Held constant by three mechanisms: grids keep their column count from
 750px up and shrink the cards rather than wrapping; below 750px they
@@ -154,6 +156,8 @@ Pages *without* assigned keywords (`/speaking`, `/books`, `/faq`, `/contact`,
 | 08 speaking topics | **no — native H2 required above** | copy needs Tanya's sign-off |
 | 09 speaking videos | **no — native H2 required above** | replaces the homepage video library |
 | 10 insurance steps | **no — native H2 required above** | coverage wording must not be strengthened |
+| 11 books | yes | new book has NO buy button until it is published |
+| 12 hero visual | n/a — no text at all | **H1 stays native Wix**; place beside it |
 
 ### Deliberately NOT embedded
 
@@ -164,11 +168,28 @@ Pages *without* assigned keywords (`/speaking`, `/books`, `/faq`, `/contact`,
 | Hero, insurance heading, "who we are" | carry assigned homepage keywords |
 | Header, footer, nav | sitewide, and the nav restructure is the audit's #1 item |
 
-### Still blocked on assets
+### Images
 
-| Section | Needs |
+All served from Tanya's own Wix account through the **CDN resizer**, never
+the bare original. Appending `/v1/fit/w_N,h_N,al_c,q_85,enc_auto/name.ext`
+to a `static.wixstatic.com` URL resizes on request and `enc_auto` serves
+AVIF to browsers that take it. This matters more than it sounds:
+
+| Image | Original | Resized (AVIF) |
+|---|---|---|
+| 2026 award badge | 5.5 MB | 6.6 KB |
+| Logo | 2.2 MB | ~35 KB |
+| Mindful Me cover | 1.8 MB | 26 KB |
+| Portrait | — | 89 KB |
+
+**Never reference a bare `static.wixstatic.com` URL in an embed.**
+
+### Outstanding
+
+| Item | Needed from |
 |---|---|
-| Hero | Tanya portrait, 2 award badges, logo PNG |
-| Books | both covers, new book title + copy + buy link |
-| Speaking hero | high-res speaking photo |
+| `assets/food-isnt-the-problem.jpg` is a PLACEHOLDER | drop the real cover in, same filename |
+| New book buy link + launch date | Tanya, once published |
+| Testimonial attributions | Tanya |
+| High-res speaking photo | Tanya |
 
