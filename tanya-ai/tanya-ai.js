@@ -283,7 +283,7 @@
         '<ul>' +
           '<li>I’m an <b>AI coach</b> trained on Tanya’s book — not a doctor, therapist, or emergency service. In a crisis, call or text <b>988</b>.</li>' +
           '<li>Your chat is <b>saved for up to 12 months</b> and processed by our service providers (OpenAI and Supabase) to answer you and improve this coach.</li>' +
-          '<li>Please <b>don’t share your name, contact details, or medical records</b>.</li>' +
+          '<li>Only share what you <b>feel comfortable sharing</b> — you never need to give your name or contact details to chat.</li>' +
         '</ul>' +
         '<p>By tapping Start chat, you agree to the <a data-l="terms">Terms &amp; Conditions</a> and consent to this under the <a data-l="privacy">Privacy Policy</a>, including its Consumer Health Data notice.</p>' +
         '<button type="button" class="tai-consent-go">Start chat</button>' +
