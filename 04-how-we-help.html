@@ -14,6 +14,10 @@
   cannot read inside an embed.
 
   Transparent background: inherits the Wix section colour behind it.
+
+  SIZE  desktop: 218 (three columns at every desktop width)
+        mobile:  stacks one step per row, ~420 at 300-320px wide
+               (fits its box via shared/fit.js — drag the mobile box to ~420)
 -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -83,20 +87,24 @@
   .step .h4 { margin-bottom: 10px; font-size: clamp(16px, 1.5vw, 20px); }
   .step .p2 { color: var(--grey); font-size: clamp(13px, 1.2vw, 16px); }
 
-  /* Stack only below Wix's mobile breakpoint. */
-  @media (max-width: 749px) {
-    .step { height: 198px; padding: 26px 24px; }
-    .step::before { font-size: 96px; top: -10px; }
-    .step .h4 { font-size: 18px; }
-    .step .p2 { font-size: 15px; }
+  /* Mobile: stack one step per row (no sideways rail). Not height-locked;
+     shared/fit.js fits it to the Wix mobile box. */
+  @media (max-width: 749.98px) {
+    .wrap { min-height: 0 !important; padding: 4px 0 8px; }
+    .grid { grid-template-columns: 1fr; gap: 10px; }
+    .step { height: auto; min-height: 124px; padding: 22px 22px 20px; }
+    .step::before { font-size: 88px; top: -8px; right: 8px; }
+    .rule { margin-bottom: 12px; }
+    .step .h4 { font-size: 19px; margin-bottom: 6px; }
+    .step .p2 { font-size: 16px; }
   }
 </style>
 </head>
 <body>
 
-<div class="wrap locked" style="min-height:218px">
+<div class="wrap locked" style="min-height:218px" data-fit>
   <div class="shell">
-    <div class="grid rail">
+    <div class="grid">
 
       <div class="step" data-num="01" data-reveal data-reveal-delay="0">
         <div class="rule" aria-hidden="true"></div>
@@ -120,6 +128,7 @@
   </div>
 </div>
 
+<script src="shared/fit.js"></script>
 <script src="shared/embed.js"></script>
 </body>
 </html>

@@ -101,8 +101,8 @@ touching.
 |---|---|---|---|
 | 01 | `01-trust-marquee.html` | 66 | Home |
 | 02 | `02-five-pillars.html` | 592 | Home |
-| 03 | `03-pain-points.html` | 222 | Home |
-| 04 | `04-how-we-help.html` | 218 | Home |
+| 03 | `03-pain-points.html` | **250** desktop / ~440 mobile (stacked) | Home |
+| 04 | `04-how-we-help.html` | 218 desktop / ~460 mobile (stacked) | Home |
 | 05 | `05-services-grid.html` | 656 | Home |
 | 06 | `06-testimonials.html` | 388 | Home |
 | 07 | `07-final-cta.html` | 640 | Home |
