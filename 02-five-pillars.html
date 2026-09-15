@@ -107,18 +107,24 @@
   /* Only below Wix's mobile breakpoint do we stack. You set the mobile
      section height separately in Wix's mobile view, so one extra number
      covers this. */
-  @media (max-width: 749px) {
-    .pillar { height: 206px; padding: 18px 14px; }
+  /* Mobile: a slider — two pillars at a time with the next one peeking in,
+     swipe or use the arrows (shared/rail-nav.js). */
+  @media (max-width: 749.98px) {
+    html { background: var(--blue) !important; }   /* fit-to-box spare space */
+    .band { min-height: 0 !important; padding: 44px 0 40px; }
+    .grid.rail > .pillar { flex: 0 0 44%; height: 196px; padding: 18px 12px; }
     .icon { width: 46px; height: 46px; margin-bottom: 12px; }
     .pillar .h4 { font-size: 16px; }
-    .pillar .p3 { font-size: 12px; }
-    .head { margin-bottom: 32px; }
+    .pillar .p3 { font-size: 13px; }
+    .head { margin-bottom: 26px; }
+    .head .h2 { font-size: 28px; }
+    .head .p1 { font-size: 15px; margin-top: 12px; }
   }
 </style>
 </head>
 <body>
 
-<section class="band on-dark section locked" style="min-height:592px">
+<section class="band on-dark section locked" style="min-height:592px" data-fit>
   <div class="shell">
 
     <div class="head" data-reveal>
@@ -128,7 +134,7 @@
         &mdash; because they hold each other up.</p>
     </div>
 
-    <div class="grid rail">
+    <div class="grid rail" data-rail-nav="pillar">
 
       <div class="pillar" data-reveal data-reveal-delay="0">
         <div class="icon" aria-hidden="true">
@@ -174,6 +180,8 @@
   </div>
 </section>
 
+<script src="shared/rail-nav.js"></script>
+<script src="shared/fit.js"></script>
 <script src="shared/embed.js"></script>
 </body>
 </html>

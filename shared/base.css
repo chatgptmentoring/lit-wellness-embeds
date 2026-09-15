@@ -164,6 +164,54 @@ a { color: inherit; }
   }
 }
 
+/* --- Slider controls for rails (shared/rail-nav.js) -----------------
+   Dots + previous/next buttons under a rail marked data-rail-nav.
+   Phones only; hidden on desktop where the grid shows every card. */
+.rail-nav { display: none; }
+
+@media (max-width: 749.98px) {
+  [data-rail-nav] { scroll-behavior: smooth; }
+  [data-rail-nav] > * { scroll-snap-align: start; }
+
+  .rail-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 14px;
+  }
+  .rail-dots { display: flex; gap: 6px; flex-wrap: wrap; }
+  .rail-dots i {
+    width: 8px; height: 8px; border-radius: 999px;
+    background: var(--tan);
+    transition: width .3s var(--ease), background-color .3s var(--ease);
+  }
+  .rail-dots i.on { width: 22px; background: var(--blue); }
+
+  .rail-arrows { display: flex; gap: 8px; flex: none; }
+  .rail-btn {
+    width: 42px; height: 42px;
+    display: grid; place-items: center;
+    border-radius: 50%;
+    border: 1.5px solid var(--blue);
+    background: transparent;
+    color: var(--blue);
+    cursor: pointer;
+    transition: background-color .2s var(--ease), color .2s var(--ease), opacity .2s var(--ease);
+  }
+  .rail-btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+  .rail-btn.next { background: var(--blue); color: var(--white); }
+  .rail-btn:disabled { opacity: .35; cursor: default; }
+  .rail-btn.next:not(:disabled) svg { animation: rail-nudge 1.6s var(--ease) infinite; }
+  @keyframes rail-nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(3px); } }
+
+  /* On a dark band. */
+  .on-dark .rail-dots i { background: rgba(255,255,255,.35); }
+  .on-dark .rail-dots i.on { background: var(--tan); }
+  .on-dark .rail-btn { border-color: rgba(255,255,255,.6); color: var(--white); }
+  .on-dark .rail-btn.next { background: var(--white); color: var(--blue-deep); border-color: var(--white); }
+}
+
 /* --- Scroll reveal -------------------------------------------------- */
 [data-reveal] {
   opacity: 0;

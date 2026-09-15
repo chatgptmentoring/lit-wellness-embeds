@@ -18,6 +18,10 @@
   ready — uncomment the <cite> line and fill it in.
 
   Transparent background: inherits the Wix section colour behind it.
+
+  SIZE  desktop: 388 (three columns)
+        mobile:  one quote at a time with dots + arrows (shared/rail-nav.js);
+                 ~470 at 300-320px wide — drag the Wix mobile box to that
 -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -73,10 +77,14 @@
     color: var(--blue);
   }
 
-  /* Stack only below Wix's mobile breakpoint. */
-  @media (max-width: 749px) {
-    .quote { height: 336px; padding: 26px 24px; }
-    .quote blockquote { font-size: 16px; }
+  /* Mobile: one quote at a time, swipe or use the arrows. Cards size to the
+     longest quote (all equal height, nothing clipped) and the next one
+     peeks in from the right. */
+  @media (max-width: 749.98px) {
+    .wrap { min-height: 0 !important; padding: 4px 0 10px; }
+    .grid.rail { align-items: stretch; }
+    .grid.rail > .quote { flex: 0 0 86%; height: auto; min-height: 0; padding: 24px 22px; justify-content: flex-start; }
+    .quote blockquote { font-size: 17px; }
     .stars { width: auto; margin-bottom: 14px; }
     .stars svg { width: 16px; height: 16px; }
   }
@@ -84,9 +92,9 @@
 </head>
 <body>
 
-<div class="wrap locked" style="min-height:388px">
+<div class="wrap locked" style="min-height:388px" data-fit>
   <div class="shell">
-    <div class="grid rail">
+    <div class="grid rail" data-rail-nav="testimonial">
 
       <figure class="quote" data-reveal data-reveal-delay="0">
         <div class="stars" role="img" aria-label="5 out of 5 stars">
@@ -128,6 +136,8 @@
   </div>
 </div>
 
+<script src="shared/rail-nav.js"></script>
+<script src="shared/fit.js"></script>
 <script src="shared/embed.js"></script>
 </body>
 </html>

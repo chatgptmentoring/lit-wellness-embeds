@@ -100,11 +100,11 @@ touching.
 | # | File | Height | Page |
 |---|---|---|---|
 | 01 | `01-trust-marquee.html` | 66 | Home |
-| 02 | `02-five-pillars.html` | 592 | Home |
+| 02 | `02-five-pillars.html` | 592 desktop / ~570 mobile slider | Home |
 | 03 | `03-pain-points.html` | **250** desktop / ~440 mobile (stacked) | Home |
 | 04 | `04-how-we-help.html` | 218 desktop / ~460 mobile (stacked) | Home |
 | 05 | `05-services-grid.html` | 656 | Home |
-| 06 | `06-testimonials.html` | 388 | Home |
+| 06 | `06-testimonials.html` | 388 desktop / ~470 mobile slider | Home |
 | 07 | `07-final-cta.html` | 640 | Home |
 | 08 | `08-speaking-topics.html` | 342 | /speaking |
 | 09 | `09-speaking-videos.html` | 1232 | /speaking |
