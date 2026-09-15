@@ -108,7 +108,7 @@ touching.
 | 07 | `07-final-cta.html` | 640 | Home |
 | 08 | `08-speaking-topics.html` | 342 | /speaking |
 | 09 | `09-speaking-videos.html` | 1232 | /speaking |
-| 10 | `10-insurance-steps.html` | 400 | Home + /insurance-coverage |
+| 10 | `10-insurance-steps.html` | 400 desktop / ~470 mobile (swipe cards + step nav) | Home + /insurance-coverage |
 | 11 | `11-books.html` | **1110** desktop / **~1340 mobile** | Home + /books |
 | 12 | `12-hero-visual.html` | 620 | Home hero, beside native text |
 | 13 | `13-hero.html?native-h1` | 680 desktop / **~500 mobile** | Home hero — full design, native Wix H1 directly above (recommended) |
