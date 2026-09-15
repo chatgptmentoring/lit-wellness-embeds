@@ -18,8 +18,10 @@
      from the desktop box rather than the embed's content. -->
 <div class="row" id="row"></div>
 <script>
-  var src = new URLSearchParams(location.search).get('src') || '13-hero.html?native-h1';
-  var boxes = [[300, 202, 'Wix default box 300×202'], [320, 500, 'full width, dragged to ~500'], [300, 700, 'box too tall 300×700'], [280, 420, 'box too short 280×420']];
+  var sp = new URLSearchParams(location.search);
+  var src = sp.get('src') || '13-hero.html?native-h1';
+  var target = parseInt(sp.get('h') || '500', 10);
+  var boxes = [[300, 202, 'Wix default box 300×202'], [320, target, 'full width, dragged to ~' + target], [300, Math.round(target * 1.3), 'box too tall'], [280, Math.round(target * .8), 'box too short']];
   boxes.forEach(function (b) {
     var d = document.createElement('div'); d.className = 'phone';
     d.innerHTML = '<p>' + b[2] + '</p>';

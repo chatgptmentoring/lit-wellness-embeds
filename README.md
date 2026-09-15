@@ -83,6 +83,7 @@ itself within a minute. No re-pasting.
 shared/tokens.css   Design tokens — colours, fonts, radii. Change once, all embeds update.
 shared/base.css     Reset, type scale, buttons, reveal animation.
 shared/embed.js     Auto-height reporting + scroll reveal + link target fixing.
+shared/fit.js       Fit-to-box for Wix Classic mobile boxes (13, 14). Load before embed.js.
 velo/masterPage.js  The snippet that goes into Wix Site Code (once).
 preview.html       Local/hosted test harness. Mimics exactly what Wix does.
 NN-name.html        One embed per file.
@@ -112,6 +113,24 @@ touching.
 | 12 | `12-hero-visual.html` | 620 | Home hero, beside native text |
 | 13 | `13-hero.html?native-h1` | 680 desktop / **~500 mobile** | Home hero — full design, native Wix H1 directly above (recommended) |
 | 13 | `13-hero.html` | 800 desktop / **~650 mobile** | Home hero — full design incl. headline (no readable H1; see below) |
+
+| 14 | `14-video-library.html` | 830 desktop / **~940 mobile** | /speaking — full library, all 32 talks (replaces 09) |
+
+### 14 — video library
+
+One player plus a scrollable playlist of all 32 talks from `links.txt`, with
+category tabs (Driver Health 7 · Mindful Eating 7 · Wellness Culture 7 ·
+Podcasts & Interviews 5 · Her Story & Awards 6) and search. Shows a still
+poster until someone presses play, so the page never loads 32 YouTube
+players. Talks play in place (youtube-nocookie). Carries its own heading —
+/speaking has no assigned keywords, so no native H2 is needed.
+
+URL options: `?cat=driver` (or `eating`, `culture`, `podcast`, `story`)
+opens on one topic — e.g. `14-video-library.html?cat=driver` on
+/transportation-health. `?v=VIDEO_ID` opens on a specific talk.
+
+All 32 IDs verified public and embeddable (Sep 2026). To add a talk, add one
+line to `TALKS` in the file; the height does not change.
 
 ### 13-hero on mobile (Wix Classic)
 

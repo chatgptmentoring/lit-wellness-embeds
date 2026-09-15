@@ -391,9 +391,9 @@
     .proof p { display: none; }
   }
 
-  /* ---------- Fit-to-box (see script at the end) ---------- */
+  /* ---------- Fit-to-box (shared/fit.js) ---------- */
   html, body { height: 100%; }
-  .hero { transform-origin: 50% 0; will-change: transform; }
+  .hero { will-change: transform; }
 
   @media (prefers-reduced-motion: reduce) {
     .rise { opacity: 1; transform: none; animation: none; }
@@ -403,7 +403,7 @@
 </head>
 <body>
 
-<section class="hero locked">
+<section class="hero locked" data-fit>
   <span class="glow" aria-hidden="true"></span>
 
   <div class="shell grid">
@@ -475,44 +475,7 @@
   </div>
 </section>
 
-<script>
-  /* FIT-TO-BOX
-     In the Wix Classic mobile view the embed box gets a height Wix derives
-     from the desktop box, not from this content, and Wix page code cannot
-     resize an HTML embed. Left alone, a too-short box crops the hero to a
-     sliver of her photo. So the hero measures the box it was given:
-       box shorter than the hero -> scale the whole hero down to fit
-       box taller than the hero  -> centre it, sand fills the rest
-     Nothing is ever cut off, and a box dragged roughly to the right
-     height looks exactly right.                                        */
-  (function () {
-    var hero = document.querySelector('.hero');
-    var natural = 0;
-
-    function fit() {
-      hero.style.transform = 'none';
-      natural = hero.offsetHeight;             // layout height, unscaled
-      var H = window.innerHeight;
-      if (!natural || H < 40) return;
-      if (H < natural - 1) {
-        hero.style.transform = 'scale(' + (H / natural).toFixed(4) + ')';
-      } else if (H > natural + 1) {
-        hero.style.transform = 'translateY(' + Math.floor((H - natural) / 2) + 'px)';
-      }
-    }
-
-    /* Report the hero's real height to Wix (not the scaled size), so the
-       auto-height snippet, where it works, sizes the box to the design. */
-    window.litwsMeasure = function () { return natural || hero.offsetHeight; };
-
-    window.addEventListener('resize', fit);
-    window.addEventListener('load', fit);
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
-    if (typeof ResizeObserver === 'function') new ResizeObserver(fit).observe(document.documentElement);
-    setInterval(fit, 500);   // Wix does not always fire resize into the iframe
-    fit();
-  })();
-</script>
+<script src="shared/fit.js"></script>
 <script src="shared/embed.js"></script>
 </body>
 </html>
