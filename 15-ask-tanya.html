@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ask Tanya — AI Coach</title>
+
+<!--
+  A full, always-open Tanya AI chat panel as an HTML embed — for a dedicated
+  "Ask Tanya" page or section. The floating bubble on every page is
+  installed separately through Wix Custom Code (see tanya-ai/README.md);
+  this embed is optional.
+
+  SIZE: fills the box. Desktop 640-720 tall works well; mobile ~600.
+-->
+
+<link rel="stylesheet" href="shared/tokens.css">
+<link rel="stylesheet" href="shared/base.css">
+<style>
+  html, body { height: 100%; }
+  body { background: transparent; overflow: hidden; }
+  #tanya-chat { height: 100%; padding: 6px; }
+</style>
+</head>
+<body>
+
+<div id="tanya-chat"></div>
+
+<script>
+  /* Size reporting: the panel fills the box, so report a fixed design
+     height rather than the box height (avoids auto-height ratcheting). */
+  window.litwsMeasure = function () { return window.innerWidth < 750 ? 600 : 680; };
+</script>
+<script src="tanya-ai/tanya-ai.js"
+        data-endpoint="https://xagfmcbpqpkfrtqkwjzg.supabase.co/functions/v1/tanya-chat"
+        data-inline="#tanya-chat"></script>
+<script src="shared/embed.js"></script>
+</body>
+</html>

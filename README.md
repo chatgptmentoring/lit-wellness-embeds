@@ -114,6 +114,7 @@ touching.
 | 13 | `13-hero.html?native-h1` | 680 desktop / **~500 mobile** | Home hero — full design, native Wix H1 directly above (recommended) |
 | 13 | `13-hero.html` | 800 desktop / **~650 mobile** | Home hero — full design incl. headline (no readable H1; see below) |
 | 14 | `14-video-library.html` | 830 desktop / **~940 mobile** | /speaking — full library, all 32 talks (replaces 09) |
+| 15 | `15-ask-tanya.html` | 680 desktop / ~600 mobile | Optional full chat panel for an "Ask Tanya" page (the bubble on every page is `tanya-ai/tanya-ai.js` via Wix Custom Code) |
 | 16 | `16-who-we-are-video.html` | box width × ~0.56 + 58 (560 wide → 372; mobile 300 → 215) | Home "Who we are" — video beside the native text |
 | 17 | `17-food-strip.html` | 84 | Home — sliding "It isn't just about the food!" strip |
 
