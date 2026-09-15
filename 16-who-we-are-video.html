@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>LIT Wellness — Who We Are Video</title>
+
+<!--
+  THE VIDEO HALF OF "WHO WE ARE" ONLY.
+
+  ⚠️ "Who we are" carries assigned homepage keywords (Build Guide 10.2), so
+  its heading and paragraph STAY NATIVE WIX TEXT. Place this embed beside
+  or below that text. It carries no keyword copy.
+
+  Video: "Get To Know L I T Wellness Solutions"
+         https://www.youtube.com/watch?v=6WETGov_hCs  (verified embeddable)
+  Shows a still poster until pressed, then plays in place
+  (youtube-nocookie). "Learn more" goes to /ignitechange, as on the live site.
+
+  SIZING: fills whatever box Wix gives it — the video area stretches to the
+  box. For a true 16:9 picture set the box height to (measured):
+    480 wide -> 327   560 wide -> 372   640 wide -> 417   980 wide -> 608
+    mobile 300 wide -> 215   mobile 320 wide -> 226
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://i.ytimg.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@1,6..72,400&display=swap">
+
+<link rel="stylesheet" href="shared/tokens.css">
+<link rel="stylesheet" href="shared/base.css">
+
+<style>
+  html, body { height: 100%; }
+
+  .wrap {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0 14px 14px 0;          /* room for the offset frame */
+  }
+
+  .stage-box { position: relative; flex: 1; min-height: 0; }
+
+  /* Tan outline frame offset behind the video. */
+  .stage-box::before {
+    content: '';
+    position: absolute;
+    inset: 14px -14px -14px 14px;
+    border: 1.5px solid var(--tan);
+    border-radius: 20px;
+    pointer-events: none;
+  }
+
+  .stage {
+    position: relative;
+    height: 100%;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #0B1620;
+    box-shadow: 0 30px 60px -32px rgba(34,62,86,.6);
+  }
+  .stage iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+  .poster {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    padding: 0; border: 0; cursor: pointer;
+    background: #0B1620;
+  }
+  .poster img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transform: scale(1.02);
+    transition: transform 1s var(--ease), filter .4s var(--ease);
+  }
+  .poster::after {
+    content: ''; position: absolute; inset: 0;
+    background:
+      linear-gradient(to top, rgba(11,22,32,.78) 0%, rgba(11,22,32,.08) 50%, rgba(11,22,32,.2) 100%);
+  }
+  .poster:hover img { transform: scale(1.06); filter: brightness(1.06); }
+
+  .play {
+    position: absolute; z-index: 2;
+    left: 50%; top: 50%;
+    width: 82px; height: 82px;
+    margin: -41px 0 0 -41px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    background: var(--terracotta);
+    box-shadow: 0 18px 40px -12px rgba(169,80,47,.85);
+    transition: transform .35s var(--ease), background-color .3s var(--ease);
+  }
+  .play::before, .play::after {
+    content: ''; position: absolute; inset: -12px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,.55);
+    animation: ring 2.6s var(--ease) infinite;
+  }
+  .play::after { animation-delay: 1.3s; }
+  @keyframes ring { 0% { transform: scale(.8); opacity: .9; } 100% { transform: scale(1.45); opacity: 0; } }
+  .play svg { width: 30px; height: 30px; margin-left: 5px; fill: #fff; }
+  .poster:hover .play { transform: scale(1.08); background: var(--terracotta-h); }
+
+  .label {
+    position: absolute; z-index: 2;
+    left: 22px; right: 22px; bottom: 18px;
+    display: flex; align-items: flex-end; justify-content: space-between; gap: 12px;
+    color: #fff; text-align: left;
+  }
+  .label small {
+    display: block;
+    font: 600 11px var(--font-body);
+    letter-spacing: .16em; text-transform: uppercase;
+    color: var(--tan);
+    margin-bottom: 4px;
+  }
+  .label strong {
+    display: block;
+    font: italic 400 24px/1.2 var(--font-display);
+    color: #fff;
+  }
+  .label .yt {
+    flex: none;
+    font: 600 11px var(--font-body);
+    letter-spacing: .1em; text-transform: uppercase;
+    color: rgba(255,255,255,.7);
+  }
+
+  .caption {
+    flex: none;
+    height: 50px;
+    padding-top: 14px;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  }
+  .caption span {
+    display: inline-flex; align-items: center; gap: 9px;
+    font: 500 14px var(--font-body);
+    color: var(--grey);
+  }
+  .caption span::before {
+    content: ''; width: 22px; height: 1.5px; background: var(--terracotta);
+  }
+  .caption .link-arrow { font-size: 15px; color: var(--terracotta); }
+
+  @media (max-width: 480px) {
+    .wrap { padding: 0 8px 8px 0; }
+    .stage-box::before { inset: 8px -8px -8px 8px; border-radius: 14px; }
+    .stage { border-radius: 12px; }
+    .play { width: 56px; height: 56px; margin: -28px 0 0 -28px; }
+    .play svg { width: 21px; height: 21px; margin-left: 3px; }
+    .label { left: 12px; right: 12px; bottom: 10px; }
+    .label small { font-size: 9.5px; margin-bottom: 2px; }
+    .label strong { font-size: 16px; }
+    .label .yt { display: none; }
+    .caption { height: 42px; padding-top: 10px; }
+    .caption span { font-size: 12.5px; }
+    .caption span::before { width: 14px; }
+    .caption .link-arrow { font-size: 13.5px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .play::before, .play::after { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap" data-reveal>
+  <div class="stage-box">
+    <div class="stage" id="stage">
+      <button class="poster" id="poster" type="button" aria-label="Play video: Get to know LIT Wellness Solutions">
+        <img src="https://i.ytimg.com/vi/6WETGov_hCs/sddefault.jpg" alt="">
+        <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg></span>
+        <span class="label">
+          <span><small>Watch &middot; Who we are</small><strong>Get to know LIT Wellness</strong></span>
+          <span class="yt">Video</span>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <div class="caption">
+    <span>Meet Tanya and the team</span>
+    <a class="link-arrow" href="https://www.litwellnesssolutions.com/ignitechange">
+      Learn more
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var poster = document.getElementById('poster');
+    poster.addEventListener('click', function () {
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/6WETGov_hCs?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+      f.title = 'Get To Know LIT Wellness Solutions';
+      f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen';
+      f.setAttribute('allowfullscreen', '');
+      document.getElementById('stage').appendChild(f);
+      poster.remove();
+    });
+
+    /* The layout fills the box, so report the height a true 16:9 video
+       needs at this width rather than the box's own height (which would
+       make the auto-height snippet ratchet). */
+    window.litwsMeasure = function () {
+      var w = document.querySelector('.stage-box').getBoundingClientRect().width;
+      var cap = document.querySelector('.caption').getBoundingClientRect().height;
+      var pad = parseFloat(getComputedStyle(document.querySelector('.wrap')).paddingBottom) || 0;
+      return Math.ceil(w * 9 / 16 + cap + pad);
+    };
+  })();
+</script>
+<script src="shared/embed.js"></script>
+</body>
+</html>

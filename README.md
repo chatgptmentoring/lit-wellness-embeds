@@ -114,6 +114,22 @@ touching.
 | 13 | `13-hero.html?native-h1` | 680 desktop / **~500 mobile** | Home hero — full design, native Wix H1 directly above (recommended) |
 | 13 | `13-hero.html` | 800 desktop / **~650 mobile** | Home hero — full design incl. headline (no readable H1; see below) |
 | 14 | `14-video-library.html` | 830 desktop / **~940 mobile** | /speaking — full library, all 32 talks (replaces 09) |
+| 16 | `16-who-we-are-video.html` | box width × ~0.56 + 58 (560 wide → 372; mobile 300 → 215) | Home "Who we are" — video beside the native text |
+| 17 | `17-food-strip.html` | 84 | Home — sliding "It isn't just about the food!" strip |
+
+### 16 — who we are video
+
+"Get To Know L I T Wellness Solutions" (`youtube.com/watch?v=6WETGov_hCs`,
+verified embeddable) in a framed poster that plays in place, with "Learn more"
+to /ignitechange. **The "Who we are" heading and paragraph stay native Wix** —
+they carry assigned keywords; this embed has none. It fills any box; the
+height above gives a true 16:9 picture.
+
+### 17 — food strip
+
+"It isn't just about the food!" sliding on a blue band, alternating white and
+tan, with a bobbing 🍎 between repeats. Decorative; pauses on hover; static
+for reduced-motion visitors.
 
 ### 11 — books
 

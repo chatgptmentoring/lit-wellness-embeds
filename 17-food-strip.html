@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>LIT Wellness — It Isn't Just About the Food</title>
+
+<!--
+  Sliding brand strip: "It isn't just about the food!" with an apple
+  between every repeat. Decorative — the phrase is hidden from screen
+  readers after the first copy.
+
+  Height locked at 84 on desktop AND mobile.
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&display=swap">
+
+<link rel="stylesheet" href="shared/tokens.css">
+<link rel="stylesheet" href="shared/base.css">
+
+<style>
+  .band {
+    position: relative;
+    min-height: 84px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: linear-gradient(100deg, var(--blue-deep) 0%, var(--blue) 50%, var(--blue-deep) 100%);
+  }
+
+  /* Soft fade at both edges. */
+  .band::before, .band::after {
+    content: ''; position: absolute; top: 0; bottom: 0; width: 90px; z-index: 2; pointer-events: none;
+  }
+  .band::before { left: 0;  background: linear-gradient(to right, var(--blue-deep), rgba(34,62,86,0)); }
+  .band::after  { right: 0; background: linear-gradient(to left,  var(--blue-deep), rgba(34,62,86,0)); }
+
+  .track {
+    display: flex;
+    width: max-content;
+    animation: slide 38s linear infinite;
+    will-change: transform;
+  }
+  .band:hover .track { animation-play-state: paused; }
+  @keyframes slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  .set { display: flex; align-items: center; }
+
+  .phrase {
+    padding: 0 26px;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 1;
+    letter-spacing: -.005em;
+    color: #fff;
+    white-space: nowrap;
+  }
+  /* Every other phrase in warm tan, so the loop has rhythm. */
+  .phrase.alt { color: var(--tan); }
+
+  .apple {
+    display: inline-block;
+    font-size: 26px;
+    line-height: 1;
+    font-style: normal;
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+    animation: bob 2.4s ease-in-out infinite;
+  }
+  .apple.late { animation-delay: -1.2s; }
+  @keyframes bob {
+    0%, 100% { transform: translateY(0) rotate(-8deg); }
+    50%      { transform: translateY(-5px) rotate(8deg); }
+  }
+
+  @media (max-width: 749px) {
+    .phrase { font-size: 24px; padding: 0 18px; }
+    .apple  { font-size: 20px; }
+    .band::before, .band::after { width: 40px; }
+    .track { animation-duration: 30s; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .track, .apple { animation: none; }
+    .track { width: 100%; justify-content: center; }
+    .set + .set { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="band locked" role="region" aria-label="It isn't just about the food">
+  <div class="track">
+
+    <!-- Six phrases per set (~2,500px) so one set is wider than any
+         screen; the track slides by exactly one set to loop seamlessly. -->
+    <div class="set">
+      <span class="phrase">It isn&rsquo;t just about the food!</span><span class="apple" aria-hidden="true">🍎</span>
+      <span class="phrase alt" aria-hidden="true">It isn&rsquo;t just about the food!</span><span class="apple late" aria-hidden="true">🍎</span>
+      <span class="phrase" aria-hidden="true">It isn&rsquo;t just about the food!</span><span class="apple" aria-hidden="true">🍎</span>
+      <span class="phrase alt" aria-hidden="true">It isn&rsquo;t just about the food!</span><span class="apple late" aria-hidden="true">🍎</span>
+      <span class="phrase" aria-hidden="true">It isn&rsquo;t just about the food!</span><span class="apple" aria-hidden="true">🍎</span>
+      <span class="phrase alt" aria-hidden="true">It isn&rsquo;t just about the food!</span><span class="apple late" aria-hidden="true">🍎</span>
+    </div>
+
+    <div class="set" aria-hidden="true">
+      <span class="phrase">It isn&rsquo;t just about the food!</span><span class="apple">🍎</span>
+      <span class="phrase alt">It isn&rsquo;t just about the food!</span><span class="apple late">🍎</span>
+      <span class="phrase">It isn&rsquo;t just about the food!</span><span class="apple">🍎</span>
+      <span class="phrase alt">It isn&rsquo;t just about the food!</span><span class="apple late">🍎</span>
+      <span class="phrase">It isn&rsquo;t just about the food!</span><span class="apple">🍎</span>
+      <span class="phrase alt">It isn&rsquo;t just about the food!</span><span class="apple late">🍎</span>
+    </div>
+
+  </div>
+</div>
+
+<script src="shared/embed.js"></script>
+</body>
+</html>
