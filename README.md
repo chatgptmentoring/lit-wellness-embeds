@@ -109,12 +109,21 @@ touching.
 | 08 | `08-speaking-topics.html` | 342 | /speaking |
 | 09 | `09-speaking-videos.html` | 1232 | /speaking |
 | 10 | `10-insurance-steps.html` | 400 | Home + /insurance-coverage |
-| 11 | `11-books.html` | 870 | Home + /books |
+| 11 | `11-books.html` | **1110** desktop / **~1340 mobile** | Home + /books |
 | 12 | `12-hero-visual.html` | 620 | Home hero, beside native text |
 | 13 | `13-hero.html?native-h1` | 680 desktop / **~500 mobile** | Home hero — full design, native Wix H1 directly above (recommended) |
 | 13 | `13-hero.html` | 800 desktop / **~650 mobile** | Home hero — full design incl. headline (no readable H1; see below) |
-
 | 14 | `14-video-library.html` | 830 desktop / **~940 mobile** | /speaking — full library, all 32 talks (replaces 09) |
+
+### 11 — books
+
+Features **Food Isn't the Problem** (published August 31, 2026 · 224 pages ·
+LIT Wellness Solutions · ISBN-13 979-8234147899) as an animated 3D book on a
+sunrise background taken from its cover, with *The Mindful Me Journey* below.
+Buy links: paperback `amazon.com/dp/B0HHCBCQGB`, Kindle `amazon.com/dp/B0HGM7RF35`.
+Prices are deliberately not shown — they change. Copy comes only from the
+cover and her Amazon description. Cover: official Amazon image resized to
+`assets/food-isnt-the-problem.jpg` (720px).
 
 ### 14 — video library
 
@@ -191,7 +200,7 @@ Pages *without* assigned keywords (`/speaking`, `/books`, `/faq`, `/contact`,
 | 08 speaking topics | **no — native H2 required above** | copy needs Tanya's sign-off |
 | 09 speaking videos | **no — native H2 required above** | replaces the homepage video library |
 | 10 insurance steps | **no — native H2 required above** | coverage wording must not be strengthened |
-| 11 books | yes | new book has NO buy button until it is published |
+| 11 books | yes | Food Isn't the Problem featured with paperback + Kindle links; Mindful Me Journey below |
 | 12 hero visual | n/a — no text at all | **H1 stays native Wix**; place beside it |
 | 13 hero (full) | optional | Replaces 12 + the native hero copy. Buttons: Schedule a Free Strategy Session (Healthie) + Connect Now Using Insurance (Fay). Use `?native-h1` to hide its headline + eyebrow and keep a real Wix H1 above it. Without the parameter the homepage loses its H1 keywords (*nutrition support*, *strict diets*) |
 
@@ -224,8 +233,6 @@ AVIF to browsers that take it. This matters more than it sounds:
 
 | Item | Needed from |
 |---|---|
-| `assets/food-isnt-the-problem.jpg` is a PLACEHOLDER | drop the real cover in, same filename |
-| New book buy link + launch date | Tanya, once published |
 | Testimonial attributions | Tanya |
 | High-res speaking photo | Tanya |
 

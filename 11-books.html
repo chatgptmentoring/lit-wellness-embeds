@@ -7,175 +7,549 @@
 <title>LIT Wellness — Books</title>
 
 <!--
-  Tanya's specific request (Build Guide 6, section 8 and Part 8).
-  Tan #D8C3A5 band, new book first, then The Mindful Me Journey.
+  BOOKS — Home + /books. Carries its own heading.
 
-  IMAGES
-  - The Mindful Me Journey cover is served from Tanya's own Wix account,
-    resized by the Wix CDN from 1.8MB down to a sane size. Its "#1 New
-    Release" flash is burned into the artwork, which is why the text
-    below does not repeat that claim as a badge.
-  - "Food Isn't the Problem" is NOT on Wix yet — it is an upcoming book —
-    so its cover is hosted in this repo at assets/food-isnt-the-problem.jpg.
+  FEATURED: "Food Isn't the Problem" (published August 31, 2026)
+  Details verified on the Amazon listing, September 2026:
+    Paperback  https://www.amazon.com/Food-Isnt-Problem-Understanding-Emotional/dp/B0HHCBCQGB/
+    Kindle     https://www.amazon.com/dp/B0HGM7RF35
+    224 pages · Publisher: LIT Wellness Solutions · ISBN-13 979-8234147899
+  Prices are deliberately NOT shown: they change, and a stale price on
+  her site is worse than none.
+  Cover: official Amazon image, resized to assets/food-isnt-the-problem.jpg.
 
-  COPY — do not embellish. The new book's description is built only from
-  what is printed on its own cover plus what the client told us: it is
-  about the emotions driving eating, dieting and bingeing. The book is
-  unreleased, so there is deliberately NO purchase button and no launch
-  date. Swap the "Coming soon" tag for a real "Get the Book" link to the
-  retailer once it is published.
+  COPY comes only from the book's own cover and Amazon description
+  (the "Name It, Claim It, Reframe It" framework, Comfort and Dopamine
+  Menus, physical hunger vs emotional hijack). Do not embellish.
+
+  ALSO BY TANYA: The Mindful Me Journey, cover from her Wix Media Manager.
+
+  SIZE: desktop locked at 1000. Mobile fits its box via shared/fit.js —
+  drag the Wix mobile box to ~1340.
 -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap">
 
 <link rel="stylesheet" href="shared/tokens.css">
 <link rel="stylesheet" href="shared/base.css">
 
 <style>
-  .band { background: var(--tan); }
+  /* Sunrise sky — the palette of the new cover, which is already the
+     brand's blue and warm orange. On <html> so fit-to-box spare space
+     matches. */
+  html {
+    background:
+      radial-gradient(760px 520px at 26% 46%, rgba(255,214,160,.55), rgba(255,214,160,0) 70%),
+      linear-gradient(180deg, #E4EDF4 0%, #F3F0EA 42%, #F8EBDD 78%, #F3DFCB 100%) !important;
+  }
+  html, body { height: 100%; }
+  body { background: transparent; overflow: hidden; }
 
-  .head { max-width: 620px; margin: 0 auto 44px; text-align: center; }
-  .head .eyebrow { color: var(--terracotta); margin-bottom: 14px; }
+  /* Locked at 1110: the tallest desktop layout (980px, where the copy
+     wraps most). Content is centred, so wider screens get even space. */
+  .books {
+    position: relative; padding: 64px 0; min-height: 1110px;
+    display: flex; flex-direction: column; justify-content: center;
+    will-change: transform; overflow: hidden;
+  }
+  .books > .shell { width: 100%; }
+
+  /* ---------- Atmosphere ---------- */
+  .sky { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+
+  /* Slow-turning sun rays behind the book. */
+  .rays {
+    position: absolute;
+    left: 26%; top: 44%;
+    width: 1100px; height: 1100px;
+    margin: -550px 0 0 -550px;
+    background: repeating-conic-gradient(from 0deg, rgba(255,196,130,.15) 0deg 5deg, rgba(255,196,130,0) 5deg 15deg);
+    -webkit-mask-image: radial-gradient(circle, #000 12%, transparent 62%);
+            mask-image: radial-gradient(circle, #000 12%, transparent 62%);
+    animation: turn 90s linear infinite;
+  }
+  @keyframes turn { to { transform: rotate(360deg); } }
+
+  .sun {
+    position: absolute;
+    left: 26%; top: 44%;
+    width: 420px; height: 420px;
+    margin: -210px 0 0 -210px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,222,178,.95) 0%, rgba(255,200,140,.45) 38%, rgba(255,200,140,0) 70%);
+    animation: breathe 7s ease-in-out infinite;
+  }
+  @keyframes breathe { 0%, 100% { transform: scale(1); opacity: .9; } 50% { transform: scale(1.08); opacity: 1; } }
+
+  /* Rising embers of light. */
+  .mote {
+    position: absolute;
+    bottom: -12px;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #FFD9A8 0%, rgba(233,150,80,.0) 70%);
+    box-shadow: 0 0 10px 2px rgba(255,190,120,.55);
+    opacity: 0;
+    animation: rise linear infinite;
+  }
+  @keyframes rise {
+    0%   { transform: translate(0, 0) scale(.6); opacity: 0; }
+    12%  { opacity: .9; }
+    100% { transform: translate(var(--dx, 20px), -900px) scale(1.1); opacity: 0; }
+  }
+
+  /* ---------- Heading ---------- */
+  .head { position: relative; text-align: center; max-width: 640px; margin: 0 auto 30px; }
+  .head .eyebrow { color: var(--terracotta); margin-bottom: 12px; }
   .head .h2 { color: var(--ink); }
+  .head .h2 em { font-style: italic; color: var(--blue); }
 
-  .grid {
+  /* ---------- Feature ---------- */
+  .feature {
+    position: relative;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: clamp(14px, 2vw, 28px);
-  }
-
-  .book {
-    height: 560px;
-    display: flex;
-    flex-direction: column;
+    grid-template-columns: 400px 1fr;
+    gap: clamp(32px, 5vw, 72px);
     align-items: center;
-    text-align: center;
-    background: var(--white);
-    border-radius: var(--radius);
-    padding: 30px clamp(20px, 2.4vw, 34px) 28px;
   }
 
-  /* Fixed pixel height + contain: the two covers have different aspect
-     ratios, so a width-driven image would give the cards different
-     heights. contain (not cover) because cropping a book cover is
-     never acceptable. */
-  .cover {
-    height: 268px;
-    flex: none;
-    margin-bottom: 22px;
+  .stage3d {
+    position: relative;
+    height: 500px;
     display: grid;
     place-items: center;
-  }
-  .cover img {
-    max-height: 268px;
-    width: auto;
-    max-width: 100%;
-    border-radius: 4px;
-    box-shadow: 0 18px 36px -18px rgba(26,26,26,.55);
+    perspective: 1700px;
   }
 
-  .tag {
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 11px;
-    letter-spacing: .13em;
-    text-transform: uppercase;
+  /* Floor shadow that breathes with the float. */
+  .stage3d::after {
+    content: '';
+    position: absolute;
+    left: 50%; bottom: 14px;
+    width: 280px; height: 34px;
+    margin-left: -140px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(34,62,86,.38) 0%, rgba(34,62,86,0) 70%);
+    animation: shadow 6s ease-in-out infinite;
+  }
+  @keyframes shadow { 0%, 100% { transform: scaleX(1); opacity: .9; } 50% { transform: scaleX(.86); opacity: .65; } }
+
+  .float { animation: float 6s ease-in-out infinite; transform-style: preserve-3d; }
+  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+
+  /* The book: front cover, page block on the right, back board.
+     W 300 x H 450 (the cover's 2:3), thickness 30 ≈ 224 pages. */
+  .book {
+    --ry: 0deg; --rx: 0deg;
+    display: block;
+    position: relative;
+    width: 300px; height: 450px;
+    transform-style: preserve-3d;
+    transform: rotateY(calc(-26deg + var(--ry))) rotateX(calc(3deg + var(--rx)));
+    transition: transform .6s var(--ease);
+  }
+  /* Entrance: swings in from edge-on. */
+  .feature:not(.is-visible) .book { transform: rotateY(-80deg) rotateX(6deg) translateX(-40px); }
+  .feature.is-visible .book { transition: transform 1.4s cubic-bezier(.16,.84,.24,1); }
+  .book.tracking { transition: transform .25s ease-out; }
+
+  .face {
+    position: absolute; inset: 0;
+    transform: translateZ(15px);
+    border-radius: 2px 6px 6px 2px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px -20px rgba(34,62,86,.55);
+    background: #1B3350;
+  }
+  .face img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  /* Spine hinge crease + glossy light that sweeps across. */
+  .face::before {
+    content: ''; position: absolute; inset: 0; z-index: 2;
+    background: linear-gradient(90deg, rgba(0,0,0,.28) 0, rgba(255,255,255,.18) 5px, rgba(0,0,0,.06) 12px, rgba(0,0,0,0) 22px);
+  }
+  .face::after {
+    content: ''; position: absolute; top: -20%; bottom: -20%; width: 45%; z-index: 3;
+    background: linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.38) 50%, rgba(255,255,255,0) 100%);
+    transform: translateX(-160%) skewX(-12deg);
+    animation: gloss 7s var(--ease) 2.2s infinite;
+  }
+  @keyframes gloss { 0% { transform: translateX(-160%) skewX(-12deg); } 26%, 100% { transform: translateX(340%) skewX(-12deg); } }
+
+  .pages {
+    position: absolute;
+    top: 5px; height: 440px;
+    width: 28px;
+    left: calc(300px - 14px);
+    transform: rotateY(90deg);
+    background:
+      linear-gradient(90deg, rgba(0,0,0,.14), rgba(0,0,0,0) 30%, rgba(0,0,0,0) 70%, rgba(0,0,0,.1)),
+      repeating-linear-gradient(90deg, #FBF8F2 0 1px, #E7DFD2 1px 2px);
+  }
+  .back {
+    position: absolute; inset: 0;
+    transform: translateZ(-15px);
+    border-radius: 2px 6px 6px 2px;
+    background: #1B3350;
+  }
+  .spine {
+    position: absolute;
+    top: 0; height: 450px;
+    width: 30px;
+    left: -15px;
+    transform: rotateY(-90deg);
+    background: linear-gradient(90deg, #14283F, #274A6B 50%, #14283F);
+  }
+
+  .ribbon {
+    position: absolute; z-index: 5;
+    top: 6px; left: 50%;
+    margin-left: 124px;
+    display: grid; place-items: center;
+    width: 104px; height: 104px;
+    border-radius: 50%;
+    background: var(--terracotta);
+    color: var(--white);
+    text-align: center;
+    box-shadow: 0 16px 30px -12px rgba(169,80,47,.75);
+    transform: rotate(12deg);
+    animation: pop .7s cubic-bezier(.3,1.6,.5,1) 1.3s both;
+  }
+  .ribbon::before {
+    content: ''; position: absolute; inset: 6px;
+    border-radius: 50%;
+    border: 1.5px dashed rgba(255,255,255,.55);
+    animation: turn 20s linear infinite;
+  }
+  .ribbon span { font: 600 10.5px/1.25 var(--font-body); letter-spacing: .14em; text-transform: uppercase; }
+  .ribbon strong { display: block; font: 500 22px/1 var(--font-display); letter-spacing: 0; text-transform: none; margin: 3px 0; }
+  @keyframes pop { from { transform: rotate(-20deg) scale(0); opacity: 0; } to { transform: rotate(12deg) scale(1); opacity: 1; } }
+
+  /* ---------- Copy ---------- */
+  .copy { position: relative; }
+
+  .status {
+    display: inline-flex; align-items: center; gap: 9px;
+    padding: 7px 14px 7px 10px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.75);
+    border: 1px solid rgba(169,80,47,.22);
+    font: 600 12px var(--font-body);
+    letter-spacing: .12em; text-transform: uppercase;
     color: var(--terracotta);
-    margin: 0 0 8px;
+    margin-bottom: 18px;
   }
+  .status i {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--terracotta);
+    box-shadow: 0 0 0 0 rgba(169,80,47,.6);
+    animation: ping 2s ease-out infinite;
+  }
+  @keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(169,80,47,.55); } 80%, 100% { box-shadow: 0 0 0 9px rgba(169,80,47,0); } }
 
-  .book .h3 {
+  .title {
     font-family: var(--font-display);
-    font-weight: 500;
-    font-size: clamp(19px, 1.9vw, 26px);
-    line-height: 1.2;
-    margin: 0 0 8px;
-    color: var(--ink);
-  }
-  .sub {
-    font-family: var(--font-body);
-    font-size: clamp(12px, 1.15vw, 14px);
-    line-height: 1.45;
-    color: var(--grey);
+    font-weight: 400;
+    font-size: clamp(40px, 4.4vw, 58px);
+    line-height: 1.04;
+    letter-spacing: -.015em;
+    color: var(--blue-deep);
     margin: 0 0 12px;
   }
-  .pitch {
-    font-size: clamp(13px, 1.2vw, 15px);
-    line-height: 1.55;
+  .title em { font-style: italic; color: var(--terracotta); }
+  .subtitle { font-family: var(--font-display); font-size: 19px; line-height: 1.35; color: var(--blue); margin: 0 0 16px; }
+  .pitch { color: #3A3A3A; max-width: 620px; margin: 0 0 20px; font-size: 16px; line-height: 1.6; }
+
+  /* Signature framework — the highlight walks through the three steps. */
+  .framework { margin-bottom: 22px; }
+  .framework p { margin: 0 0 10px; font: 600 12px var(--font-body); letter-spacing: .12em; text-transform: uppercase; color: var(--grey); }
+  .steps { display: flex; align-items: center; gap: 8px; flex-wrap: nowrap; }
+  .step {
+    position: relative;
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 16px 10px 10px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.8);
+    border: 1px solid var(--border);
+    font: 600 15px var(--font-body);
     color: var(--ink);
-    margin: 0;
+    white-space: nowrap;
+    animation: stepGlow 4.5s ease-in-out infinite;
+  }
+  .step b {
+    width: 26px; height: 26px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: var(--blue-wash); color: var(--blue);
+    font: 600 13px var(--font-body);
+    animation: stepDot 4.5s ease-in-out infinite;
+  }
+  .step:nth-of-type(2), .step:nth-of-type(2) b { animation-delay: 1.5s; }
+  .step:nth-of-type(3), .step:nth-of-type(3) b { animation-delay: 3s; }
+  @keyframes stepGlow {
+    0%, 40%, 100% { background: rgba(255,255,255,.8); border-color: var(--border); transform: none; box-shadow: none; }
+    8%, 30%       { background: #fff; border-color: rgba(169,80,47,.45); transform: translateY(-2px); box-shadow: 0 12px 24px -14px rgba(169,80,47,.6); }
+  }
+  @keyframes stepDot {
+    0%, 40%, 100% { background: var(--blue-wash); color: var(--blue); }
+    8%, 30%       { background: var(--terracotta); color: #fff; }
+  }
+  .arrow { width: 18px; height: 18px; flex: none; fill: none; stroke: var(--tan); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+  .learn { list-style: none; margin: 0 0 24px; padding: 0; display: grid; gap: 9px; }
+  .learn li { display: flex; gap: 11px; align-items: flex-start; font-size: 15.5px; line-height: 1.45; color: var(--ink); }
+  .learn svg { width: 20px; height: 20px; flex: none; margin-top: 1px; fill: none; stroke: var(--terracotta); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+
+  .buy { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+  .btn--primary { position: relative; overflow: hidden; box-shadow: 0 16px 30px -14px rgba(169,80,47,.75); }
+  .btn--primary::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.3) 50%, transparent 70%);
+    transform: translateX(-120%);
+    animation: sheen 5s var(--ease) 3s infinite;
+  }
+  @keyframes sheen { 0% { transform: translateX(-120%); } 22%, 100% { transform: translateX(120%); } }
+  .btn--primary:hover, .btn--tertiary:hover { transform: translateY(-2px); }
+  .btn--tertiary { background: rgba(255,255,255,.6); }
+  .btn svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+  .meta { margin: 16px 0 0; font-size: 13px; color: var(--grey); letter-spacing: .02em; }
+  .meta span { color: var(--tan); margin: 0 7px; }
+
+  /* ---------- Also by Tanya ---------- */
+  .also {
+    position: relative;
+    margin-top: 34px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 28px;
+    padding: 18px 30px 18px 22px;
+    border-radius: 18px;
+    background: rgba(255,255,255,.72);
+    border: 1px solid rgba(255,255,255,.9);
+    box-shadow: 0 24px 50px -32px rgba(34,62,86,.45);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+  .also-cover {
+    width: 96px; height: 136px;
+    display: grid; place-items: center;
+    transition: transform .5s var(--ease);
+  }
+  .also:hover .also-cover { transform: rotate(-4deg) translateY(-4px); }
+  .also-cover img { max-width: 96px; max-height: 136px; border-radius: 3px; box-shadow: 0 14px 26px -12px rgba(26,26,26,.5); }
+  .also .tag { margin: 0 0 6px; font: 600 11px var(--font-body); letter-spacing: .13em; text-transform: uppercase; color: var(--blue); }
+  .also h3 { margin: 0 0 4px; font: 500 26px/1.2 var(--font-display); color: var(--ink); }
+  .also .sub { margin: 0 0 6px; font-size: 14px; color: var(--grey); }
+  .also .line { margin: 0; font-size: 14.5px; color: #3A3A3A; }
+  .also-actions { display: flex; gap: 10px; }
+  .also-actions .btn { padding: 13px 20px; font-size: 14.5px; }
+
+  /* =================== Mobile (<750px) ===================
+     Wix Classic mobile: 320px page. Not height-locked; fit.js fits it. */
+  @media (max-width: 749.98px) {
+    .books { padding: 36px 0 30px; min-height: 0; }
+    .shell { padding: 0 16px; }
+    .head { margin-bottom: 8px; }
+    .head .h2 { font-size: 28px; }
+    .head .eyebrow { font-size: 11px; }
+
+    .feature { grid-template-columns: 1fr; gap: 10px; text-align: center; }
+    .rays, .sun { left: 50%; top: 250px; }
+    .rays { width: 700px; height: 700px; margin: -350px 0 0 -350px; }
+    .sun { width: 300px; height: 300px; margin: -150px 0 0 -150px; }
+
+    .stage3d { height: 306px; perspective: 1200px; }
+    .stage3d::after { width: 160px; margin-left: -80px; bottom: 4px; height: 20px; }
+    .book { width: 176px; height: 264px; }
+    .face { transform: translateZ(9px); }
+    .back { transform: translateZ(-9px); }
+    .pages { top: 3px; height: 258px; width: 16px; left: calc(176px - 8px); }
+    .spine { height: 264px; width: 18px; left: -9px; }
+    .ribbon { width: 72px; height: 72px; top: 0; margin-left: 70px; }
+    .ribbon span { font-size: 8.5px; }
+    .ribbon strong { font-size: 16px; }
+
+    .status { font-size: 10.5px; margin-bottom: 12px; }
+    .title { font-size: 34px; }
+    .subtitle { font-size: 16px; margin-bottom: 12px; }
+    .pitch { font-size: 14.5px; margin: 0 auto 18px; }
+    .framework p { font-size: 11px; }
+    .steps { justify-content: center; gap: 4px; }
+    .step { padding: 7px 10px 7px 7px; font-size: 12.5px; gap: 5px; }
+    .step b { width: 20px; height: 20px; font-size: 11px; }
+    .arrow { width: 12px; height: 12px; }
+    /* Mobile keeps the framework steps; the bullet list is desktop-only. */
+    .learn { display: none; }
+    .framework { margin-bottom: 20px; }
+    .buy { flex-direction: column; }
+    .buy .btn { width: 100%; max-width: 300px; }
+    .meta { font-size: 12px; }
+
+    .also { grid-template-columns: 80px 1fr; gap: 14px; padding: 16px; margin-top: 30px; text-align: left; }
+    .also-cover { width: 80px; height: 116px; }
+    .also-cover img { max-width: 80px; max-height: 116px; }
+    .also h3 { font-size: 20px; }
+    .also .sub, .also .line { display: none; }
+    .also-actions { grid-column: 1 / -1; }
+    .also-actions .btn { flex: 1; padding: 12px 10px; font-size: 13.5px; }
   }
 
-  .actions {
-    margin-top: auto;
-    padding-top: 20px;
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  .actions .btn { padding: 14px 22px; font-size: 15px; }
+  /* Grid children must be allowed to shrink, or the no-wrap step row
+     widens the column past a narrow Wix box. */
+  .feature > * { min-width: 0; }
 
-  @media (max-width: 749px) {
-    .book { height: 560px; padding: 26px 22px 24px; }
-    .head { margin-bottom: 30px; }
-    .book .h3 { font-size: 21px; }
-    .sub { font-size: 13px; }
-    .pitch { font-size: 14px; }
+  @media (max-width: 340px) {
+    .ribbon { margin-left: 48px; }
+    .steps { flex-wrap: wrap; row-gap: 6px; }
+    .step { font-size: 11.5px; padding: 6px 8px 6px 6px; }
+    .arrow { display: none; }
+  }
+
+  /* 750-979px never occurs in the Wix desktop view (its canvas is 980+),
+     but keep it tidy for anyone previewing the file directly. */
+  @media (min-width: 750px) and (max-width: 979.98px) {
+    .feature { grid-template-columns: 300px 1fr; gap: 28px; }
+    .stage3d { transform: scale(.78); }
+    .steps { flex-wrap: wrap; row-gap: 8px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rays, .sun, .mote, .float, .face::after, .ribbon, .ribbon::before, .step, .step b, .status i, .btn--primary::after, .stage3d::after { animation: none !important; }
+    .mote { display: none; }
+    .feature:not(.is-visible) .book { transform: rotateY(-26deg) rotateX(3deg); }
   }
 </style>
 </head>
 <body>
 
-<section class="band section locked" style="min-height:870px">
+<section class="books" data-fit>
+  <div class="sky" aria-hidden="true">
+    <span class="rays"></span>
+    <span class="sun"></span>
+    <span class="mote" style="left:12%;animation-duration:11s;animation-delay:0s;--dx:30px"></span>
+    <span class="mote" style="left:22%;animation-duration:14s;animation-delay:3s;--dx:-20px"></span>
+    <span class="mote" style="left:31%;animation-duration:10s;animation-delay:6s;--dx:24px"></span>
+    <span class="mote" style="left:38%;animation-duration:13s;animation-delay:1.5s;--dx:-34px"></span>
+    <span class="mote" style="left:18%;animation-duration:16s;animation-delay:8s;--dx:16px"></span>
+    <span class="mote" style="left:45%;animation-duration:12s;animation-delay:4.5s;--dx:-12px"></span>
+    <span class="mote" style="left:7%;animation-duration:15s;animation-delay:10s;--dx:22px"></span>
+    <span class="mote" style="left:60%;animation-duration:17s;animation-delay:2s;--dx:-26px"></span>
+    <span class="mote" style="left:82%;animation-duration:14s;animation-delay:7s;--dx:18px"></span>
+  </div>
+
   <div class="shell">
 
     <div class="head" data-reveal>
       <p class="eyebrow">Books by Tanya Jolliffe</p>
-      <h2 class="h2">From reading to real change</h2>
+      <h2 class="h2">From reading to <em>real change</em></h2>
     </div>
 
-    <div class="grid rail">
+    <div class="feature" data-reveal id="feature">
 
-      <article class="book" data-reveal>
-        <div class="cover">
-          <img src="assets/food-isnt-the-problem.jpg"
-               alt="Food Isn't the Problem, by Tanya Fasnacht Jolliffe RDN LD CIMHP"
-               loading="lazy">
+      <div class="stage3d" id="stage">
+        <div class="float">
+          <a class="book" id="book" href="https://www.amazon.com/Food-Isnt-Problem-Understanding-Emotional/dp/B0HHCBCQGB/" aria-label="Food Isn't the Problem on Amazon">
+            <span class="back"></span>
+            <span class="spine"></span>
+            <span class="pages"></span>
+            <span class="face">
+              <img src="assets/food-isnt-the-problem.jpg"
+                   alt="Food Isn't the Problem: Understanding Emotional Eating and Crossing the Bridge to Peace with Food, by Tanya Fasnacht Jolliffe, RDN, LD, CIMHP">
+            </span>
+          </a>
         </div>
-        <p class="tag">Coming soon</p>
-        <h3 class="h3">Food Isn't the Problem</h3>
-        <p class="sub">Understanding Emotional Eating and Crossing the Bridge to Peace with Food</p>
-        <p class="pitch">A three-step path to freedom from emotional eating &mdash; built around
-          the emotions that drive eating, dieting and bingeing, rather than the food itself.</p>
-        <div class="actions">
-          <a class="btn btn--tertiary" href="https://www.litwellnesssolutions.com/contact">Tell me when it&rsquo;s out</a>
-        </div>
-      </article>
+        <div class="ribbon" aria-hidden="true"><span>New<strong>2026</strong>release</span></div>
+      </div>
 
-      <article class="book" data-reveal data-reveal-delay="110">
-        <div class="cover">
-          <img src="https://static.wixstatic.com/media/dca1c2_85fe24c16e654161b0be54c206ceeb64~mv2.png/v1/fit/w_420,h_600,al_c,q_85,enc_auto/mindful-me-journey.png"
-               alt="The Mindful Me Journey, a 40-day guided journal by Tanya Fasnacht Jolliffe"
-               loading="lazy">
+      <div class="copy">
+        <p class="status"><i aria-hidden="true"></i>Out now &middot; New release</p>
+
+        <h3 class="title">Food <em>Isn&rsquo;t</em> the Problem</h3>
+        <p class="subtitle">Understanding Emotional Eating and Crossing the Bridge to Peace with Food</p>
+
+        <p class="pitch">Stuck in the cycle of restrictive dieting and emotional bingeing? Willpower
+          was never the problem &mdash; and neither is the food. Tanya shows how stress, hidden
+          emotions and brain chemistry drive the reach for comfort, and offers a compassionate,
+          anti-diet path to lasting peace with food.</p>
+
+        <div class="framework">
+          <p>Tanya&rsquo;s signature framework</p>
+          <div class="steps">
+            <span class="step"><b>1</b>Name It</span>
+            <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            <span class="step"><b>2</b>Claim It</span>
+            <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            <span class="step"><b>3</b>Reframe It</span>
+          </div>
         </div>
-        <p class="tag">Available now</p>
-        <h3 class="h3">The Mindful Me Journey</h3>
+
+        <ul class="learn">
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4.5 12.5 5 5 10-11"/></svg>Tell physical hunger from an emotional hijack</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4.5 12.5 5 5 10-11"/></svg>Decode what your cravings are really asking for</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4.5 12.5 5 5 10-11"/></svg>Build Comfort and Dopamine Menus that soothe without the pantry</li>
+        </ul>
+
+        <div class="buy">
+          <a class="btn btn--primary" href="https://www.amazon.com/Food-Isnt-Problem-Understanding-Emotional/dp/B0HHCBCQGB/">
+            Get the Paperback
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn btn--tertiary" href="https://www.amazon.com/dp/B0HGM7RF35">Kindle Edition</a>
+        </div>
+        <p class="meta">224 pages<span>&bull;</span>Paperback &amp; Kindle<span>&bull;</span>Available on Amazon</p>
+      </div>
+    </div>
+
+    <article class="also" data-reveal data-reveal-delay="120">
+      <div class="also-cover">
+        <img src="https://static.wixstatic.com/media/dca1c2_85fe24c16e654161b0be54c206ceeb64~mv2.png/v1/fit/w_240,h_340,al_c,q_85,enc_auto/mindful-me-journey.png"
+             alt="The Mindful Me Journey, a 40-day guided journal by Tanya Fasnacht Jolliffe" loading="lazy">
+      </div>
+      <div>
+        <p class="tag">Also by Tanya &middot; Available now</p>
+        <h3>The Mindful Me Journey</h3>
         <p class="sub">A 40-Day Guided Journal Toward a Healthier Relationship with Food and Exercise</p>
-        <p class="pitch">Forty days of guided prompts for re-examining habits without stigma,
-          shame or guilt. Now distributed internationally.</p>
-        <div class="actions">
-          <a class="btn btn--primary" href="https://www.amazon.com/Mindful-Me-Journey-Healthier-Relationship/dp/0578581809/">Get the Book</a>
-          <a class="btn btn--tertiary" href="https://www.litwellnesssolutions.com/the-mindful-me-journey">Learn more</a>
-        </div>
-      </article>
+        <p class="line">Forty days of guided prompts for re-examining habits without stigma, shame or guilt.</p>
+      </div>
+      <div class="also-actions">
+        <a class="btn btn--primary" href="https://www.amazon.com/Mindful-Me-Journey-Healthier-Relationship/dp/0578581809/">Get the Book</a>
+        <a class="btn btn--tertiary" href="https://www.litwellnesssolutions.com/the-mindful-me-journey">Learn more</a>
+      </div>
+    </article>
 
-    </div>
   </div>
 </section>
 
+<script>
+  /* The book turns gently toward the pointer. Desktop pointers only, and
+     only after the entrance swing has finished. */
+  (function () {
+    var stage = document.getElementById('stage');
+    var book = document.getElementById('book');
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var ready = false;
+    setTimeout(function () { ready = true; }, 2200);
+
+    document.addEventListener('mousemove', function (e) {
+      if (!ready) return;
+      var r = stage.getBoundingClientRect();
+      var x = (e.clientX - (r.left + r.width / 2)) / window.innerWidth;
+      var y = (e.clientY - (r.top + r.height / 2)) / window.innerHeight;
+      book.classList.add('tracking');
+      book.style.setProperty('--ry', (x * 30).toFixed(2) + 'deg');
+      book.style.setProperty('--rx', (-y * 12).toFixed(2) + 'deg');
+    });
+    document.addEventListener('mouseleave', function () {
+      book.classList.remove('tracking');
+      book.style.setProperty('--ry', '0deg');
+      book.style.setProperty('--rx', '0deg');
+    });
+  })();
+</script>
+<script src="shared/fit.js"></script>
 <script src="shared/embed.js"></script>
 </body>
 </html>
