@@ -36,10 +36,14 @@
 
   var STORE = 'tanya_ai_v2';
   var NUDGE_KEY = 'tanya_ai_nudged_v2';
+  var CONSENT_KEY = 'tanya_ai_consent_v1';
+  var CONSENT_VERSION = '2026-09-15';
   var MAX_STORED = 30;
 
   var AVATAR = 'https://static.wixstatic.com/media/dca1c2_ad3d1a3d26ad4ec2a3238ed019a9763a~mv2.jpg/v1/fill/w_132,h_132,al_t,q_85,enc_auto/tanya.jpg';
   var SITE = 'https://www.litwellnesssolutions.com';
+  var PRIVACY_URL = script.getAttribute('data-privacy') || SITE + '/privacy-policy';
+  var TERMS_URL = script.getAttribute('data-terms') || SITE + '/terms-and-conditions';
 
   var CTA = {
     BOOK_LINK:         { label: 'Get “Food Isn’t the Problem”', icon: 'book',   url: 'https://www.amazon.com/Food-Isnt-Problem-Understanding-Emotional/dp/B0HHCBCQGB/', kind: 'primary' },
@@ -118,6 +122,21 @@
   }
   function sget(k) { try { return JSON.parse(sessionStorage.getItem(k)); } catch (e) { return null; } }
   function sset(k, v) { try { sessionStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+
+  /* Consent to the chat notice is remembered in localStorage, so a returning
+     visitor isn't asked again until the notice version changes. */
+  var memoryConsent = null;
+  function getConsent() {
+    var c = memoryConsent;
+    try { c = JSON.parse(localStorage.getItem(CONSENT_KEY)) || c; } catch (e) {}
+    return c && c.version === CONSENT_VERSION && c.at ? c : null;
+  }
+  function saveConsent() {
+    var c = { at: new Date().toISOString(), version: CONSENT_VERSION };
+    memoryConsent = c;
+    try { localStorage.setItem(CONSENT_KEY, JSON.stringify(c)); } catch (e) {}
+    return c;
+  }
   function newId() {
     var a = new Uint8Array(12);
     (window.crypto || window.msCrypto).getRandomValues(a);
@@ -248,8 +267,46 @@
     this.renderAll();
   };
 
+  Chat.prototype.setComposer = function (enabled) {
+    this.input.disabled = !enabled;
+    this.sendBtn.disabled = !enabled;
+    this.input.placeholder = enabled ? 'Tell me what’s on your mind…' : 'Tap “Start chat” above to begin';
+  };
+
+  Chat.prototype.renderConsent = function (greeting) {
+    var self = this;
+    this.log.innerHTML = '';
+    this.setComposer(false);
+    var card = el(
+      '<div class="tai-consent">' +
+        '<strong>Before we chat</strong>' +
+        '<ul>' +
+          '<li>I’m an <b>AI coach</b> trained on Tanya’s book — not a doctor, therapist, or emergency service. In a crisis, call or text <b>988</b>.</li>' +
+          '<li>Your chat is <b>saved for up to 12 months</b> and processed by our service providers (OpenAI and Supabase) to answer you and improve this coach.</li>' +
+          '<li>Please <b>don’t share your name, contact details, or medical records</b>.</li>' +
+        '</ul>' +
+        '<p>By tapping Start chat, you agree to the <a data-l="terms">Terms &amp; Conditions</a> and consent to this under the <a data-l="privacy">Privacy Policy</a>, including its Consumer Health Data notice.</p>' +
+        '<button type="button" class="tai-consent-go">Start chat</button>' +
+      '</div>'
+    );
+    card.querySelector('[data-l="terms"]').href = TERMS_URL;
+    card.querySelector('[data-l="privacy"]').href = PRIVACY_URL;
+    Array.prototype.forEach.call(card.querySelectorAll('a'), function (a) {
+      if (INSIDE_IFRAME) a.target = '_top';
+    });
+    card.querySelector('.tai-consent-go').addEventListener('click', function () {
+      saveConsent();
+      self.renderAll(greeting, true);
+      self.input.focus();
+    });
+    this.log.appendChild(card);
+    this.scroll();
+  };
+
   Chat.prototype.renderAll = function (greeting) {
     var self = this;
+    if (!getConsent()) { this.renderConsent(greeting); return; }
+    this.setComposer(true);
     this.log.innerHTML = '';
     if (!this.history.length) {
       this.bubble('assistant', greeting ||
@@ -307,6 +364,8 @@
     var self = this;
     var text = (this.input.value || '').trim();
     if (!text || this.busy) return;
+    var consent = getConsent();
+    if (!consent) { this.renderConsent(); return; }
     if (!ENDPOINT) { this.bubble('assistant', 'Chat isn’t connected yet — please check back soon.'); return; }
 
     var starters = this.log.querySelector('.tai-starters');
@@ -365,6 +424,7 @@
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         session_id: this.sessionId,
+        consent: consent,
         messages: this.history.slice(-16),
         page: { url: (INSIDE_IFRAME ? document.referrer : location.href) || location.href, title: INSIDE_IFRAME ? '' : document.title }
       })

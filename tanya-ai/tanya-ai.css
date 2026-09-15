@@ -232,6 +232,42 @@
 .tai .tai-chip:hover { border-color: var(--tai-tan); box-shadow: 0 8px 18px -12px rgba(34,62,86,.35); }
 .tai .tai-chip:hover::before { transform: translateX(3px); }
 
+/* ---------------- Consent notice (before the first message) ---------------- */
+.tai .tai-consent {
+  margin: auto 0;
+  padding: 18px 18px 16px;
+  border-radius: 16px;
+  background: #fff;
+  border: 1px solid var(--tai-border);
+  box-shadow: 0 10px 26px -18px rgba(34,62,86,.45);
+  animation: tai-in .3s var(--tai-ease);
+}
+.tai .tai-consent strong {
+  display: block; margin-bottom: 10px;
+  font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: 21px; color: var(--tai-blue-deep);
+}
+.tai .tai-consent ul { margin: 0 0 10px; display: grid; gap: 8px; }
+.tai .tai-consent li {
+  position: relative; padding-left: 18px;
+  font-size: 14px; line-height: 1.45; color: #2B2B2B;
+}
+.tai .tai-consent li::before {
+  content: ''; position: absolute; left: 2px; top: 8px;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--tai-terra);
+}
+.tai .tai-consent b { font-weight: 700; font-size: 14px; color: var(--tai-blue-deep); }
+.tai .tai-consent p { font-size: 12.5px; line-height: 1.45; color: var(--tai-grey); margin-bottom: 14px; }
+.tai .tai-consent a { font-size: 12.5px; color: var(--tai-blue); text-decoration: underline; text-underline-offset: 2px; }
+.tai .tai-consent-go {
+  width: 100%; padding: 13px 16px; border-radius: 12px;
+  background: var(--tai-terra); color: #fff;
+  font-weight: 700; font-size: 15px; text-align: center;
+  box-shadow: 0 10px 20px -12px rgba(169,80,47,.8);
+  transition: background-color .2s ease, transform .15s ease;
+}
+.tai .tai-consent-go:hover { background: var(--tai-terra-h); transform: translateY(-1px); }
+.tai .tai-compose textarea:disabled { background: var(--tai-sand); cursor: not-allowed; }
+
 /* ---------------- Composer ---------------- */
 .tai .tai-compose {
   display: flex; gap: 8px; align-items: flex-end;
