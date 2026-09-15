@@ -110,6 +110,8 @@ touching.
 | 10 | `10-insurance-steps.html` | 400 | Home + /insurance-coverage |
 | 11 | `11-books.html` | 870 | Home + /books |
 | 12 | `12-hero-visual.html` | 620 | Home hero, beside native text |
+| 13 | `13-hero.html?native-h1` | 680 | Home hero — full design, native Wix H1 directly above (recommended) |
+| 13 | `13-hero.html` | 800 | Home hero — full design incl. headline (no readable H1; see below) |
 
 Held constant by three mechanisms: grids keep their column count from
 750px up and shrink the cards rather than wrapping; below 750px they
@@ -128,7 +130,7 @@ not read iframe content, so:
 
 | Homepage section | Keywords assigned? | Approach |
 |---|---|---|
-| Hero / H1 | yes | **native Wix** |
+| Hero / H1 | yes | **native H1** + embed 12 beside it, or native H1 + embed `13-hero.html?native-h1` below it |
 | Trust strip | no | embed 01 |
 | Sound familiar? | H2 only | native H2 + embed 03 |
 | How we help | H2 only | native H2 + embed 04 |
@@ -158,6 +160,7 @@ Pages *without* assigned keywords (`/speaking`, `/books`, `/faq`, `/contact`,
 | 10 insurance steps | **no — native H2 required above** | coverage wording must not be strengthened |
 | 11 books | yes | new book has NO buy button until it is published |
 | 12 hero visual | n/a — no text at all | **H1 stays native Wix**; place beside it |
+| 13 hero (full) | optional | Replaces 12 + the native hero copy. Buttons: Schedule a Free Strategy Session (Healthie) + Connect Now Using Insurance (Fay). Use `?native-h1` to hide its headline + eyebrow and keep a real Wix H1 above it. Without the parameter the homepage loses its H1 keywords (*nutrition support*, *strict diets*) |
 
 ### Deliberately NOT embedded
 

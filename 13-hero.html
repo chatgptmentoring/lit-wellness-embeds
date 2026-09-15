@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>LIT Wellness — Hero</title>
+
+<!--
+  THE COMPLETE HOMEPAGE HERO: eyebrow, headline, subhead, both CTAs, award
+  badges and Tanya's portrait, in one embed.
+
+  Buttons (the client's chosen pair):
+    1. Schedule a Free Strategy Session  -> Healthie   (primary, terracotta)
+    2. Connect Now Using Insurance       -> Fay        (tertiary, blue outline)
+
+  ⚠️ SEO — READ BEFORE PLACING.
+  Google does not read text inside an embed, and Build Guide 10.2 assigns
+  "nutrition support" and "strict diets" to the homepage H1. So:
+
+    RECOMMENDED  keep a native Wix H1 on the page and load this embed with
+                 ?native-h1 on the end of the URL. That hides the embed's
+                 own headline, so the real H1 sits directly above it:
+                 13-hero.html?native-h1
+
+    FULL EMBED   13-hero.html with no parameter shows the headline inside
+                 the embed. It looks complete, but the homepage then has no
+                 readable H1 at all. Only do this with that trade-off
+                 accepted.
+
+  Height is LOCKED so it is one number on desktop AND mobile:
+    13-hero.html            -> 800
+    13-hero.html?native-h1  -> 680
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap">
+
+<link rel="stylesheet" href="shared/tokens.css">
+<link rel="stylesheet" href="shared/base.css">
+
+<script>
+  /* Decide the variant before first paint so the layout never jumps. */
+  if (/[?&]native-h1\b/.test(location.search)) {
+    document.documentElement.className += ' native-h1';
+  }
+</script>
+
+<style>
+  body { background: var(--sand); }
+
+  .hero {
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(900px 520px at 88% 30%, rgba(216,195,165,.55), rgba(216,195,165,0) 70%),
+      radial-gradient(640px 420px at 0% 100%, rgba(53,93,128,.10), rgba(53,93,128,0) 70%),
+      var(--sand);
+    min-height: 800px;
+  }
+  .native-h1 .hero { min-height: 680px; }
+
+  /* Soft drifting light — slow enough to read as warmth, not motion. */
+  .glow {
+    position: absolute;
+    width: 460px; height: 460px;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(20px);
+    background: radial-gradient(circle, rgba(169,80,47,.12), rgba(169,80,47,0) 70%);
+    top: -120px; left: 30%;
+    animation: drift 18s ease-in-out infinite;
+  }
+  @keyframes drift {
+    0%, 100% { transform: translate(0, 0); }
+    50%      { transform: translate(60px, 50px); }
+  }
+
+  .grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1.08fr .92fr;
+    align-items: center;
+    gap: clamp(28px, 5vw, 72px);
+    min-height: inherit;
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  /* ---------- Copy ---------- */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--terracotta);
+    margin-bottom: 22px;
+  }
+  .eyebrow::before {
+    content: '';
+    width: 28px; height: 1.5px;
+    background: var(--terracotta);
+  }
+
+  .headline {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(40px, 4.6vw, 60px);
+    line-height: 1.08;
+    letter-spacing: -.015em;
+    color: var(--ink);
+    margin: 0 0 22px;
+  }
+  .headline em {
+    font-style: italic;
+    color: var(--blue);
+    position: relative;
+    white-space: nowrap;
+  }
+  .headline svg {
+    position: absolute;
+    left: -2%; bottom: -.16em;
+    width: 104%; height: .32em;
+    overflow: visible;
+  }
+  .headline path {
+    fill: none;
+    stroke: var(--terracotta);
+    stroke-width: 3.5;
+    stroke-linecap: round;
+    stroke-dasharray: 340;
+    stroke-dashoffset: 340;
+    animation: draw 1.2s var(--ease) .7s forwards;
+  }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  /* The native Wix H1 (and its eyebrow) sit above the embed in this mode. */
+  .native-h1 .headline,
+  .native-h1 .eyebrow { display: none; }
+
+  .lede {
+    color: #3D3D3D;
+    max-width: 470px;
+    margin-bottom: 34px;
+  }
+
+  /* Stacked at equal width on desktop too: the two labels are long, and
+     side by side they wrap unevenly between 1000 and 1300px. */
+  .ctas {
+    display: grid;
+    grid-template-columns: max-content;
+    gap: 12px;
+    margin-bottom: 38px;
+  }
+  .ctas .btn { position: relative; overflow: hidden; }
+  .btn--primary { box-shadow: 0 14px 30px -14px rgba(169,80,47,.75); }
+  .btn--primary:hover { box-shadow: 0 18px 34px -14px rgba(169,80,47,.85); transform: translateY(-2px); }
+  .btn--tertiary { background: rgba(255,255,255,.55); }
+  .btn--tertiary:hover { transform: translateY(-2px); }
+  .btn svg { width: 17px; height: 17px; flex: none; transition: transform .25s var(--ease); }
+  .btn:hover svg { transform: translateX(3px); }
+
+  /* Light sweep across the primary button. */
+  .btn--primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.28) 50%, transparent 70%);
+    transform: translateX(-120%);
+    animation: sheen 5.5s var(--ease) 2.2s infinite;
+  }
+  @keyframes sheen {
+    0%   { transform: translateX(-120%); }
+    22%  { transform: translateX(120%); }
+    100% { transform: translateX(120%); }
+  }
+
+  .proof {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .proof img { height: 60px; width: auto; flex: none; }
+  .proof p {
+    margin: 0 0 0 4px;
+    padding-left: 16px;
+    border-left: 1px solid var(--tan);
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--grey);
+    max-width: 200px;
+  }
+  .proof strong { color: var(--ink); font-weight: 600; }
+
+  /* ---------- Portrait ---------- */
+  .visual {
+    position: relative;
+    display: grid;
+    place-items: center;
+    height: 560px;
+  }
+
+  /* Arch frame — the one shape on the page that reads "wellness" at a
+     glance, and it gives her portrait a warm doorway instead of a box. */
+  .arch {
+    position: relative;
+    width: 360px;
+    height: 480px;
+    border-radius: 180px 180px 18px 18px;
+    overflow: hidden;
+    background: var(--blue-wash);
+    box-shadow: 0 40px 70px -36px rgba(34,62,86,.55);
+    z-index: 1;
+  }
+  .arch img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center 16%;
+    transform: scale(1.04);
+    transition: transform 1.2s var(--ease);
+  }
+  .visual:hover .arch img { transform: scale(1.08); }
+
+  /* Offset outline arch behind the photo. */
+  .arch-line {
+    position: absolute;
+    width: 360px;
+    height: 480px;
+    border-radius: 180px 180px 18px 18px;
+    border: 1.5px solid var(--terracotta);
+    opacity: .55;
+    transform: translate(22px, 22px);
+    z-index: 0;
+  }
+
+  /* Rotating seal: "Ignite the change within". */
+  .seal {
+    position: absolute;
+    z-index: 2;
+    top: 18px; right: calc(50% - 232px);
+    width: 112px; height: 112px;
+    border-radius: 50%;
+    background: var(--white);
+    box-shadow: 0 16px 34px -18px rgba(26,26,26,.45);
+    display: grid;
+    place-items: center;
+  }
+  .seal svg { position: absolute; inset: 6px; width: 100px; height: 100px; animation: spin 22s linear infinite; }
+  .seal text {
+    font-family: var(--font-body);
+    font-size: 10.4px;
+    font-weight: 600;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    fill: var(--blue);
+  }
+  .seal .flame { width: 30px; height: 30px; }
+  .seal .flame path { fill: var(--terracotta); }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .chip {
+    position: absolute;
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 11px 16px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--border);
+    box-shadow: 0 14px 30px -16px rgba(26,26,26,.45);
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--ink);
+    white-space: nowrap;
+    animation: bob 6s ease-in-out infinite;
+  }
+  .chip i {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    background: var(--blue-wash);
+    flex: none;
+  }
+  .chip i svg { width: 14px; height: 14px; fill: none; stroke: var(--blue); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+  .chip--1 { left: calc(50% - 250px); top: 150px; }
+  .chip--2 { right: calc(50% - 246px); bottom: 110px; animation-delay: -3s; }
+  .chip--2 i { background: #F3E3DA; }
+  .chip--2 i svg { stroke: var(--terracotta); }
+  @keyframes bob {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-9px); }
+  }
+
+  .credential {
+    position: absolute;
+    z-index: 3;
+    left: 50%;
+    bottom: 12px;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px 12px 12px;
+    border-radius: 14px;
+    background: var(--white);
+    box-shadow: 0 18px 36px -20px rgba(26,26,26,.5);
+    white-space: nowrap;
+  }
+  .credential b {
+    display: grid; place-items: center;
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    background: var(--blue);
+    color: var(--white);
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: .02em;
+  }
+  .credential span { font-size: 13px; line-height: 1.3; color: var(--grey); }
+  .credential strong { display: block; color: var(--ink); font-size: 14px; font-weight: 600; }
+
+  /* ---------- Entrance ---------- */
+  .rise { opacity: 0; transform: translateY(22px); animation: rise .9s var(--ease) forwards; }
+  .d1 { animation-delay: .05s; } .d2 { animation-delay: .15s; } .d3 { animation-delay: .25s; }
+  .d4 { animation-delay: .35s; } .d5 { animation-delay: .45s; } .d6 { animation-delay: .2s; }
+  @keyframes rise { to { opacity: 1; transform: none; } }
+
+  /* =================== Tablet (750-999px) =================== */
+  @media (max-width: 999px) and (min-width: 750px) {
+    .grid { grid-template-columns: 1.1fr .9fr; }
+    .arch, .arch-line { width: 290px; height: 400px; border-radius: 145px 145px 16px 16px; }
+    .visual { height: 500px; }
+    .seal { width: 92px; height: 92px; right: calc(50% - 188px); }
+    .seal svg { inset: 4px; width: 84px; height: 84px; }
+    .chip--1 { left: calc(50% - 200px); }
+    .chip--2 { right: calc(50% - 190px); }
+    .proof img { height: 50px; }
+    .proof p { display: none; }
+  }
+
+  /* =================== Mobile (<750px) ===================
+     Stacked, but sized so the full-headline version lands inside the
+     same 800px as desktop. Portrait becomes a compact arch with the
+     copy below it.                                                   */
+  @media (max-width: 749px) {
+    .hero { min-height: 800px; }
+    .native-h1 .hero { min-height: 680px; }
+
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 18px;
+      padding-top: 24px;
+      padding-bottom: 28px;
+      text-align: center;
+      align-content: center;
+    }
+    .visual { order: -1; height: 250px; }
+    .arch, .arch-line { width: 180px; height: 236px; border-radius: 90px 90px 12px 12px; }
+    .arch-line { transform: translate(12px, 12px); }
+    .seal { width: 74px; height: 74px; top: 4px; right: calc(50% - 138px); }
+    .seal svg { inset: 3px; width: 68px; height: 68px; }
+    .seal .flame { width: 20px; height: 20px; }
+    .seal text { font-size: 10.8px; }
+    .chip { font-size: 11.5px; padding: 7px 11px 7px 7px; gap: 6px; }
+    .chip i { width: 20px; height: 20px; }
+    .chip i svg { width: 11px; height: 11px; }
+    /* Chips sit at shoulder height and below, never across her face. */
+    .chip--1 { left: calc(50% - 170px); top: 156px; }
+    .chip--2 { right: calc(50% - 170px); bottom: 2px; }
+    .credential { display: none; }
+
+    .eyebrow { justify-content: center; margin-bottom: 12px; font-size: 11px; }
+    .eyebrow::before { display: none; }
+    .headline { font-size: 34px; margin-bottom: 12px; }
+    .lede { font-size: 15px; margin: 0 auto 20px; max-width: 360px; }
+    .ctas { grid-template-columns: 1fr; justify-items: center; gap: 10px; margin-bottom: 20px; }
+    .ctas .btn { width: 100%; max-width: 330px; padding: 15px 20px; font-size: 15px; }
+    .proof { justify-content: center; }
+    .proof img { height: 46px; }
+    .proof p { display: none; }
+  }
+
+  /* Wix's mobile view is 320px wide, so this breakpoint is the real one. */
+  @media (max-width: 360px) {
+    .visual { height: 226px; }
+    .arch, .arch-line { width: 164px; height: 214px; border-radius: 82px 82px 12px 12px; }
+    .chip--1 { top: 146px; }
+    .chip--2 { bottom: 0; }
+    .seal { right: 8px; }
+    .headline { font-size: 30px; }
+    .lede { font-size: 14.5px; }
+    .ctas .btn { font-size: 14px; padding: 15px 12px; gap: 6px; }
+    .ctas .btn svg { width: 15px; height: 15px; }
+    .chip--1 { left: 4px; }
+    .chip--2 { right: 4px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rise { opacity: 1; transform: none; animation: none; }
+    .headline path { stroke-dashoffset: 0; animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero locked">
+  <span class="glow" aria-hidden="true"></span>
+
+  <div class="shell grid">
+
+    <!-- ===== Copy ===== -->
+    <div class="copy">
+      <p class="eyebrow rise d1">Registered Dietitian Nutritionist &middot; West&nbsp;Chester,&nbsp;OH</p>
+
+      <p class="headline rise d2" role="heading" aria-level="1">
+        Get expert nutrition support
+        <em>without strict diets.<svg viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true"><path d="M3 13 C 70 4, 160 3, 230 9 S 292 15, 297 8"/></svg></em>
+      </p>
+
+      <p class="p1 lede rise d3">Build sustainable habits, manage emotional eating, and improve your
+        health with a clear plan that fits your real life &mdash; often covered by insurance.</p>
+
+      <div class="ctas rise d4">
+        <a class="btn btn--primary"
+           href="https://secure.gethealthie.com/appointments/embed_appt?dietitian_id=420052&amp;require_offering=true&amp;offering_id=76499&amp;hide_package_images=false&amp;primary_color=355d80">
+          Schedule a Free Strategy Session
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn--tertiary" href="https://signup.faynutrition.com/book/tanya-jolliffe/ddfa1a">
+          Connect Now Using Insurance
+        </a>
+      </div>
+
+      <div class="proof rise d5">
+        <img src="https://static.wixstatic.com/media/dca1c2_5617a240d6644d82887c9c24e819fcad~mv2.png/v1/fit/w_180,h_180,al_c,q_85,enc_auto/award-2026.png"
+             alt="2026 Business Rate Award">
+        <img src="https://static.wixstatic.com/media/dca1c2_dd41fbd52033400baf30137737bebb27~mv2.png/v1/fit/w_180,h_180,al_c,q_85,enc_auto/award-corporate-excellence.png"
+             alt="Corporate Excellence Awards 2025 winner">
+        <p><strong>Award-winning</strong> wellness coaching, as seen in national media</p>
+      </div>
+    </div>
+
+    <!-- ===== Portrait ===== -->
+    <div class="visual rise d6">
+      <span class="arch-line" aria-hidden="true"></span>
+
+      <div class="arch">
+        <img src="https://static.wixstatic.com/media/dca1c2_ad3d1a3d26ad4ec2a3238ed019a9763a~mv2.jpg/v1/fill/w_760,h_1000,al_t,q_85,enc_auto/tanya-jolliffe.jpg"
+             alt="Tanya Jolliffe, Registered Dietitian Nutritionist and founder of LIT Wellness Solutions">
+      </div>
+
+      <div class="seal" aria-hidden="true">
+        <svg viewBox="0 0 100 100">
+          <defs><path id="ring" d="M50 50 m-38 0 a38 38 0 1 1 76 0 a38 38 0 1 1 -76 0"/></defs>
+          <text><textPath href="#ring" textLength="236" lengthAdjust="spacing">Ignite the change within &middot; LIT &middot;</textPath></text>
+        </svg>
+        <svg class="flame" viewBox="0 0 24 24" style="position:static;animation:none"><path d="M12 2c1 3.2-1.6 4.8-1.6 7.6 0 1.3.9 2.2 2 2.2 1.4 0 2.1-1.2 1.8-2.9 2.3 1.6 3.8 4.1 3.8 6.6A6 6 0 0 1 12 21.5a6 6 0 0 1-6-6c0-4.6 4.4-7.4 6-13.5z"/></svg>
+      </div>
+
+      <span class="chip chip--1">
+        <i><svg viewBox="0 0 24 24"><path d="m4.5 12.5 5 5 10-11"/></svg></i>
+        Non-Diet Approach
+      </span>
+      <span class="chip chip--2">
+        <i><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.4 3.4 8.3 8 9 4.6-.7 8-4.6 8-9V6z"/></svg></i>
+        Insurance Accepted
+      </span>
+
+      <div class="credential">
+        <b>RDN</b>
+        <span><strong>Tanya Jolliffe</strong>1-on-1 coaching, virtual nationwide</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script src="shared/embed.js"></script>
+</body>
+</html>
