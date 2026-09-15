@@ -110,8 +110,22 @@ touching.
 | 10 | `10-insurance-steps.html` | 400 | Home + /insurance-coverage |
 | 11 | `11-books.html` | 870 | Home + /books |
 | 12 | `12-hero-visual.html` | 620 | Home hero, beside native text |
-| 13 | `13-hero.html?native-h1` | 680 | Home hero — full design, native Wix H1 directly above (recommended) |
-| 13 | `13-hero.html` | 800 | Home hero — full design incl. headline (no readable H1; see below) |
+| 13 | `13-hero.html?native-h1` | 680 desktop / **~500 mobile** | Home hero — full design, native Wix H1 directly above (recommended) |
+| 13 | `13-hero.html` | 800 desktop / **~650 mobile** | Home hero — full design incl. headline (no readable H1; see below) |
+
+### 13-hero on mobile (Wix Classic)
+
+The Classic mobile view is a fixed 320px page and **the embed box height is
+set separately there** — it does not follow the embed's content, and Wix page
+code cannot resize an HTML embed. Left at Wix's default the box is ~200px tall.
+
+13-hero therefore **fits itself to whatever box it gets**: too short and the
+whole hero scales down, too tall and it centres on the same background. It is
+never cropped. For it to look right, in **Mobile view** select the embed, drag
+its side handles to the page edges, and drag the bottom handle down to about
+the mobile height above. Being 20-40px off is invisible.
+
+`wix-mobile-sim.html` reproduces the Classic mobile box sizes for testing.
 
 Held constant by three mechanisms: grids keep their column count from
 750px up and shrink the cards rather than wrapping; below 750px they

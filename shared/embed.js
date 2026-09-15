@@ -20,6 +20,13 @@
      bigger every time Wix resizes it and never shrink back. Bounding
      boxes of the top-level children give the true content height.     */
   function measure() {
+    /* An embed that scales itself to its box (13-hero) reports its own
+       unscaled design height instead. */
+    if (typeof window.litwsMeasure === 'function') {
+      var own = window.litwsMeasure();
+      if (own) return Math.ceil(own);
+    }
+
     var max = Math.ceil(document.body.getBoundingClientRect().height);
     var kids = document.body.children;
 

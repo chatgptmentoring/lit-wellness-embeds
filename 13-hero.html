@@ -48,15 +48,21 @@
 </script>
 
 <style>
-  body { background: var(--sand); }
+  /* The background is painted on the whole iframe, not on .hero, so when
+     the hero is scaled or centred inside a mismatched Wix box there is no
+     visible edge — the extra space is the same warm field. */
+  html {
+    background:
+      radial-gradient(900px 520px at 88% 30%, rgba(216,195,165,.55), rgba(216,195,165,0) 70%),
+      radial-gradient(640px 420px at 0% 100%, rgba(53,93,128,.10), rgba(53,93,128,0) 70%),
+      var(--sand) !important;
+  }
+  body { background: transparent; }
 
   .hero {
     position: relative;
     overflow: hidden;
-    background:
-      radial-gradient(900px 520px at 88% 30%, rgba(216,195,165,.55), rgba(216,195,165,0) 70%),
-      radial-gradient(640px 420px at 0% 100%, rgba(53,93,128,.10), rgba(53,93,128,0) 70%),
-      var(--sand);
+    background: transparent;
     min-height: 800px;
   }
   .native-h1 .hero { min-height: 680px; }
@@ -343,61 +349,51 @@
   }
 
   /* =================== Mobile (<750px) ===================
-     Stacked, but sized so the full-headline version lands inside the
-     same 800px as desktop. Portrait becomes a compact arch with the
-     copy below it.                                                   */
-  @media (max-width: 749px) {
-    .hero { min-height: 800px; }
-    .native-h1 .hero { min-height: 680px; }
+     Built for the Wix CLASSIC mobile view: a fixed 320px page where the
+     embed box is usually 280-320px wide. Compact on purpose — every
+     pixel of height here is a pixel Tanya's visitor scrolls past.
+     No locked height on mobile: the fit script below makes the hero
+     fill whatever box Wix gives it, so nothing is ever cropped.       */
+  /* 749.98, not 749: zoomed screens report fractional widths that would
+     otherwise fall in the gap between this and the 750px tablet query. */
+  @media (max-width: 749.98px) {
+    .hero, .native-h1 .hero { min-height: 0; }
 
     .grid {
       grid-template-columns: 1fr;
-      gap: 18px;
-      padding-top: 24px;
-      padding-bottom: 28px;
+      gap: 14px;
+      padding: 22px 16px 24px;
       text-align: center;
-      align-content: center;
     }
-    .visual { order: -1; height: 250px; }
-    .arch, .arch-line { width: 180px; height: 236px; border-radius: 90px 90px 12px 12px; }
-    .arch-line { transform: translate(12px, 12px); }
-    .seal { width: 74px; height: 74px; top: 4px; right: calc(50% - 138px); }
-    .seal svg { inset: 3px; width: 68px; height: 68px; }
-    .seal .flame { width: 20px; height: 20px; }
-    .seal text { font-size: 10.8px; }
-    .chip { font-size: 11.5px; padding: 7px 11px 7px 7px; gap: 6px; }
-    .chip i { width: 20px; height: 20px; }
-    .chip i svg { width: 11px; height: 11px; }
+    .visual { order: -1; height: 196px; }
+    .arch, .arch-line { width: 146px; height: 184px; border-radius: 73px 73px 12px 12px; }
+    .arch-line { transform: translate(9px, 9px); }
+    .seal { width: 62px; height: 62px; top: 0; right: max(4px, calc(50% - 116px)); }
+    .seal svg { inset: 3px; width: 56px; height: 56px; }
+    .seal .flame { width: 16px; height: 16px; }
+    .chip { font-size: 11px; padding: 6px 10px 6px 6px; gap: 6px; }
+    .chip i { width: 18px; height: 18px; }
+    .chip i svg { width: 10px; height: 10px; }
     /* Chips sit at shoulder height and below, never across her face. */
-    .chip--1 { left: calc(50% - 170px); top: 156px; }
-    .chip--2 { right: calc(50% - 170px); bottom: 2px; }
+    .chip--1 { left: max(4px, calc(50% - 146px)); top: 118px; }
+    .chip--2 { right: max(4px, calc(50% - 146px)); bottom: 2px; }
     .credential { display: none; }
 
-    .eyebrow { justify-content: center; margin-bottom: 12px; font-size: 11px; }
+    .eyebrow { justify-content: center; margin-bottom: 8px; font-size: 10.5px; letter-spacing: .12em; }
     .eyebrow::before { display: none; }
-    .headline { font-size: 34px; margin-bottom: 12px; }
-    .lede { font-size: 15px; margin: 0 auto 20px; max-width: 360px; }
-    .ctas { grid-template-columns: 1fr; justify-items: center; gap: 10px; margin-bottom: 20px; }
-    .ctas .btn { width: 100%; max-width: 330px; padding: 15px 20px; font-size: 15px; }
-    .proof { justify-content: center; }
-    .proof img { height: 46px; }
+    .headline { font-size: 29px; line-height: 1.1; margin-bottom: 10px; }
+    .lede { font-size: 14px; line-height: 1.5; margin: 0 auto 16px; max-width: 300px; }
+    .ctas { grid-template-columns: 1fr; justify-items: center; gap: 8px; margin-bottom: 14px; }
+    .ctas .btn { width: 100%; max-width: 300px; padding: 13px 10px; font-size: 14px; gap: 6px; }
+    .ctas .btn svg { width: 15px; height: 15px; }
+    .proof { justify-content: center; gap: 12px; }
+    .proof img { height: 36px; }
     .proof p { display: none; }
   }
 
-  /* Wix's mobile view is 320px wide, so this breakpoint is the real one. */
-  @media (max-width: 360px) {
-    .visual { height: 226px; }
-    .arch, .arch-line { width: 164px; height: 214px; border-radius: 82px 82px 12px 12px; }
-    .chip--1 { top: 146px; }
-    .chip--2 { bottom: 0; }
-    .seal { right: 8px; }
-    .headline { font-size: 30px; }
-    .lede { font-size: 14.5px; }
-    .ctas .btn { font-size: 14px; padding: 15px 12px; gap: 6px; }
-    .ctas .btn svg { width: 15px; height: 15px; }
-    .chip--1 { left: 4px; }
-    .chip--2 { right: 4px; }
-  }
+  /* ---------- Fit-to-box (see script at the end) ---------- */
+  html, body { height: 100%; }
+  .hero { transform-origin: 50% 0; will-change: transform; }
 
   @media (prefers-reduced-motion: reduce) {
     .rise { opacity: 1; transform: none; animation: none; }
@@ -479,6 +475,44 @@
   </div>
 </section>
 
+<script>
+  /* FIT-TO-BOX
+     In the Wix Classic mobile view the embed box gets a height Wix derives
+     from the desktop box, not from this content, and Wix page code cannot
+     resize an HTML embed. Left alone, a too-short box crops the hero to a
+     sliver of her photo. So the hero measures the box it was given:
+       box shorter than the hero -> scale the whole hero down to fit
+       box taller than the hero  -> centre it, sand fills the rest
+     Nothing is ever cut off, and a box dragged roughly to the right
+     height looks exactly right.                                        */
+  (function () {
+    var hero = document.querySelector('.hero');
+    var natural = 0;
+
+    function fit() {
+      hero.style.transform = 'none';
+      natural = hero.offsetHeight;             // layout height, unscaled
+      var H = window.innerHeight;
+      if (!natural || H < 40) return;
+      if (H < natural - 1) {
+        hero.style.transform = 'scale(' + (H / natural).toFixed(4) + ')';
+      } else if (H > natural + 1) {
+        hero.style.transform = 'translateY(' + Math.floor((H - natural) / 2) + 'px)';
+      }
+    }
+
+    /* Report the hero's real height to Wix (not the scaled size), so the
+       auto-height snippet, where it works, sizes the box to the design. */
+    window.litwsMeasure = function () { return natural || hero.offsetHeight; };
+
+    window.addEventListener('resize', fit);
+    window.addEventListener('load', fit);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+    if (typeof ResizeObserver === 'function') new ResizeObserver(fit).observe(document.documentElement);
+    setInterval(fit, 500);   // Wix does not always fire resize into the iframe
+    fit();
+  })();
+</script>
 <script src="shared/embed.js"></script>
 </body>
 </html>

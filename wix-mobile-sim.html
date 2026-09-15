@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<title>Wix Classic mobile simulator</title>
+<style>
+  body { margin: 0; background: #ddd; font: 12px system-ui, sans-serif; }
+  .row { display: flex; gap: 24px; padding: 16px; align-items: flex-start; flex-wrap: wrap; }
+  .phone { width: 320px; background: #fff; }
+  .phone p { margin: 0; padding: 6px 10px; background: #223E56; color: #fff; }
+  iframe { display: block; border: 0; margin: 0 auto; }
+</style>
+</head>
+<body>
+<!-- Mimics how the Wix Classic mobile view places an HTML embed: a 320px
+     page, the box inset to 300px (10px margins), and a height Wix derived
+     from the desktop box rather than the embed's content. -->
+<div class="row" id="row"></div>
+<script>
+  var src = new URLSearchParams(location.search).get('src') || '13-hero.html?native-h1';
+  var boxes = [[300, 202, 'Wix default box 300×202'], [320, 500, 'full width, dragged to ~500'], [300, 700, 'box too tall 300×700'], [280, 420, 'box too short 280×420']];
+  boxes.forEach(function (b) {
+    var d = document.createElement('div'); d.className = 'phone';
+    d.innerHTML = '<p>' + b[2] + '</p>';
+    var f = document.createElement('iframe');
+    f.src = src; f.width = b[0]; f.height = b[1]; f.setAttribute('scrolling', 'no');
+    d.appendChild(f); document.getElementById('row').appendChild(d);
+  });
+</script>
+</body>
+</html>
