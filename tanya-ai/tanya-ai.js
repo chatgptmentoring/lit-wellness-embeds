@@ -51,6 +51,28 @@
     CTA_RESOURCES:     { label: 'Free Tools',                              icon: 'spark',  url: SITE + '/free-resources', kind: 'soft' }
   };
 
+  /* If the visitor asks about an offer by name and the AI forgets its button,
+     add the matching button. Order matters: "book a call" is a call, not the
+     book; "Mindful Me Journey" is the journal, not the program. */
+  var INTENTS = [
+    [/\b(strategy (call|session)|free (call|consult\w*)|book (a|an) (call|appointment|session)|talk (to|with) tanya|work with (you|tanya))\b/i, 'CTA_STRATEGY_CALL'],
+    [/\b(intensive|4[- ]?month|four[- ]month)\b/i, 'CTA_INTENSIVE'],
+    [/\b(5[- ]?week|five[- ]week|mindful me (coaching )?program)\b/i, 'CTA_MINDFUL'],
+    [/\b(journal|mindful me journey)\b/i, 'JOURNAL_LINK'],
+    [/\b(insurance|insured|coverage|covered)\b/i, 'CTA_INSURANCE'],
+    [/\b(book|food isn.?t the problem)\b/i, 'BOOK_LINK'],
+    [/\bfree (tools|resources)\b/i, 'CTA_RESOURCES']
+  ];
+  var CRISIS = /\b(suicid\w*|kill (my|him|her)self|want to die|don'?t want to (live|be here)|self[- ]?harm|hurt(ing)? myself|purg(e|ing)|laxatives?)\b/i;
+
+  function ensureCta(userText, reply) {
+    if (/\[[A-Z_]+\]/.test(reply) || CRISIS.test(userText)) return reply;
+    for (var i = 0; i < INTENTS.length; i++) {
+      if (INTENTS[i][0].test(userText)) return reply.replace(/\s+$/, '') + '\n[' + INTENTS[i][1] + ']';
+    }
+    return reply;
+  }
+
   var ICONS = {
     book:    '<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20"/>',
     journal: '<path d="M6 3h12a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H6z"/><path d="M9 7h6M9 11h6"/>',
@@ -323,6 +345,7 @@
       if (finished) return;
       finished = true;
       if (errorText && !reply) reply = errorText;
+      if (!errorText && reply) reply = ensureCta(text, reply);
       paint(false);
       if (reply && !errorText) {
         self.history.push({ role: 'assistant', content: reply });
