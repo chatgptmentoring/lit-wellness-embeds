@@ -144,6 +144,13 @@
   .native-h1 .headline,
   .native-h1 .eyebrow { display: none; }
 
+  /* Extra room at the top-left for the native Wix title + H2 placed over
+     the embed. position/top moves the copy down without changing the
+     locked height or the portrait on the right. */
+  @media (min-width: 750px) {
+    .native-h1 .copy { position: relative; top: 30px; }
+  }
+
   .lede {
     color: #3D3D3D;
     max-width: 470px;
