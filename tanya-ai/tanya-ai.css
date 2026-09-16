@@ -92,6 +92,15 @@
   display: grid; place-items: center; color: var(--tai-grey);
 }
 .tai .tai-nudge-x:hover { background: var(--tai-sand); }
+.tai.tai-nudge { cursor: pointer; }
+.tai .tai-nudge-go {
+  display: inline-flex; align-items: center; gap: 4px; margin-top: 8px;
+  padding: 6px 12px; border-radius: 999px;
+  background: var(--tai-terra); color: #fff;
+  font-size: 13px; font-weight: 700; line-height: 1.2;
+  transition: filter .2s var(--tai-ease);
+}
+.tai.tai-nudge:hover .tai-nudge-go { filter: brightness(.92); }
 .tai .tai-nudge-x svg { width: 14px; height: 14px; }
 
 /* ---------------- Panel ---------------- */

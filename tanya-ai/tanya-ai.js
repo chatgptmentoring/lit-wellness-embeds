@@ -10,7 +10,8 @@
 
    Options (data- attributes on the script tag):
      data-endpoint   required — the tanya-chat Edge Function URL
-     data-nudge      seconds before the friendly greeting pops up (default 45, 0 = off)
+     data-nudge      seconds before the friendly greeting pops up (default 45, 0 = off
+                     — this also turns off the page and section nudges)
      data-inline     CSS selector: render a full chat panel inside that element
                      instead of the floating bubble
 
@@ -35,7 +36,9 @@
   var INSIDE_IFRAME = window.self !== window.top;
 
   var STORE = 'tanya_ai_v2';
-  var NUDGE_KEY = 'tanya_ai_nudged_v2';
+  var NUDGE_KEY = 'tanya_ai_nudges_v3';   // { shown: [topic ids], off: bool } for this visit
+  var MAX_NUDGES = 3;                      // topic nudges per visit — helpful, never pushy
+  var NUDGE_LINGER_MS = 22000;             // a nudge fades away on its own after this
   var CONSENT_KEY = 'tanya_ai_consent_v1';
   var CONSENT_VERSION = '2026-09-15';
   var MAX_STORED = 30;
@@ -100,15 +103,66 @@
     { label: 'Which program is right for me?',     prompt: 'I’m thinking about working with you. What are my options, and how do I know which one fits?' }
   ];
 
-  var NUDGES = [
-    { match: 'coaching-intensive',       text: 'Curious about the **4-month Intensive**? I can answer the real questions — like whether you actually need it — before you book anything.' },
-    { match: 'mindful-coaching-program', text: 'The **5-week Mindful Me program** is the gentlest on-ramp. Want help figuring out if it fits where you are?' },
-    { match: 'the-mindful-me-journey',   text: 'Wondering how the journal works day to day? Ask me — I can walk you through Phase One.' },
-    { match: 'free-resources',           text: 'Not sure which free tool to start with? Tell me what’s going on and I’ll point you to the one that helps most.' },
-    { match: 'mindful-eating',           text: 'Here’s a question to start: *are you hungry, or are you feeling something?* I can help you tell the difference.' },
-    { match: 'contact',                  text: 'Before you reach out — can I help with something quick? Sometimes five minutes here answers it.' },
-    { match: '',                         text: 'Hi, I’m Tanya’s AI coach 🤍 I’m trained on her new book, *Food Isn’t the Problem*. Want to chat about what brought you here?' }
+  /* Proactive nudges. A topic pops up when the visitor lands on a matching
+     page (PAGE_NUDGES) or lingers on a matching homepage section
+     (SECTION_NUDGES — found by the embed's iframe src). At most MAX_NUDGES
+     topics per visit (plus the generic hello, only if nothing else showed
+     first), each once, each fading after NUDGE_LINGER_MS. Dismissing one,
+     or opening the chat, ends them for the visit. Clicking one opens the
+     chat with that topic's question ready as the first quick-start chip. */
+  var TOPICS = {
+    book:      { text: 'Curious about Tanya’s new book, **Food Isn’t the Problem**? Ask me anything — who it’s for, what’s inside, or where to start.',
+                 go: 'Ask about the book',
+                 opened: 'Happy to talk about **Food Isn’t the Problem**! Ask me who it’s for, what’s inside, or how to use one of the tools from the book.',
+                 starter: { label: 'Tell me about the new book', prompt: 'Tell me about your new book, Food Isn’t the Problem. Who is it for?' } },
+    emotional: { text: 'Looking for help with **emotional eating**? I can help you tell physical hunger from feelings — privately, right now.',
+                 go: 'Talk it through',
+                 starter: { label: 'What is emotional eating, really?', prompt: 'What is emotional eating, really? How do I know if that’s what I’m doing?' } },
+    insurance: { text: 'Wondering whether **insurance** covers your sessions? I can walk you through how to check in a couple of minutes.',
+                 go: 'Ask about insurance',
+                 starter: { label: 'Can I use my insurance?', prompt: 'Can I use my insurance for nutrition counseling with you? How do I check my coverage?' } },
+    journal:   { text: 'Wondering how the journal works day to day? Ask me — I can walk you through Phase One.',
+                 go: 'Ask about the journal',
+                 starter: { label: 'How does the journal work?', prompt: 'How does The Mindful Me Journey journal work day to day?' } },
+    intensive: { text: 'Curious about the **4-month Intensive**? I can answer the real questions — like whether you actually need it — before you book anything.',
+                 go: 'Ask a question' },
+    mindful:   { text: 'The **5-week Mindful Me program** is the gentlest on-ramp. Want help figuring out if it fits where you are?',
+                 go: 'Help me decide' },
+    tools:     { text: 'Not sure which free tool to start with? Tell me what’s going on and I’ll point you to the one that helps most.',
+                 go: 'Point me to one' },
+    hunger:    { text: 'Here’s a question to start: *are you hungry, or are you feeling something?* I can help you tell the difference.',
+                 go: 'Help me tell',
+                 starter: { label: 'Hungry or feeling something?', prompt: 'How can I tell whether I’m physically hungry or eating because of a feeling?' } },
+    contact:   { text: 'Before you reach out — can I help with something quick? Sometimes five minutes here answers it.',
+                 go: 'Ask a quick question' },
+    hello:     { text: 'Hi, I’m Tanya’s AI coach 🤍 I’m trained on her new book, *Food Isn’t the Problem*. Want to chat about what brought you here?',
+                 go: 'Start a chat' }
+  };
+
+  // [path contains, topic, seconds on the page] — first match wins.
+  var PAGE_NUDGES = [
+    ['food-isnt-the-problem',    'book',      8],
+    ['books',                    'book',      8],
+    ['the-mindful-me-journey',   'journal',  12],
+    ['insurance',                'insurance', 10],
+    ['coaching-intensive',       'intensive', null],
+    ['mindful-coaching-program', 'mindful',   null],
+    ['free-resources',           'tools',     null],
+    ['mindful-eating',           'hunger',    15],
+    ['contact',                  'contact',   null],
+    ['',                         'hello',     null]    // null = data-nudge delay
   ];
+
+  // [embed iframe src contains, topic] — shown after the section has been
+  // on screen for SECTION_DWELL_MS.
+  var SECTION_NUDGES = [
+    ['11-books',             'book'],
+    ['03-pain-points',       'emotional'],
+    ['10-insurance-steps',   'insurance'],
+    ['20-insurance-coverage','insurance'],
+    ['21-food-isnt',         'book']
+  ];
+  var SECTION_DWELL_MS = 2500;
 
   /* ---------------- Utilities ---------------- */
   function el(html) {
@@ -198,7 +252,7 @@
     if (!document.querySelector('link[data-tanya-ai-css]')) {
       var css = document.createElement('link');
       css.rel = 'stylesheet';
-      css.href = BASE + 'tanya-ai.css?v=2';
+      css.href = BASE + 'tanya-ai.css?v=3';
       css.setAttribute('data-tanya-ai-css', '');
       document.head.appendChild(css);
     }
@@ -273,7 +327,7 @@
     this.input.placeholder = enabled ? 'Tell me what’s on your mind…' : 'Tap “Start chat” above to begin';
   };
 
-  Chat.prototype.renderConsent = function (greeting) {
+  Chat.prototype.renderConsent = function (greeting, starter) {
     var self = this;
     this.log.innerHTML = '';
     this.setComposer(false);
@@ -296,16 +350,16 @@
     });
     card.querySelector('.tai-consent-go').addEventListener('click', function () {
       saveConsent();
-      self.renderAll(greeting, true);
+      self.renderAll(greeting, starter);
       self.input.focus();
     });
     this.log.appendChild(card);
     this.scroll();
   };
 
-  Chat.prototype.renderAll = function (greeting) {
+  Chat.prototype.renderAll = function (greeting, starter) {
     var self = this;
-    if (!getConsent()) { this.renderConsent(greeting); return; }
+    if (!getConsent()) { this.renderConsent(greeting, starter); return; }
     this.setComposer(true);
     this.log.innerHTML = '';
     if (!this.history.length) {
@@ -313,7 +367,13 @@
         'Hi, I’m **Tanya’s AI coach** — so glad you’re here.\n\n' +
         'I’m trained on my new book, *Food Isn’t the Problem*. I can answer questions about emotional eating and my programs, or walk with you through a craving right now. What’s on your mind?');
       var wrap = el('<div class="tai-starters"><span>Quick start</span></div>');
-      STARTERS.forEach(function (s) {
+      var list = STARTERS.slice();
+      if (starter) {
+        list = list.filter(function (s) { return s.prompt !== starter.prompt; });
+        list.unshift(starter);
+        list = list.slice(0, 4);
+      }
+      list.forEach(function (s) {
         var chip = el('<button type="button" class="tai-chip"></button>');
         chip.textContent = s.label;
         chip.addEventListener('click', function () { self.input.value = s.prompt; self.send(); });
@@ -467,33 +527,56 @@
   var nudge = null;
   var chat = null;
 
-  function pickNudge() {
-    var path = location.pathname.toLowerCase();
-    for (var i = 0; i < NUDGES.length; i++) {
-      if (!NUDGES[i].match || path.indexOf(NUDGES[i].match) !== -1) return NUDGES[i].text;
-    }
-    return NUDGES[NUDGES.length - 1].text;
+  function nudgeState() {
+    var st = sget(NUDGE_KEY) || {};
+    return { shown: Array.isArray(st.shown) ? st.shown : [], off: !!st.off };
+  }
+  function stopNudges() {
+    var st = nudgeState();
+    st.off = true;
+    sset(NUDGE_KEY, st);
+    clearTimeout(pageTimer);
+    hideNudge();
+  }
+  function canNudge(topic) {
+    var st = nudgeState();
+    if (NUDGE_MS < 1000 || st.off || st.shown.indexOf(topic) !== -1) return false;
+    if (chat && (chat.isOpen() || chat.history.length)) return false;
+    // The generic hello only shows if nothing else has; it never uses up a
+    // topic slot, so a visitor who idles at the top still gets the book nudge.
+    if (topic === 'hello') return st.shown.length === 0;
+    return st.shown.filter(function (t) { return t !== 'hello'; }).length < MAX_NUDGES;
   }
 
-  function showNudge() {
-    if (nudge || (chat && chat.isOpen()) || sget(NUDGE_KEY) || (chat && chat.history.length)) return;
-    var text = pickNudge();
-    nudge = el(
+  function showNudge(topic) {
+    if (!TOPICS[topic] || !canNudge(topic)) return;
+    var t = TOPICS[topic];
+    var st = nudgeState();
+    st.shown.push(topic);
+    sset(NUDGE_KEY, st);
+
+    if (nudge) { nudge.remove(); nudge = null; }
+    var n = el(
       '<div class="tai tai-nudge" role="status">' +
         '<button type="button" class="tai-nudge-x" aria-label="Dismiss">' + icon('close') + '</button>' +
         '<img src="' + AVATAR + '" alt="">' +
-        '<div><strong>Tanya</strong><p></p></div>' +
+        '<div><strong>Tanya</strong><p></p>' +
+          '<span class="tai-nudge-go">' + esc(t.go || 'Chat with me') + ' <span aria-hidden="true">→</span></span></div>' +
       '</div>'
     );
-    nudge.querySelector('p').innerHTML = inline(esc(text));
-    document.body.appendChild(nudge);
-    requestAnimationFrame(function () { nudge && nudge.classList.add('is-in'); });
+    n.querySelector('p').innerHTML = inline(esc(t.text));
+    nudge = n;
+    document.body.appendChild(n);
+    requestAnimationFrame(function () { requestAnimationFrame(function () { n.classList.add('is-in'); }); });
     launcher.classList.add('has-nudge');
 
-    nudge.addEventListener('click', function (e) {
-      sset(NUDGE_KEY, 1);
-      if (e.target.closest('.tai-nudge-x')) { hideNudge(); return; }
-      if (!chat.history.length) chat.renderAll(text + '\n\nWhat’s on your mind?');
+    var linger = setTimeout(function () { if (nudge === n) hideNudge(); }, NUDGE_LINGER_MS);
+    n.addEventListener('mouseenter', function () { clearTimeout(linger); });
+    n.addEventListener('click', function (e) {
+      clearTimeout(linger);
+      if (e.target.closest('.tai-nudge-x')) { stopNudges(); return; }
+      stopNudges();
+      if (!chat.history.length) chat.renderAll(t.text + '\n\nWhat’s on your mind?', t.starter);
       chat.open();
     });
   }
@@ -505,6 +588,57 @@
     n.classList.remove('is-in');
     if (launcher) launcher.classList.remove('has-nudge');
     setTimeout(function () { n.remove(); }, 300);
+  }
+
+  /* Page nudges. Wix switches pages without reloading, so watch the path. */
+  var pageTimer = null;
+  var lastPath = null;
+  function schedulePageNudge() {
+    var path = location.pathname.toLowerCase();
+    if (path === lastPath) return;
+    lastPath = path;
+    clearTimeout(pageTimer);
+    hideNudge();
+    for (var i = 0; i < PAGE_NUDGES.length; i++) {
+      var rule = PAGE_NUDGES[i];
+      if (rule[0] && path.indexOf(rule[0]) === -1) continue;
+      var ms = rule[2] == null ? NUDGE_MS : rule[2] * 1000;
+      var topic = rule[1];
+      if (ms >= 1000) pageTimer = setTimeout(function () { showNudge(topic); }, ms);
+      return;
+    }
+  }
+
+  /* Section nudges: when a matching embed sits in view for a moment. */
+  function watchSections() {
+    if (!('IntersectionObserver' in window)) return;
+    var timers = new Map();
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        var topic = en.target.__taiTopic;
+        // Tall sections never reach a high ratio, so also accept "fills half the screen".
+        var seen = en.isIntersecting &&
+          (en.intersectionRatio >= 0.45 || en.intersectionRect.height >= window.innerHeight * 0.5);
+        clearTimeout(timers.get(en.target));
+        if (seen && canNudge(topic)) {
+          timers.set(en.target, setTimeout(function () { showNudge(topic); }, SECTION_DWELL_MS));
+        }
+      });
+    }, { threshold: [0, 0.25, 0.45, 0.6, 0.8] });
+
+    function scan() {
+      var frames = document.querySelectorAll('iframe[src]');
+      for (var i = 0; i < frames.length; i++) {
+        var f = frames[i];
+        if (f.__taiTopic !== undefined) continue;
+        f.__taiTopic = null;
+        for (var j = 0; j < SECTION_NUDGES.length; j++) {
+          if (f.src.indexOf(SECTION_NUDGES[j][0]) !== -1) { f.__taiTopic = SECTION_NUDGES[j][1]; io.observe(f); break; }
+        }
+      }
+    }
+    scan();
+    setInterval(function () { scan(); schedulePageNudge(); }, 1500);
   }
 
   function initFloating() {
@@ -520,13 +654,29 @@
       '</button>'
     );
     document.body.appendChild(launcher);
-    launcher.addEventListener('click', function () { sset(NUDGE_KEY, 1); chat.open(); });
+    launcher.addEventListener('click', function () { stopNudges(); chat.open(); });
 
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && chat.isOpen()) chat.close();
     });
 
-    if (NUDGE_MS >= 1000) setTimeout(showNudge, NUDGE_MS);
+    /* Embeds from our own GitHub Pages site can open the chat on a topic
+       (e.g. "Ask Tanya AI about this book"). They ping first and only show
+       their button once we answer, so it never appears without the widget. */
+    var EMBED_ORIGIN = new URL(BASE, location.href).origin;
+    window.addEventListener('message', function (e) {
+      var d = e.data;
+      if (e.origin !== EMBED_ORIGIN || !d || typeof d !== 'object' || !d.tanyaAi) return;
+      if (d.tanyaAi === 'ping' && e.source) e.source.postMessage({ tanyaAi: 'ready' }, '*');
+      if (d.tanyaAi === 'open') {
+        var t = TOPICS[d.topic];
+        stopNudges();
+        if (t && !chat.history.length) chat.renderAll((t.opened || t.text) + '\n\nWhat’s on your mind?', t.starter);
+        chat.open();
+      }
+    });
+
+    if (NUDGE_MS >= 1000) { schedulePageNudge(); watchSections(); }
   }
 
   function init() {

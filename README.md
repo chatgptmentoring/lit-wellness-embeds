@@ -119,6 +119,8 @@ touching.
 | 19 | `19-terms-and-conditions.html` | 900 desktop / 720 mobile (document scrolls inside) | /terms-and-conditions |
 | 16 | `16-who-we-are-video.html` | box width × ~0.56 + 58 (560 wide → 372; mobile 300 → 215) | Home "Who we are" — video beside the native text |
 | 17 | `17-food-strip.html` | 84 | Home — sliding "It isn't just about the food!" strip |
+| 20 | `20-insurance-coverage.html` | ~3450 desktop (3720 at a 980 window) / ~4900 mobile | /insurance-coverage — the whole page: hero, steps, what we work on, first session, questions, CTA |
+| 21 | `21-food-isnt-the-problem.html` | ~4430 desktop (4660 at a 980 window) / ~5650 mobile | /food-isnt-the-problem — landing page for the new book, with an "Ask Tanya AI about this book" button |
 
 ### 16 — who we are video
 

@@ -191,19 +191,105 @@
   .proof {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 16px;
   }
-  .proof img { height: 60px; width: auto; flex: none; }
+  /* The badges are a button: tap to see what each award is and why it matters. */
+  .awards-open {
+    display: flex; align-items: center; gap: 12px;
+    padding: 0; border: 0; background: none; cursor: pointer;
+    font: inherit; color: inherit;
+  }
+  .awards-open img {
+    height: 84px; width: auto; flex: none;
+    filter: drop-shadow(0 6px 10px rgba(26,26,26,.16));
+    transition: transform .25s var(--ease);
+  }
+  .awards-open:hover img { transform: translateY(-3px) scale(1.04); }
+  .awards-open .awards-hint { display: none; }
   .proof p {
-    margin: 0 0 0 4px;
+    margin: 0 0 0 2px;
     padding-left: 16px;
     border-left: 1px solid var(--tan);
     font-size: 13px;
     line-height: 1.45;
     color: var(--grey);
-    max-width: 200px;
+    max-width: 220px;
   }
   .proof strong { color: var(--ink); font-weight: 600; }
+  .awards-link {
+    display: inline-flex; align-items: center; gap: 4px; margin-top: 4px;
+    padding: 0; border: 0; background: none; cursor: pointer;
+    font: 600 13px/1.4 var(--font-body); color: var(--terracotta);
+    text-decoration: underline; text-underline-offset: 3px;
+  }
+  .awards-link svg { width: 13px; height: 13px; transition: transform .2s var(--ease); }
+  .awards-link:hover svg { transform: translateX(3px); }
+  .awards-hint {
+    align-items: center;
+    font: 600 12px/1.25 var(--font-body); color: var(--terracotta);
+    text-align: left; max-width: 64px;
+    text-decoration: underline; text-underline-offset: 3px;
+  }
+
+  /* ---------- Awards dialog (outside the fitted hero, so never scaled) ---------- */
+  .awards[hidden] { display: none; }
+  .awards {
+    position: fixed; inset: 0; z-index: 50;
+    display: grid; place-items: center; padding: 20px;
+  }
+  .awards-backdrop {
+    position: absolute; inset: 0;
+    background: rgba(34,62,86,.55);
+    opacity: 0; transition: opacity .3s var(--ease);
+  }
+  .awards-card {
+    position: relative;
+    width: 100%; max-width: 860px; max-height: 100%;
+    overflow-y: auto; overscroll-behavior: contain;
+    background: var(--white);
+    border-radius: 18px;
+    padding: 34px 36px 30px;
+    box-shadow: 0 30px 60px -20px rgba(26,26,26,.45);
+    opacity: 0; transform: translateY(16px) scale(.98);
+    transition: opacity .3s var(--ease), transform .3s var(--ease);
+  }
+  .awards.is-open .awards-backdrop { opacity: 1; }
+  .awards.is-open .awards-card { opacity: 1; transform: none; }
+  .awards-x {
+    position: absolute; top: 12px; right: 12px;
+    width: 38px; height: 38px; border-radius: 50%;
+    display: grid; place-items: center;
+    border: 0; background: var(--sand); color: var(--ink); cursor: pointer;
+  }
+  .awards-x:hover { background: var(--tan); }
+  .awards-x svg { width: 18px; height: 18px; }
+  .awards-card .eyebrow { color: var(--terracotta); margin-bottom: 8px; }
+  .awards-card .eyebrow::before { display: none; }
+  .native-h1 .awards-card .eyebrow { display: flex; }
+  .awards-card h2 {
+    font-family: var(--font-display); font-weight: 400;
+    font-size: 32px; line-height: 1.2; margin: 0 40px 22px 0; color: var(--ink);
+  }
+  .awards-card h2 em { color: var(--blue); }
+  .awards-list { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .award {
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    padding: 22px 22px 24px;
+    border-radius: 14px;
+    background: var(--sand);
+  }
+  .award img { height: 190px; width: auto; margin-bottom: 16px; filter: drop-shadow(0 10px 16px rgba(26,26,26,.18)); }
+  .award .by {
+    margin: 0 0 6px; font-size: 11.5px; font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--blue);
+  }
+  .award h3 {
+    margin: 0 0 8px; font-family: var(--font-display); font-weight: 500;
+    font-size: 21px; line-height: 1.25; color: var(--ink);
+  }
+  .award .why { margin: 0; font-size: 14.5px; line-height: 1.55; color: #4a4a4a; }
+  .awards-note { margin: 18px 0 0; text-align: center; font-size: 14px; color: var(--grey); }
+  .awards-note strong { color: var(--ink); }
 
   /* ---------- Portrait ---------- */
   .visual {
@@ -351,8 +437,9 @@
     .seal svg { inset: 4px; width: 84px; height: 84px; }
     .chip--1 { left: calc(50% - 200px); }
     .chip--2 { right: calc(50% - 190px); }
-    .proof img { height: 50px; }
+    .awards-open img { height: 64px; }
     .proof p { display: none; }
+    .awards-open .awards-hint { display: inline-flex; }
   }
 
   /* =================== Mobile (<750px) ===================
@@ -394,8 +481,23 @@
     .ctas .btn { width: 100%; max-width: 300px; padding: 13px 10px; font-size: 14px; gap: 6px; }
     .ctas .btn svg { width: 15px; height: 15px; }
     .proof { justify-content: center; gap: 12px; }
-    .proof img { height: 36px; }
+    .awards-open { gap: 10px; }
+    .awards-open img { height: 50px; }
     .proof p { display: none; }
+    .awards-open .awards-hint { display: inline-flex; }
+
+    .awards { padding: 10px; }
+    .awards-card { padding: 22px 16px 18px; border-radius: 14px; }
+    .awards-x { top: 8px; right: 8px; width: 34px; height: 34px; }
+    .awards-card .eyebrow { font-size: 10.5px; margin-bottom: 4px; justify-content: flex-start; }
+    .awards-card h2 { font-size: 21px; margin: 0 36px 14px 0; }
+    .awards-list { grid-template-columns: 1fr; gap: 10px; }
+    .award { flex-direction: row; align-items: center; text-align: left; gap: 12px; padding: 12px; }
+    .award img { height: 92px; margin: 0; flex: none; }
+    .award .by { font-size: 10px; margin-bottom: 3px; }
+    .award h3 { font-size: 15.5px; margin-bottom: 4px; }
+    .award .why { font-size: 12.5px; line-height: 1.45; }
+    .awards-note { margin-top: 12px; font-size: 12.5px; }
   }
 
   /* ---------- Fit-to-box (shared/fit.js) ---------- */
@@ -439,11 +541,17 @@
       </div>
 
       <div class="proof rise d5">
-        <img src="https://static.wixstatic.com/media/dca1c2_5617a240d6644d82887c9c24e819fcad~mv2.png/v1/fit/w_180,h_180,al_c,q_85,enc_auto/award-2026.png"
-             alt="2026 Business Rate Award">
-        <img src="https://static.wixstatic.com/media/dca1c2_dd41fbd52033400baf30137737bebb27~mv2.png/v1/fit/w_180,h_180,al_c,q_85,enc_auto/award-corporate-excellence.png"
-             alt="Corporate Excellence Awards 2025 winner">
-        <p><strong>Award-winning</strong> wellness coaching, as seen in national media</p>
+        <button type="button" class="awards-open" aria-haspopup="dialog" aria-controls="awards">
+          <img src="https://static.wixstatic.com/media/dca1c2_5617a240d6644d82887c9c24e819fcad~mv2.png/v1/fit/w_240,h_240,al_c,q_85,enc_auto/award-2026.png"
+               alt="Best of 2026 Award Winner, BusinessRate">
+          <img src="https://static.wixstatic.com/media/dca1c2_dd41fbd52033400baf30137737bebb27~mv2.png/v1/fit/w_240,h_240,al_c,q_85,enc_auto/award-corporate-excellence.png"
+               alt="Corporate Excellence Awards 2025 winner, Corporate Vision">
+          <span class="awards-hint">See our awards</span>
+        </button>
+        <p><strong>Award-winning</strong> wellness coaching, as seen in national media<br>
+          <button type="button" class="awards-link" aria-haspopup="dialog" aria-controls="awards">See our awards
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button></p>
       </div>
     </div>
 
@@ -481,6 +589,64 @@
 
   </div>
 </section>
+
+<!-- Awards: what each one is and why it matters. Opened from the badges.
+     Sits outside the fitted .hero so the fit script never scales it. -->
+<div class="awards" id="awards" role="dialog" aria-modal="true" aria-labelledby="awards-title" hidden>
+  <div class="awards-backdrop" data-close></div>
+  <div class="awards-card">
+    <button type="button" class="awards-x" data-close aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <p class="eyebrow">Our awards</p>
+    <h2 id="awards-title">Recognized for <em>real results</em></h2>
+    <div class="awards-list">
+      <article class="award">
+        <img src="https://static.wixstatic.com/media/dca1c2_5617a240d6644d82887c9c24e819fcad~mv2.png/v1/fit/w_400,h_400,al_c,q_85,enc_auto/award-2026.png" alt="Best of 2026 Award Winner badge from BusinessRate" loading="lazy">
+        <div>
+          <p class="by">BusinessRate &middot; 2026</p>
+          <h3>Best of 2026 Nutritionist, Butler County, Ohio</h3>
+          <p class="why">BusinessRate&rsquo;s Best of awards are powered by Google Reviews, so this one
+            comes straight from what real clients say about working with Tanya.</p>
+        </div>
+      </article>
+      <article class="award">
+        <img src="https://static.wixstatic.com/media/dca1c2_dd41fbd52033400baf30137737bebb27~mv2.png/v1/fit/w_400,h_400,al_c,q_85,enc_auto/award-corporate-excellence.png" alt="Corporate Excellence Awards 2025 badge from Corporate Vision" loading="lazy">
+        <div>
+          <p class="by">Corporate Vision &middot; 2025</p>
+          <h3>Best Health &amp; Wellness Consultancy &ndash; USA</h3>
+          <p class="why">A national Corporate Excellence Award naming LIT Wellness Solutions the
+            best health and wellness consultancy in the United States for 2025.</p>
+        </div>
+      </article>
+    </div>
+    <p class="awards-note">What it means for you: care that clients rate highly <strong>and</strong> that&rsquo;s recognized nationally.</p>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var dlg = document.getElementById('awards');
+    var closeBtn = dlg.querySelector('.awards-x');
+    var lastFocus = null;
+    function open() {
+      lastFocus = document.activeElement;
+      dlg.hidden = false;
+      requestAnimationFrame(function () { requestAnimationFrame(function () { dlg.classList.add('is-open'); }); });
+      closeBtn.focus();
+    }
+    function close() {
+      dlg.classList.remove('is-open');
+      setTimeout(function () { dlg.hidden = true; }, 300);
+      if (lastFocus) lastFocus.focus();
+    }
+    Array.prototype.forEach.call(document.querySelectorAll('[aria-controls="awards"]'), function (b) {
+      b.addEventListener('click', open);
+    });
+    dlg.addEventListener('click', function (e) { if (e.target.closest('[data-close]')) close(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !dlg.hidden) close(); });
+  })();
+</script>
 
 <script src="shared/fit.js"></script>
 <script src="shared/embed.js"></script>

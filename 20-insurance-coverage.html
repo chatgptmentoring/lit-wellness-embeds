@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>LIT Wellness — Insurance-Covered Counseling</title>
+
+<!--
+  THE WHOLE /insurance-coverage PAGE in one embed: hero, how it works,
+  what you can work on, the first session, common questions, final CTA.
+
+  Every fact here comes from what litwellnesssolutions.com already
+  publishes (site FAQ "Payment Methods" + "Services", the insurance steps
+  section). Nothing about coverage is promised: plans differ, and the
+  Fay estimate is what tells a visitor what applies to them.
+
+  Links: Check My Coverage -> Fay · Free Strategy Session -> Healthie.
+
+  SEO: Google does not read text inside an embed. In Wix, fill in the
+  page's SEO title + description (Page settings -> SEO basics), e.g.
+  "Insurance-Covered Nutrition Counseling | LIT Wellness Solutions".
+
+  SIZE  desktop ~3000 · mobile ~4200 (see README; fit.js keeps it uncut)
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap">
+
+<link rel="stylesheet" href="shared/tokens.css">
+<link rel="stylesheet" href="shared/base.css">
+
+<style>
+  html { background: var(--white) !important; }
+  .page { background: var(--white); }
+  .h2 em, .h1 em { font-style: italic; color: var(--blue); }
+  .center { text-align: center; }
+  .head { max-width: 660px; margin: 0 auto 44px; }
+  .head .eyebrow { color: var(--terracotta); margin-bottom: 12px; }
+  .head .p1 { color: #4a4a4a; margin-top: 14px; }
+  .tint { background: var(--sand); }
+  .ico { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative; overflow: hidden;
+    padding: 72px 0 80px;
+    background:
+      radial-gradient(760px 460px at 90% 20%, rgba(216,195,165,.55), rgba(216,195,165,0) 70%),
+      radial-gradient(560px 380px at 0% 100%, rgba(53,93,128,.10), rgba(53,93,128,0) 70%),
+      var(--sand);
+  }
+  .hero-grid { display: grid; grid-template-columns: 1.08fr .92fr; gap: 48px; align-items: center; }
+  .hero .eyebrow { color: var(--terracotta); display: inline-flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+  .hero .eyebrow::before { content: ''; width: 28px; height: 1.5px; background: var(--terracotta); }
+  .hero .h1 { font-size: 52px; line-height: 1.1; color: var(--ink); }
+  .hero .lede { margin: 20px 0 30px; color: #4a4a4a; max-width: 540px; }
+  .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+  .ctas .btn svg { width: 18px; height: 18px; }
+  .ticks { display: flex; flex-wrap: wrap; gap: 10px 22px; margin: 30px 0 0; padding: 0; list-style: none; }
+  .ticks li { display: flex; align-items: center; gap: 8px; font-size: 14.5px; font-weight: 600; color: var(--ink); }
+  .ticks i { width: 22px; height: 22px; border-radius: 50%; background: var(--blue); color: var(--white); display: grid; place-items: center; flex: none; }
+  .ticks i svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+
+  .visual { position: relative; display: grid; place-items: center; height: 470px; }
+  .arch {
+    position: relative; z-index: 1;
+    width: 320px; height: 430px; border-radius: 160px 160px 18px 18px; overflow: hidden;
+    background: var(--blue-wash);
+    box-shadow: 0 40px 70px -36px rgba(34,62,86,.55);
+  }
+  .arch img { width: 100%; height: 100%; object-fit: cover; object-position: center 16%; }
+  .arch-line {
+    position: absolute; z-index: 0;
+    width: 320px; height: 430px; border-radius: 160px 160px 18px 18px;
+    border: 1.5px solid var(--terracotta); opacity: .55; transform: translate(20px, 20px);
+  }
+  .estimate {
+    position: absolute; z-index: 2; left: 0; bottom: 34px;
+    width: 250px; padding: 16px 18px;
+    background: var(--white); border-radius: 14px;
+    box-shadow: 0 22px 40px -20px rgba(26,26,26,.35);
+    animation: bob 6s ease-in-out infinite;
+  }
+  .estimate small { display: block; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--blue); margin-bottom: 6px; }
+  .estimate strong { display: block; font-family: var(--font-display); font-weight: 500; font-size: 19px; line-height: 1.25; }
+  .estimate span { display: block; margin-top: 6px; font-size: 13px; line-height: 1.45; color: var(--grey); }
+  .estimate b { color: var(--terracotta); font-weight: 700; }
+  .badge {
+    position: absolute; z-index: 2; right: 6px; top: 40px;
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 14px 8px 8px; border-radius: 999px;
+    background: var(--white); box-shadow: 0 14px 30px -16px rgba(26,26,26,.35);
+    font-size: 13px; font-weight: 600;
+  }
+  .badge i { width: 28px; height: 28px; border-radius: 50%; background: var(--blue-wash); color: var(--blue); display: grid; place-items: center; }
+  .badge i svg { width: 15px; height: 15px; }
+  @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+  /* ---------- Steps ---------- */
+  .band { padding: 88px 0; }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; counter-reset: s; position: relative; }
+  .step {
+    position: relative; padding: 30px 28px 32px;
+    background: var(--blue-wash); border-radius: var(--radius);
+  }
+  .step .n {
+    width: 42px; height: 42px; border-radius: 50%;
+    display: grid; place-items: center; margin-bottom: 18px;
+    background: var(--blue); color: var(--white);
+    font-family: var(--font-display); font-size: 19px;
+  }
+  .step h3 { margin-bottom: 8px; }
+  .step p { color: #4a4a4a; }
+  .step p b { color: var(--ink); }
+  .steps-cta { display: flex; justify-content: center; align-items: center; gap: 18px; flex-wrap: wrap; margin-top: 36px; }
+  .steps-cta .note { color: var(--grey); }
+
+  /* ---------- Help cards ---------- */
+  .help { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .card {
+    padding: 28px 24px 30px; background: var(--white);
+    border: 1px solid var(--border); border-radius: var(--radius);
+    transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-sm); }
+  .card .icon {
+    width: 50px; height: 50px; border-radius: 14px; margin-bottom: 18px;
+    display: grid; place-items: center;
+    background: rgba(169,80,47,.1); color: var(--terracotta);
+  }
+  .card h3 { font-size: 18px; margin-bottom: 8px; }
+  .card p { color: #4a4a4a; }
+  .fine { margin-top: 26px; text-align: center; font-size: 14px; color: var(--grey); }
+
+  /* ---------- First session ---------- */
+  .expect { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
+  .expect .eyebrow { color: var(--terracotta); margin-bottom: 12px; }
+  .expect .p1 { color: #4a4a4a; margin: 16px 0 26px; }
+  .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .fact { padding: 16px 14px; border-radius: var(--radius); background: var(--sand); }
+  .fact strong { display: block; font-family: var(--font-display); font-weight: 500; font-size: 22px; color: var(--blue); line-height: 1.2; }
+  .fact span { display: block; margin-top: 4px; font-size: 13.5px; color: #4a4a4a; line-height: 1.4; }
+  .bring {
+    padding: 32px 30px; border-radius: 16px;
+    background: var(--blue); color: var(--white);
+    box-shadow: var(--shadow);
+  }
+  .bring h3 { font-family: var(--font-display); font-weight: 400; font-size: 26px; margin: 0 0 18px; }
+  .bring ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+  .bring li { display: flex; gap: 12px; align-items: flex-start; font-size: 16px; line-height: 1.5; color: rgba(255,255,255,.9); }
+  .bring li i { flex: none; width: 24px; height: 24px; margin-top: 1px; border-radius: 50%; background: rgba(216,195,165,.25); color: var(--tan); display: grid; place-items: center; }
+  .bring li i svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+  .bring p { margin: 20px 0 0; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.18); font-family: var(--font-display); font-style: italic; font-size: 19px; color: var(--tan); }
+
+  /* ---------- Questions ---------- */
+  .qa { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .q { padding: 26px 26px 28px; background: var(--white); border-radius: var(--radius); border-left: 3px solid var(--terracotta); }
+  .q h3 { font-size: 18px; margin-bottom: 8px; }
+  .q p { color: #4a4a4a; }
+
+  /* ---------- Final CTA ---------- */
+  .final {
+    position: relative; overflow: hidden;
+    padding: 84px 0; text-align: center;
+    background: var(--blue); color: var(--white);
+  }
+  .final::after {
+    content: ''; position: absolute; top: -40%; right: -8%;
+    width: 560px; height: 560px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(216,195,165,.2), rgba(216,195,165,0) 68%);
+    pointer-events: none;
+  }
+  .final .shell { position: relative; z-index: 1; }
+  .final .h2 { color: var(--white); }
+  .final .h2 em { color: var(--tan); }
+  .final .p1 { color: rgba(255,255,255,.82); margin: 16px auto 30px; max-width: 560px; }
+  .final .ctas { justify-content: center; }
+  .final .partner { margin-top: 22px; font-size: 13.5px; color: rgba(255,255,255,.65); }
+
+  /* =================== Tablet (750-979px; Wix desktop is never narrower than 980) =================== */
+  @media (max-width: 979.98px) and (min-width: 750px) {
+    .hero .h1 { font-size: 42px; }
+    .hero-grid { gap: 28px; }
+    .arch, .arch-line { width: 270px; height: 370px; border-radius: 135px 135px 16px 16px; }
+    .visual { height: 420px; }
+    .estimate { width: 220px; left: -6px; }
+    .help { grid-template-columns: 1fr 1fr; }
+    .expect { gap: 28px; }
+    .facts { grid-template-columns: 1fr; }
+  }
+
+  /* =================== Mobile (<750px) =================== */
+  @media (max-width: 749.98px) {
+    .hero { padding: 30px 0 40px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 26px; text-align: center; }
+    .hero .eyebrow { font-size: 11px; justify-content: center; margin-bottom: 12px; }
+    .hero .eyebrow::before { display: none; }
+    .hero .h1 { font-size: 31px; }
+    .hero .lede { margin: 14px auto 22px; font-size: 15px; }
+    .ctas { flex-direction: column; align-items: stretch; }
+    .ctas .btn { padding: 15px 14px; font-size: 15px; }
+    .ticks { flex-direction: column; align-items: flex-start; gap: 10px; margin: 22px auto 0; width: max-content; max-width: 100%; text-align: left; }
+    .ticks li { font-size: 14px; }
+    .visual { order: -1; height: 270px; }
+    .arch, .arch-line { width: 180px; height: 240px; border-radius: 90px 90px 12px 12px; }
+    .arch-line { transform: translate(12px, 12px); }
+    .estimate { left: 0; bottom: 0; width: 176px; padding: 10px 12px; text-align: left; }
+    .estimate small { font-size: 9.5px; margin-bottom: 3px; }
+    .estimate strong { font-size: 14.5px; }
+    .estimate span { display: none; }
+    .badge { right: 0; top: 14px; font-size: 11.5px; padding: 6px 10px 6px 6px; gap: 6px; }
+    .badge i { width: 22px; height: 22px; }
+    .badge i svg { width: 12px; height: 12px; }
+
+    .band { padding: 48px 0; }
+    .head { margin-bottom: 26px; }
+    .steps, .expect, .qa { grid-template-columns: 1fr; gap: 12px; }
+    .help.rail { align-items: stretch; }
+    .help.rail > .card { flex: 0 0 82%; }
+    .step { padding: 22px 20px 24px; }
+    .step .n { width: 36px; height: 36px; font-size: 17px; margin-bottom: 12px; }
+    .steps-cta { flex-direction: column; gap: 10px; margin-top: 22px; }
+    .steps-cta .btn { width: 100%; }
+    .steps-cta .note { text-align: center; }
+    .card { padding: 22px 20px 24px; }
+    .card .icon { width: 44px; height: 44px; margin-bottom: 12px; }
+    .card h3 { font-size: 17px; margin-bottom: 4px; }
+    .expect { gap: 22px; }
+    .facts { grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+    .fact { padding: 12px 8px; text-align: center; }
+    .fact strong { font-size: 17px; }
+    .fact span { font-size: 12px; }
+    .bring { padding: 24px 20px; }
+    .bring h3 { font-size: 22px; margin-bottom: 14px; }
+    .bring li { font-size: 15px; }
+    .bring p { font-size: 17px; }
+    .q { padding: 20px 18px 22px; }
+    .q h3 { font-size: 17px; }
+    .final { padding: 52px 0; }
+    .fine { font-size: 13px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) { .estimate { animation: none; } }
+</style>
+</head>
+<body>
+
+<main class="page" data-fit>
+
+  <!-- ===================== Hero ===================== -->
+  <section class="hero">
+    <div class="shell hero-grid">
+      <div>
+        <p class="eyebrow">Insurance-covered nutrition counseling</p>
+        <h1 class="h1">Use your insurance for <em>1-on-1 nutrition care</em></h1>
+        <p class="p1 lede">Work one-on-one with Tanya Jolliffe, a Registered Dietitian Nutritionist,
+          from home or the office. Many medical insurance plans cover dietitian services, and
+          checking yours takes just a couple of minutes.</p>
+        <div class="ctas">
+          <a class="btn btn--primary" href="https://signup.faynutrition.com/book/tanya-jolliffe/ddfa1a">
+            Check My Coverage
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn btn--tertiary" href="https://secure.gethealthie.com/appointments/embed_appt?dietitian_id=420052&amp;require_offering=true&amp;offering_id=76499&amp;hide_package_images=false&amp;primary_color=355d80">
+            Book a Free Strategy Session
+          </a>
+        </div>
+        <ul class="ticks">
+          <li><i><svg viewBox="0 0 24 24"><path d="m4.5 12.5 5 5 10-11"/></svg></i>Registered Dietitian Nutritionist</li>
+          <li><i><svg viewBox="0 0 24 24"><path d="m4.5 12.5 5 5 10-11"/></svg></i>Virtual, anywhere in the U.S.</li>
+          <li><i><svg viewBox="0 0 24 24"><path d="m4.5 12.5 5 5 10-11"/></svg></i>No referral needed in many cases</li>
+        </ul>
+      </div>
+
+      <div class="visual">
+        <span class="arch-line" aria-hidden="true"></span>
+        <div class="arch">
+          <img src="https://static.wixstatic.com/media/dca1c2_ad3d1a3d26ad4ec2a3238ed019a9763a~mv2.jpg/v1/fill/w_640,h_860,al_t,q_85,enc_auto/tanya-jolliffe.jpg"
+               alt="Tanya Jolliffe, Registered Dietitian Nutritionist">
+        </div>
+        <span class="badge" aria-hidden="true">
+          <i><svg class="ico" viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.4 3.4 8.3 8 9 4.6-.7 8-4.6 8-9V6z"/></svg></i>
+          Insurance accepted
+        </span>
+        <div class="estimate" aria-hidden="true">
+          <small>Coverage check</small>
+          <strong>Your estimate in about 2 minutes</strong>
+          <span>Tap <b>Get your estimate</b> and enter your insurance details.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== How it works ===================== -->
+  <section class="band">
+    <div class="shell">
+      <div class="head center">
+        <p class="eyebrow">How it works</p>
+        <h2 class="h2">Three simple steps to <em>get started</em></h2>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="n" aria-hidden="true">1</div>
+          <h3 class="h4">Check your coverage</h3>
+          <p class="p2">Tap <b>Check My Coverage</b>, choose <b>Get your estimate</b>, and enter your
+            insurance information to see what your plan covers.</p>
+        </div>
+        <div class="step">
+          <div class="n" aria-hidden="true">2</div>
+          <h3 class="h4">Book your first session</h3>
+          <p class="p2">Once you know you&rsquo;re covered, pick a time that works around your schedule.
+            No referral hunting, no waiting rooms.</p>
+        </div>
+        <div class="step">
+          <div class="n" aria-hidden="true">3</div>
+          <h3 class="h4">Meet with your dietitian</h3>
+          <p class="p2">Work one-on-one with Tanya on a secure, HIPAA-compliant Zoom call from home,
+            work, or wherever you are in the U.S.</p>
+        </div>
+      </div>
+      <div class="steps-cta">
+        <a class="btn btn--secondary" href="https://signup.faynutrition.com/book/tanya-jolliffe/ddfa1a">Check My Coverage</a>
+        <span class="p3 note">Insurance coverage in partnership with Fay.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== What you can work on ===================== -->
+  <section class="band tint">
+    <div class="shell">
+      <div class="head center">
+        <p class="eyebrow">What we work on together</p>
+        <h2 class="h2">Real support for <em>real-life</em> health goals</h2>
+      </div>
+      <div class="help rail" data-rail-nav="topic">
+        <div class="card">
+          <div class="icon"><svg class="ico" viewBox="0 0 24 24"><path d="M3 12h4l2.5-6 5 12 2.5-6h4"/></svg></div>
+          <h3 class="h4">Medical nutrition needs</h3>
+          <p class="p3">Practical, evidence-based nutrition therapy for needs like diabetes or high cholesterol.</p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg class="ico" viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.9c0 5.6-7.5 10-7.5 10z"/></svg></div>
+          <h3 class="h4">Emotional &amp; stress eating</h3>
+          <p class="p3">Understand what drives the reach for food and build calmer, kinder habits.</p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg class="ico" viewBox="0 0 24 24"><path d="M5 19c8 0 14-6 14-14-8 0-14 6-14 14z"/><path d="M5 19l7-7"/></svg></div>
+          <h3 class="h4">Change without strict diets</h3>
+          <p class="p3">No harsh rules or calorie counting, just sustainable habits that fit your life.</p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></div>
+          <h3 class="h4">Busy, irregular schedules</h3>
+          <p class="p3">Support for professionals, drivers and shift workers whose days don&rsquo;t follow a script.</p>
+        </div>
+      </div>
+      <p class="fine">Coverage depends on your plan &mdash; your estimate shows what applies to you.</p>
+    </div>
+  </section>
+
+  <!-- ===================== First session ===================== -->
+  <section class="band">
+    <div class="shell expect">
+      <div>
+        <p class="eyebrow">Your first session</p>
+        <h2 class="h2">A relaxed conversation, <em>not a lecture</em></h2>
+        <p class="p1">We talk about your goals, current habits, health history and what matters most
+          to you, then build a realistic plan together. The goal is for you to feel heard, supported
+          and ready for steady progress.</p>
+        <div class="facts">
+          <div class="fact"><strong>~60 min</strong><span>average session</span></div>
+          <div class="fact"><strong>Virtual</strong><span>secure HIPAA-compliant Zoom</span></div>
+          <div class="fact"><strong>In person</strong><span>welcome near our home office</span></div>
+        </div>
+      </div>
+      <div class="bring">
+        <h3>Helpful to bring</h3>
+        <ul>
+          <li><i><svg viewBox="0 0 24 24"><path d="m4.5 12.5 5 5 10-11"/></svg></i>Recent lab results, if you have them</li>
+          <li><i><svg viewBox="0 0 24 24"><path d="m4.5 12.5 5 5 10-11"/></svg></i>A list of medications or supplements</li>
+          <li><i><svg viewBox="0 0 24 24"><path d="m4.5 12.5 5 5 10-11"/></svg></i>A few notes on your eating habits, schedule and goals</li>
+          <li><i><svg viewBox="0 0 24 24"><path d="m4.5 12.5 5 5 10-11"/></svg></i>A private space and a device with internet</li>
+        </ul>
+        <p>Most importantly, come as you are.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== Questions ===================== -->
+  <section class="band tint">
+    <div class="shell">
+      <div class="head center">
+        <p class="eyebrow">Good to know</p>
+        <h2 class="h2">Common <em>questions</em></h2>
+      </div>
+      <div class="qa">
+        <div class="q">
+          <h3 class="h4">Do I need a referral from my doctor?</h3>
+          <p class="p2">In many cases, no. If your insurance plan does require a referral, we&rsquo;ll help
+            you sort that out before you begin.</p>
+        </div>
+        <div class="q">
+          <h3 class="h4">How do I check whether I&rsquo;m covered?</h3>
+          <p class="p2">Tap Check My Coverage, choose Get your estimate, and enter your insurance
+            information. Once you see you&rsquo;re covered, set up your first consultation.</p>
+        </div>
+        <div class="q">
+          <h3 class="h4">What if insurance isn&rsquo;t a fit?</h3>
+          <p class="p2">We&rsquo;ll talk through self-pay options and help you choose the most practical
+            path. We accept credit cards and HSA, HRA or FSA cards.</p>
+        </div>
+        <div class="q">
+          <h3 class="h4">Are sessions only virtual?</h3>
+          <p class="p2">Sessions are virtual, so you can join from anywhere in the U.S. If you live near
+            our home office, in-person sessions are welcome too.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== Final CTA ===================== -->
+  <section class="final on-dark">
+    <div class="shell">
+      <h2 class="h2">Ready to see what <em>your plan covers?</em></h2>
+      <p class="p1">It only takes a couple of minutes. Not sure where to start? Book a free strategy
+        session and we&rsquo;ll figure out the best next step together.</p>
+      <div class="ctas">
+        <a class="btn btn--primary" href="https://signup.faynutrition.com/book/tanya-jolliffe/ddfa1a">
+          Check My Coverage
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn--tertiary" href="https://secure.gethealthie.com/appointments/embed_appt?dietitian_id=420052&amp;require_offering=true&amp;offering_id=76499&amp;hide_package_images=false&amp;primary_color=355d80">
+          Book a Free Strategy Session
+        </a>
+      </div>
+      <p class="partner">Insurance coverage in partnership with Fay.</p>
+    </div>
+  </section>
+
+</main>
+
+<script src="shared/rail-nav.js"></script>
+<script src="shared/fit.js"></script>
+<script src="shared/embed.js"></script>
+</body>
+</html>
