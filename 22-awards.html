@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>LIT Wellness — Awards</title>
+
+<!--
+  THE AWARDS STRIP — drop it on any page (Books, Speaking, About…).
+  The same three recognitions as the home hero, but shown open, with the
+  "why it matters" line visible instead of behind a tap.
+
+  Transparent background: it inherits the Wix section colour behind it.
+  Built for a LIGHT section (white or sand); on a dark band the text
+  would need inverting — tell me and I'll add a ?dark variant.
+
+  Wording comes from the awarding bodies themselves. CRI card links to
+  the verified listing.
+
+  SIZE  desktop: 450 (three across; 470 at a 980 window)
+        mobile:  ~520 at 300-320px wide (stacked rows)
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap">
+
+<link rel="stylesheet" href="shared/tokens.css">
+<link rel="stylesheet" href="shared/base.css">
+
+<style>
+  .wrap { padding: 10px 0 14px; }
+
+  .head { text-align: center; margin-bottom: 26px; }
+  .head .eyebrow { color: var(--terracotta); margin-bottom: 8px; }
+  .head .h3 { color: var(--ink); }
+  .head .h3 em { font-style: italic; color: var(--blue); }
+
+  .list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+  .award {
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    padding: 24px 22px 26px;
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, .62);
+    border: 1px solid var(--border);
+  }
+  /* One fixed box per logo, so a tall badge and a wide lockup still line up. */
+  .pic { height: 86px; display: grid; place-items: center; margin-bottom: 14px; }
+  .pic img { max-height: 86px; max-width: 100%; width: auto; height: auto; filter: drop-shadow(0 8px 14px rgba(26,26,26,.16)); }
+
+  .txt { width: 100%; min-width: 0; }
+  .by {
+    margin: 0 0 5px; font-size: 11px; font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--blue);
+  }
+  .award h3 {
+    margin: 0 0 7px; font-family: var(--font-display); font-weight: 400;
+    font-size: 19px; line-height: 1.25; color: var(--ink);
+  }
+  .why { margin: 0; font-size: 14px; line-height: 1.5; color: #4a4a4a; }
+  .verify {
+    display: inline-flex; align-items: center; gap: 5px; margin-top: 10px;
+    font: 600 13px/1.3 var(--font-body); color: var(--blue);
+    text-decoration: underline; text-underline-offset: 3px;
+  }
+  .verify svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+  .verify:hover { color: var(--terracotta); }
+
+  /* =================== Tablet (750-979px) =================== */
+  @media (max-width: 979.98px) and (min-width: 750px) {
+    .list { gap: 14px; }
+    .award { padding: 20px 16px 22px; }
+    .award h3 { font-size: 17px; }
+    .why { font-size: 13.5px; }
+  }
+
+  /* =================== Mobile (<750px) ===================
+     Stacked rows: logo on the left, the award beside it. Short enough
+     that nobody has to swipe for the third one. */
+  @media (max-width: 749.98px) {
+    .wrap { min-height: 0 !important; padding: 4px 0 8px; }
+    .head { margin-bottom: 16px; }
+    .head .h3 { font-size: 20px; }
+    .list { grid-template-columns: 1fr; gap: 10px; }
+    .award { flex-direction: row; align-items: center; text-align: left; gap: 14px; padding: 14px 14px; }
+    .txt { flex: 1 1 auto; }
+    .pic { height: auto; width: 78px; margin: 0; flex: none; }
+    .pic img { max-height: 76px; }
+    .by { font-size: 10px; margin-bottom: 3px; }
+    .award h3 { font-size: 15.5px; margin-bottom: 4px; }
+    .why { font-size: 12.5px; line-height: 1.45; }
+    /* Trim the second sentence on a phone: the cards sit in a narrow column
+       and the box height has to be one number for every phone width. */
+    .more { display: none; }
+    .pic { width: 70px; }
+    .verify { margin-top: 5px; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap locked" style="min-height:450px" data-fit>
+  <div class="shell">
+
+    <div class="head" data-reveal>
+      <p class="eyebrow">Recognition</p>
+      <h2 class="h3">Award-winning care, <em>independently recognized</em></h2>
+    </div>
+
+    <div class="list">
+
+      <article class="award" data-reveal data-reveal-delay="0">
+        <span class="pic">
+          <img src="https://static.wixstatic.com/media/dca1c2_bc6a264fdbdf48dca0ebbcac32fcffe0~mv2.png/v1/fit/w_560,h_260,al_c,q_90,enc_auto/cri-award-2026.png"
+               alt="1% Award badge for Elite Consumer Satisfaction 2026 from the Consumer Ratings Institute">
+        </span>
+        <div class="txt">
+          <p class="by">Consumer Ratings Institute &middot; 2026</p>
+        <h3>Exceptional Care Award: Elite Consumer Satisfaction</h3>
+        <p class="why">For outstanding customer reviews and review volume across multiple platforms.<span class="more">
+          CRI recognition is scored from public review data &mdash; never bought or requested.</span></p>
+        <a class="verify" href="https://www.consumerratingsinstitute.org/businesses/lit-wellness-solutions-YM76nI">
+          See the listing
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        </div>
+      </article>
+
+      <article class="award" data-reveal data-reveal-delay="90">
+        <span class="pic">
+          <img src="https://static.wixstatic.com/media/dca1c2_5617a240d6644d82887c9c24e819fcad~mv2.png/v1/fit/w_240,h_240,al_c,q_85,enc_auto/award-2026.png"
+               alt="Best of 2026 Award Winner badge from BusinessRate">
+        </span>
+        <div class="txt">
+          <p class="by">BusinessRate &middot; 2026</p>
+        <h3>Best of 2026 Nutritionist, Butler County, Ohio</h3>
+        <p class="why">Powered by Google Reviews &mdash; straight from what real clients say about
+          working with Tanya.</p>
+        </div>
+      </article>
+
+      <article class="award" data-reveal data-reveal-delay="180">
+        <span class="pic">
+          <img src="https://static.wixstatic.com/media/dca1c2_dd41fbd52033400baf30137737bebb27~mv2.png/v1/fit/w_240,h_240,al_c,q_85,enc_auto/award-corporate-excellence.png"
+               alt="Corporate Excellence Awards 2025 badge from Corporate Vision">
+        </span>
+        <div class="txt">
+          <p class="by">Corporate Vision &middot; 2025</p>
+        <h3>Best Health &amp; Wellness Consultancy &ndash; USA</h3>
+        <p class="why">A national Corporate Excellence Award naming LIT Wellness Solutions the best
+          health and wellness consultancy<span class="more"> in the United States</span> for 2025.</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</div>
+
+<script src="shared/fit.js"></script>
+<script src="shared/embed.js"></script>
+</body>
+</html>

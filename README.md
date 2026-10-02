@@ -121,6 +121,7 @@ touching.
 | 17 | `17-food-strip.html` | 84 | Home — sliding "It isn't just about the food!" strip |
 | 20 | `20-insurance-coverage.html` | ~3450 desktop (3720 at a 980 window) / ~4900 mobile | /insurance-coverage — the whole page: hero, steps, what we work on, first session, questions, CTA |
 | 21 | `21-food-isnt-the-problem.html` | ~4430 desktop (4660 at a 980 window) / ~5650 mobile | /food-isnt-the-problem — landing page for the new book, with an "Ask Tanya AI about this book" button |
+| 22 | `22-awards.html` | 450 desktop (470 at a 980 window) / ~800 mobile | Awards strip for any light section — Books, Speaking, About. Same three awards as the home hero, shown open |
 
 ### 16 — who we are video
 
