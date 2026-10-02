@@ -252,7 +252,7 @@
     if (!document.querySelector('link[data-tanya-ai-css]')) {
       var css = document.createElement('link');
       css.rel = 'stylesheet';
-      css.href = BASE + 'tanya-ai.css?v=3';
+      css.href = BASE + 'tanya-ai.css?v=4';
       css.setAttribute('data-tanya-ai-css', '');
       document.head.appendChild(css);
     }
@@ -581,6 +581,82 @@
     });
   }
 
+  /* ---------------- Page-level overlay for embeds ----------------
+     An embed (the hero) can ask the page to show a panel, because inside
+     its own iframe a panel is clipped by the embed box and covered by the
+     Wix header and headline. Content arrives as data and is written with
+     textContent — never as HTML. */
+  var overlay = null;
+  var overlayReturn = null;
+
+  function safeUrl(u) { return typeof u === 'string' && /^https:\/\//.test(u) ? u : ''; }
+
+  function closeOverlay() {
+    if (!overlay) return;
+    var ov = overlay;
+    overlay = null;
+    ov.classList.remove('is-in');
+    document.documentElement.style.overflow = '';
+    setTimeout(function () { ov.remove(); }, 300);
+    if (overlayReturn && overlayReturn.focus) overlayReturn.focus();
+  }
+
+  function showOverlay(d) {
+    closeOverlay();
+    var ov = el(
+      '<div class="tai tai-ov" role="dialog" aria-modal="true">' +
+        '<div class="tai-ov-bd" data-close></div>' +
+        '<div class="tai-ov-card">' +
+          '<button type="button" class="tai-ov-x" data-close aria-label="Close">' + icon('close') + '</button>' +
+          '<p class="tai-ov-eyebrow"></p>' +
+          '<h2 class="tai-ov-title"></h2>' +
+          '<div class="tai-ov-list"></div>' +
+          '<p class="tai-ov-note"></p>' +
+        '</div>' +
+      '</div>'
+    );
+    ov.querySelector('.tai-ov-eyebrow').textContent = d.eyebrow || '';
+    ov.querySelector('.tai-ov-title').textContent = d.title || '';
+    var note = ov.querySelector('.tai-ov-note');
+    if (d.note) note.textContent = d.note; else note.remove();
+
+    var list = ov.querySelector('.tai-ov-list');
+    (d.items || []).slice(0, 6).forEach(function (it) {
+      var card = el(
+        '<article class="tai-ov-item">' +
+          '<span class="tai-ov-pic"><img alt=""></span>' +
+          '<div class="tai-ov-body">' +
+            '<p class="tai-ov-by"></p>' +
+            '<h3 class="tai-ov-name"></h3>' +
+            '<p class="tai-ov-why"></p>' +
+          '</div>' +
+        '</article>'
+      );
+      var img = card.querySelector('img');
+      if (safeUrl(it.img)) { img.src = it.img; img.alt = String(it.alt || ''); }
+      else card.querySelector('.tai-ov-pic').remove();
+      card.querySelector('.tai-ov-by').textContent = it.by || '';
+      card.querySelector('.tai-ov-name').textContent = it.title || '';
+      card.querySelector('.tai-ov-why').textContent = it.why || '';
+      if (safeUrl(it.href)) {
+        var a = el('<a class="tai-ov-link" target="_blank" rel="noopener noreferrer"><span></span>' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>');
+        a.href = it.href;
+        a.querySelector('span').textContent = it.linkLabel || 'See the listing';
+        card.querySelector('.tai-ov-body').appendChild(a);
+      }
+      list.appendChild(card);
+    });
+
+    overlayReturn = document.activeElement;
+    document.body.appendChild(ov);
+    document.documentElement.style.overflow = 'hidden';
+    overlay = ov;
+    requestAnimationFrame(function () { requestAnimationFrame(function () { ov.classList.add('is-in'); }); });
+    ov.addEventListener('click', function (e) { if (e.target.closest('[data-close]')) closeOverlay(); });
+    ov.querySelector('.tai-ov-x').focus();
+  }
+
   function hideNudge() {
     if (!nudge) return;
     var n = nudge;
@@ -657,17 +733,33 @@
     launcher.addEventListener('click', function () { stopNudges(); chat.open(); });
 
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && chat.isOpen()) chat.close();
+      if (e.key !== 'Escape') return;
+      if (overlay) { closeOverlay(); return; }
+      if (chat.isOpen()) chat.close();
     });
 
     /* Embeds from our own GitHub Pages site can open the chat on a topic
        (e.g. "Ask Tanya AI about this book"). They ping first and only show
        their button once we answer, so it never appears without the widget. */
     var EMBED_ORIGIN = new URL(BASE, location.href).origin;
+
+    /* Tell our embeds we're here, in case this script finished loading after
+       they sent their ping (Wix loads iframes and custom code separately). */
+    function announce() {
+      var frames = document.querySelectorAll('iframe');
+      for (var i = 0; i < frames.length; i++) {
+        if (frames[i].src.indexOf(EMBED_ORIGIN) !== 0) continue;
+        try { frames[i].contentWindow.postMessage({ tanyaAi: 'ready', can: ['open', 'overlay'] }, EMBED_ORIGIN); } catch (e) {}
+      }
+    }
+    [0, 1500, 4000, 9000].forEach(function (ms) { setTimeout(announce, ms); });
     window.addEventListener('message', function (e) {
       var d = e.data;
       if (e.origin !== EMBED_ORIGIN || !d || typeof d !== 'object' || !d.tanyaAi) return;
-      if (d.tanyaAi === 'ping' && e.source) e.source.postMessage({ tanyaAi: 'ready' }, '*');
+      // 'can' tells the embed which messages this version understands, so an
+      // older cached widget never leaves a button doing nothing.
+      if (d.tanyaAi === 'ping' && e.source) e.source.postMessage({ tanyaAi: 'ready', can: ['open', 'overlay'] }, '*');
+      if (d.tanyaAi === 'overlay') showOverlay(d);
       if (d.tanyaAi === 'open') {
         var t = TOPICS[d.topic];
         stopNudges();

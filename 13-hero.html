@@ -670,11 +670,54 @@
       setTimeout(function () { dlg.hidden = true; }, 300);
       if (lastFocus) lastFocus.focus();
     }
-    Array.prototype.forEach.call(document.querySelectorAll('[aria-controls="awards"]'), function (b) {
-      b.addEventListener('click', open);
-    });
     dlg.addEventListener('click', function (e) { if (e.target.closest('[data-close]')) close(); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !dlg.hidden) close(); });
+
+    /* Inside Wix this embed is a boxed iframe: a panel opened in here is
+       clipped by the box and drawn *under* the page's own header and
+       headline. So when the site-wide script is on the page, hand the
+       awards to it and let it cover the whole window instead. The panel
+       below stays as the fallback (standalone, or script not loaded). */
+    var host = null;
+    function payload() {
+      var items = Array.prototype.map.call(dlg.querySelectorAll('.award'), function (a) {
+        var img = a.querySelector('img');
+        var link = a.querySelector('.verify');
+        return {
+          img: img && img.src, alt: img && img.alt,
+          by: text(a, '.by'), title: text(a, 'h3'), why: text(a, '.why'),
+          href: link && link.href, linkLabel: link && link.textContent.trim()
+        };
+      });
+      return {
+        tanyaAi: 'overlay', kind: 'awards',
+        eyebrow: text(dlg, '.eyebrow'),
+        title: text(dlg, '#awards-title'),
+        note: text(dlg, '.awards-note'),
+        items: items
+      };
+    }
+    function text(root, sel) {
+      var n = root.querySelector(sel);
+      return n ? n.textContent.replace(/\s+/g, ' ').trim() : '';
+    }
+
+    Array.prototype.forEach.call(document.querySelectorAll('[aria-controls="awards"]'), function (b) {
+      b.addEventListener('click', function () {
+        if (host) { host.postMessage(payload(), '*'); return; }
+        open();
+      });
+    });
+
+    if (window.parent !== window) {
+      window.addEventListener('message', function (e) {
+        var d = e.data;
+        if (e.source !== window.parent || !d || d.tanyaAi !== 'ready') return;
+        if (d.can && d.can.indexOf('overlay') !== -1) host = window.parent;
+      });
+      window.parent.postMessage({ tanyaAi: 'ping' }, '*');
+      setTimeout(function () { window.parent.postMessage({ tanyaAi: 'ping' }, '*'); }, 2500);
+    }
   })();
 </script>
 

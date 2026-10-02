@@ -332,3 +332,89 @@
 @media (prefers-reduced-motion: reduce) {
   .tai *, .tai.tai-panel.is-open, .tai.tai-nudge { animation: none !important; transition: none !important; }
 }
+
+/* ---------------- Page-level overlay (awards, from an embed) ----------
+   An embed is boxed inside its iframe, so a panel opened in there gets
+   clipped and sits *under* the Wix header and headline. The embed asks
+   the page to open this instead: it covers the whole window. */
+.tai.tai-ov {
+  position: fixed !important; inset: 0; z-index: 2147483600;
+  display: grid; place-items: center;
+  padding: 24px;
+}
+.tai .tai-ov-bd {
+  position: absolute; inset: 0;
+  background: rgba(34, 62, 86, .62);
+  opacity: 0; transition: opacity .28s var(--tai-ease);
+}
+.tai .tai-ov-card {
+  position: relative;
+  width: min(1020px, 100%); max-height: min(88vh, 780px);
+  overflow-y: auto; overscroll-behavior: contain;
+  background: #fff; border-radius: 20px;
+  padding: 34px 36px 30px;
+  box-shadow: 0 40px 80px -28px rgba(26, 26, 26, .5);
+  opacity: 0; transform: translateY(16px) scale(.985);
+  transition: opacity .28s var(--tai-ease), transform .28s var(--tai-ease);
+}
+.tai.tai-ov.is-in .tai-ov-bd { opacity: 1; }
+.tai.tai-ov.is-in .tai-ov-card { opacity: 1; transform: none; }
+.tai .tai-ov-x {
+  position: absolute; top: 14px; right: 14px;
+  width: 38px; height: 38px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--tai-sand); color: #1A1A1A;
+}
+.tai .tai-ov-x:hover { background: var(--tai-tan); }
+.tai .tai-ov-eyebrow {
+  font-size: 13px; font-weight: 600; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--tai-terra); margin-bottom: 8px;
+}
+.tai .tai-ov-title {
+  font-family: 'Newsreader', Georgia, serif; font-weight: 400;
+  font-size: 32px; line-height: 1.2; color: #1A1A1A; margin: 0 44px 20px 0;
+}
+.tai .tai-ov-title em { font-style: italic; color: var(--tai-blue); }
+.tai .tai-ov-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.tai .tai-ov-item {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  padding: 22px 20px 24px; border-radius: 14px; background: var(--tai-sand);
+}
+.tai .tai-ov-pic { height: 150px; display: grid; place-items: center; margin-bottom: 14px; width: 100%; }
+.tai .tai-ov-pic img {
+  max-height: 150px; max-width: 100%; width: auto; height: auto;
+  filter: drop-shadow(0 10px 16px rgba(26, 26, 26, .18));
+}
+.tai .tai-ov-by {
+  font-size: 11.5px; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--tai-blue); margin-bottom: 6px; text-align: center;
+}
+.tai .tai-ov-name {
+  font-family: 'Newsreader', Georgia, serif; font-weight: 500;
+  font-size: 20px; line-height: 1.25; color: #1A1A1A; margin-bottom: 8px; text-align: center;
+}
+.tai .tai-ov-why { font-size: 14.5px; line-height: 1.55; color: #4a4a4a; text-align: center; }
+.tai .tai-ov-link {
+  display: inline-flex; align-items: center; gap: 5px; margin-top: 10px;
+  font-size: 13px; font-weight: 600; color: var(--tai-blue);
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.tai .tai-ov-link svg { width: 13px; height: 13px; }
+.tai .tai-ov-note { margin-top: 18px; text-align: center; font-size: 14px; color: var(--tai-grey); }
+.tai .tai-ov-note b { font-weight: 700; color: #1A1A1A; }
+
+@media (max-width: 860px) {
+  .tai.tai-ov { padding: 12px; }
+  .tai .tai-ov-card { max-height: 92vh; padding: 24px 18px 20px; border-radius: 16px; }
+  .tai .tai-ov-title { font-size: 23px; margin: 0 40px 14px 0; }
+  .tai .tai-ov-list { grid-template-columns: 1fr; gap: 10px; }
+  .tai .tai-ov-item { flex-direction: row; align-items: center; text-align: left; gap: 14px; padding: 14px; }
+  .tai .tai-ov-pic { height: auto; width: 84px; margin: 0; flex: none; }
+  .tai .tai-ov-pic img { max-height: 84px; }
+  .tai .tai-ov-body { flex: 1 1 auto; min-width: 0; }
+  .tai .tai-ov-by, .tai .tai-ov-name, .tai .tai-ov-why { text-align: left; }
+  .tai .tai-ov-by { font-size: 10px; margin-bottom: 3px; }
+  .tai .tai-ov-name { font-size: 16px; margin-bottom: 4px; }
+  .tai .tai-ov-why { font-size: 13px; line-height: 1.45; }
+  .tai .tai-ov-note { font-size: 12.5px; margin-top: 12px; }
+}
